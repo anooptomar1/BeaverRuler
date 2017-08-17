@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		403D9F071F45B1A20071C351 /* RulerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F061F45B0290071C351 /* RulerLine.swift */; };
+		403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F0A1F45B3920071C351 /* SCNVector3.swift */; };
+		403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F091F45B3860071C351 /* ARSCNView.swift */; };
 		D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9195C1F43B30D00C480ED /* AppDelegate.swift */; };
 		D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E9195E1F43B30D00C480ED /* art.scnassets */; };
 		D9E919611F43B30D00C480ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E919601F43B30D00C480ED /* ViewController.swift */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		403D9F061F45B0290071C351 /* RulerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerLine.swift; sourceTree = "<group>"; };
+		403D9F091F45B3860071C351 /* ARSCNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNView.swift; sourceTree = "<group>"; };
+		403D9F0A1F45B3920071C351 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		D9E919591F43B30D00C480ED /* BeaverRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaverRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E9195C1F43B30D00C480ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9E9195E1F43B30D00C480ED /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -37,6 +43,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		403D9F031F45AFAE0071C351 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		403D9F041F45AFBC0071C351 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D9E919601F43B30D00C480ED /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		403D9F051F45AFC90071C351 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				403D9F061F45B0290071C351 /* RulerLine.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		403D9F081F45B3700071C351 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				403D9F0A1F45B3920071C351 /* SCNVector3.swift */,
+				403D9F091F45B3860071C351 /* ARSCNView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		D9E919501F43B30C00C480ED = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +94,12 @@
 		D9E9195B1F43B30D00C480ED /* BeaverRuler */ = {
 			isa = PBXGroup;
 			children = (
+				403D9F081F45B3700071C351 /* Helpers */,
+				403D9F051F45AFC90071C351 /* Views */,
+				403D9F041F45AFBC0071C351 /* Controllers */,
+				403D9F031F45AFAE0071C351 /* Models */,
 				D9E9195C1F43B30D00C480ED /* AppDelegate.swift */,
 				D9E9195E1F43B30D00C480ED /* art.scnassets */,
-				D9E919601F43B30D00C480ED /* ViewController.swift */,
 				D9E919621F43B30D00C480ED /* Main.storyboard */,
 				D9E919651F43B30D00C480ED /* Assets.xcassets */,
 				D9E919671F43B30D00C480ED /* LaunchScreen.storyboard */,
@@ -139,6 +180,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				403D9F071F45B1A20071C351 /* RulerLine.swift in Sources */,
+				403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */,
+				403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */,
 				D9E919611F43B30D00C480ED /* ViewController.swift in Sources */,
 				D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */,
 			);

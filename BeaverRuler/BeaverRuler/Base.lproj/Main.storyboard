@@ -1,27 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A278a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BrB-h1-WRS">
+                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="BeaverRuler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="87f-mc-WB1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </arscnView>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PN0-Vm-BEe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </arscnView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="targetWhite" translatesAutoresizingMaskIntoConstraints="NO" id="gow-ZP-lGN">
+                                <rect key="frame" x="174" y="320" width="27" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="27" id="1TU-C4-dbw"/>
+                                    <constraint firstAttribute="height" constant="26" id="VMp-Kc-afc"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efT-qd-CDk" userLabel="CleanButton">
+                                <rect key="frame" x="309" y="573" width="32" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="WhV-pO-GU5"/>
+                                </constraints>
+                                <state key="normal" image="reset"/>
+                                <connections>
+                                    <action selector="resetButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="6vV-EP-1lY"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLX-kg-2bt" userLabel="Message Label">
+                                <rect key="frame" x="41" y="638" width="319" height="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-2f-hAb">
+                                <rect key="frame" x="13" y="638" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="NXs-pb-kKv"/>
+                                    <constraint firstAttribute="width" constant="20" id="T4A-zT-6NP"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-xL-3HH" userLabel="Meter Button">
+                                <rect key="frame" x="329" y="33" width="30" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61" id="79p-UJ-o25"/>
+                                </constraints>
+                                <state key="normal" image="meter"/>
+                                <connections>
+                                    <action selector="meterButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="IdS-2f-s8Q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fvh-xL-3HH" firstAttribute="top" secondItem="5wb-vL-tSD" secondAttribute="top" constant="13" id="0PB-Qe-63T"/>
+                            <constraint firstItem="gow-ZP-lGN" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="38h-kA-f5l"/>
+                            <constraint firstItem="gow-ZP-lGN" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" id="3G2-Fg-cIR"/>
+                            <constraint firstItem="PN0-Vm-BEe" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" id="8lZ-5L-w5s"/>
+                            <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="fvh-xL-3HH" secondAttribute="trailing" constant="16" id="9dr-Qj-uZK"/>
+                            <constraint firstItem="Ftl-2f-hAb" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="13" id="Goi-vr-S8H"/>
+                            <constraint firstItem="zLX-kg-2bt" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" constant="312" id="JZM-5M-GyA"/>
+                            <constraint firstItem="PN0-Vm-BEe" firstAttribute="bottom" secondItem="5wb-vL-tSD" secondAttribute="bottom" id="MWG-W3-TQh"/>
+                            <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="Ftl-2f-hAb" secondAttribute="bottom" constant="9" id="Xlc-Cy-nIM"/>
+                            <constraint firstItem="PN0-Vm-BEe" firstAttribute="trailing" secondItem="5wb-vL-tSD" secondAttribute="trailing" id="b9F-zI-MXZ"/>
+                            <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="efT-qd-CDk" secondAttribute="trailing" constant="34" id="e8k-J9-NL3"/>
+                            <constraint firstItem="PN0-Vm-BEe" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" id="eA4-0K-9PG"/>
+                            <constraint firstItem="PN0-Vm-BEe" firstAttribute="top" secondItem="87f-mc-WB1" secondAttribute="top" id="gJw-pt-OmL"/>
+                            <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="efT-qd-CDk" secondAttribute="bottom" constant="65" id="nK6-xw-izw"/>
+                            <constraint firstItem="PN0-Vm-BEe" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="p2J-Dp-9oy"/>
+                            <constraint firstItem="zLX-kg-2bt" firstAttribute="leading" secondItem="Ftl-2f-hAb" secondAttribute="trailing" constant="8" id="pJx-t3-P2H"/>
+                            <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="zLX-kg-2bt" secondAttribute="trailing" constant="15" id="vP7-3P-qIP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5wb-vL-tSD"/>
+                    </view>
                     <connections>
-                        <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <outlet property="loadingView" destination="Ftl-2f-hAb" id="rbf-9P-HNU"/>
+                        <outlet property="messageLabel" destination="zLX-kg-2bt" id="NCf-Fj-T04"/>
+                        <outlet property="meterImageView" destination="fvh-xL-3HH" id="2cj-mM-shh"/>
+                        <outlet property="resetButton" destination="efT-qd-CDk" id="ls6-QL-Lo7"/>
+                        <outlet property="sceneView" destination="PN0-Vm-BEe" id="y2d-Yv-bHN"/>
+                        <outlet property="targetImageView" destination="gow-ZP-lGN" id="iPn-SA-Cbl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="156.97151424287858"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="meter" width="50" height="137"/>
+        <image name="reset" width="44" height="44"/>
+        <image name="targetWhite" width="60" height="60"/>
+    </resources>
 </document>
