@@ -134,7 +134,7 @@ extension ViewController {
     }
 
     fileprivate func detectObjects() {
-        guard let worldPosition = sceneView.realWorldVector(position: view.center).position else { return }
+        guard let worldPosition = sceneView.realWorldVector(screenPosition: view.center) else { return }
         targetImageView.isHidden = false
         meterImageView.isHidden = false
         if lines.isEmpty {
