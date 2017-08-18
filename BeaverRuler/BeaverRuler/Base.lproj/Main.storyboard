@@ -27,8 +27,8 @@
                                     <constraint firstAttribute="height" constant="26" id="VMp-Kc-afc"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efT-qd-CDk" userLabel="CleanButton">
-                                <rect key="frame" x="309" y="573" width="32" height="29"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efT-qd-CDk" userLabel="CleanButton">
+                                <rect key="frame" x="297" y="573" width="44" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="WhV-pO-GU5"/>
                                 </constraints>
@@ -60,6 +60,21 @@
                                     <action selector="meterButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="IdS-2f-s8Q"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kq8-Yh-2It">
+                                <rect key="frame" x="163" y="562" width="48" height="48"/>
+                                <state key="normal" image="add"/>
+                                <connections>
+                                    <action selector="placeAction:" destination="BV1-FR-VrT" eventType="touchUpInside" id="i3i-mA-wGk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gH-Ib-BkH">
+                                <rect key="frame" x="308" y="508" width="33" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="MnU-NE-C7b"/>
+                                    <constraint firstAttribute="width" constant="33" id="Vx3-e7-4N7"/>
+                                </constraints>
+                                <state key="normal" image="restart"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -71,15 +86,19 @@
                             <constraint firstItem="Ftl-2f-hAb" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="13" id="Goi-vr-S8H"/>
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" constant="312" id="JZM-5M-GyA"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="bottom" secondItem="5wb-vL-tSD" secondAttribute="bottom" id="MWG-W3-TQh"/>
+                            <constraint firstItem="zLX-kg-2bt" firstAttribute="top" secondItem="kq8-Yh-2It" secondAttribute="bottom" constant="28" id="O9J-c0-VoT"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="Ftl-2f-hAb" secondAttribute="bottom" constant="9" id="Xlc-Cy-nIM"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="trailing" secondItem="5wb-vL-tSD" secondAttribute="trailing" id="b9F-zI-MXZ"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="efT-qd-CDk" secondAttribute="trailing" constant="34" id="e8k-J9-NL3"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" id="eA4-0K-9PG"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="top" secondItem="87f-mc-WB1" secondAttribute="top" id="gJw-pt-OmL"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="efT-qd-CDk" secondAttribute="bottom" constant="65" id="nK6-xw-izw"/>
+                            <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="7gH-Ib-BkH" secondAttribute="trailing" constant="34" id="ofM-7P-CSZ"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="p2J-Dp-9oy"/>
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="leading" secondItem="Ftl-2f-hAb" secondAttribute="trailing" constant="8" id="pJx-t3-P2H"/>
+                            <constraint firstItem="kq8-Yh-2It" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="vFX-t5-2QC"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="zLX-kg-2bt" secondAttribute="trailing" constant="15" id="vP7-3P-qIP"/>
+                            <constraint firstItem="efT-qd-CDk" firstAttribute="top" secondItem="7gH-Ib-BkH" secondAttribute="bottom" constant="35" id="wr4-4J-ogG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5wb-vL-tSD"/>
                     </view>
@@ -98,8 +117,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add" width="48" height="48"/>
         <image name="meter" width="50" height="137"/>
         <image name="reset" width="44" height="44"/>
+        <image name="restart" width="20" height="23"/>
         <image name="targetWhite" width="60" height="60"/>
     </resources>
 </document>

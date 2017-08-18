@@ -43,28 +43,41 @@ class ViewController: UIViewController {
         super.viewWillDisappear(animated)
         session.pause()
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        resetValues()
-        isMeasuring = true
-        targetImageView.image = UIImage(named: "targetGreen")
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        isMeasuring = false
-        targetImageView.image = UIImage(named: "targetWhite")
-        if let line = currentLine {
-            lines.append(line)
-            currentLine = nil
-            resetButton.isHidden = false
-        }
-    }
 
     override var prefersStatusBarHidden: Bool {
         return true
     }
 
     // MARK: - Users Interactions
+
+    @IBAction func placeAction(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
+            sender.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }) { (value) in
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseIn], animations: {
+                sender.transform = CGAffineTransform.identity
+            }) { (value) in
+            }
+        }
+        sender.isSelected = !sender.isSelected;
+
+        if currentLine == nil {
+            resetValues()
+            isMeasuring = true
+            targetImageView.image = UIImage(named: "targetGreen")
+
+        }else{
+
+            isMeasuring = false
+            targetImageView.image = UIImage(named: "targetWhite")
+            if let line = currentLine {
+                lines.append(line)
+                currentLine = nil
+                resetButton.isHidden = false
+            }
+
+        }
+    }
 
     @IBAction func meterButtonTapped(_ sender: Any) {
         let alertVC = UIAlertController(title: "Settings", message: "Please select distance unit options", preferredStyle: .actionSheet)
