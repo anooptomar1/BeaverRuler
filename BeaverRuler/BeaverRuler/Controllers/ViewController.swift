@@ -66,17 +66,42 @@ class ViewController: UIViewController {
             isMeasuring = true
             targetImageView.image = UIImage(named: "targetGreen")
 
-        }else{
+        } else {
 
             isMeasuring = false
             targetImageView.image = UIImage(named: "targetWhite")
             if let line = currentLine {
                 lines.append(line)
                 currentLine = nil
-                resetButton.isHidden = false
             }
-
         }
+    }
+
+    @IBAction func finishPolygonPressed(_ sender: Any) {
+        if currentLine != nil {
+            isMeasuring = false
+            targetImageView.image = UIImage(named: "targetWhite")
+            if currentLine != nil {
+                currentLine = nil
+            }
+        }
+    }
+
+    @IBAction func undoPressed(_ sender: Any) {
+
+        if let line = currentLine {
+            line.removeFromParentNode()
+            currentLine = nil
+
+        } else {
+
+            if lines.count > 0 {
+                let previouseLine = lines.last
+                previouseLine?.removeFromParentNode()
+                lines.removeLast()
+            }
+        }
+
     }
 
     @IBAction func meterButtonTapped(_ sender: Any) {
@@ -95,11 +120,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func resetButtonTapped(_ sender: Any) {
-        resetButton.isHidden = true
         for line in lines {
             line.removeFromParentNode()
         }
         lines.removeAll()
+
+        if let line = currentLine {
+            line.removeFromParentNode()
+            currentLine = nil
+        }
     }
 }
 
@@ -135,7 +164,6 @@ extension ViewController {
         loadingView.startAnimating()
         meterImageView.isHidden = true
         messageLabel.text = "Detecting the world…"
-        resetButton.isHidden = true
         session.run(sessionConfiguration, options: [.resetTracking, .removeExistingAnchors])
         resetValues()
     }
