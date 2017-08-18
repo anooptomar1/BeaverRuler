@@ -68,11 +68,10 @@ class ViewController: UIViewController {
 
         } else {
 
-            isMeasuring = false
-            targetImageView.image = UIImage(named: "targetWhite")
             if let line = currentLine {
                 lines.append(line)
-                currentLine = nil
+                currentLine = RulerLine(sceneView: sceneView, startVector: endValue, unit: unit)
+                //currentLine = nil
             }
         }
     }
