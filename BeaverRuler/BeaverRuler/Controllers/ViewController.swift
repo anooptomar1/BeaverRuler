@@ -183,9 +183,46 @@ extension ViewController {
                 startValue = worldPosition
                 currentLine = RulerLine(sceneView: sceneView, startVector: startValue, unit: unit)
             }
-            endValue = worldPosition
+
+            endValue = getEndValue(worldPosition: worldPosition)
+            //endValue = worldPosition
+
             currentLine?.update(to: endValue)
             messageLabel.text = currentLine?.distance(to: endValue) ?? "Calculating…"
+        }
+    }
+
+    fileprivate func getEndValue(worldPosition: SCNVector3) -> SCNVector3{
+
+        var position = worldPosition
+
+        if currentLine != nil {
+
+            if lines.count > 0 {
+                let startLine = lines.first
+                let startPoint = startLine?.startVector
+
+                let distance = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(startPoint!))
+                if distance < 9 {
+                    position = startPoint!
+                }
+
+            }
+        }
+
+        return position
+    }
+
+    fileprivate func distanceBetweenPoints(firtsPoint:SCNVector3, secondPoint:SCNVector3) -> Float{
+        let xd = firtsPoint.x - secondPoint.x
+        let yd = firtsPoint.y - secondPoint.y
+        let zd = firtsPoint.z - secondPoint.z
+        let distance = Float(sqrt(xd * xd + yd * yd + zd * zd))
+
+        if (distance < 0){
+            return (distance * -1)
+        } else {
+            return (distance)
         }
     }
 }
