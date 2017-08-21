@@ -86,10 +86,16 @@ class ViewController: UIViewController {
         } else {
 
             if lines.count > 0 {
+
                 let previouseLine = lines.last
                 previouseLine?.removeFromParentNode()
                 lines.removeLast()
+
+                currentLine = RulerLine(sceneView: sceneView, startVector: (previouseLine?.startVector)!, unit: unit)
+                currentLine?.update(to: endValue)
+
             }
+
         }
 
     }
