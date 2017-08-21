@@ -48,19 +48,7 @@ class ViewController: UIViewController {
         return true
     }
 
-    // MARK: - Users Interactions
-
-    @IBAction func placeAction(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseOut], animations: {
-            sender.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }) { (value) in
-            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: [.allowUserInteraction,.curveEaseIn], animations: {
-                sender.transform = CGAffineTransform.identity
-            }) { (value) in
-            }
-        }
-        sender.isSelected = !sender.isSelected;
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if currentLine == nil {
             resetValues()
             isMeasuring = true
@@ -76,11 +64,14 @@ class ViewController: UIViewController {
         }
     }
 
+    // MARK: - Users Interactions
+
     @IBAction func finishPolygonPressed(_ sender: Any) {
         if currentLine != nil {
             isMeasuring = false
             targetImageView.image = UIImage(named: "targetWhite")
             if currentLine != nil {
+                currentLine?.removeFromParentNode()
                 currentLine = nil
             }
         }
