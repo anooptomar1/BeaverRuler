@@ -82,6 +82,17 @@
                                     <action selector="finishPolygonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="h2Q-Zh-nSG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RE3-wq-GAf">
+                                <rect key="frame" x="13" y="562" width="52" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="52" id="E67-S6-sB1"/>
+                                    <constraint firstAttribute="height" constant="50" id="XoG-ZZ-64v"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="shutter"/>
+                                <connections>
+                                    <action selector="takeScreenshot" destination="BV1-FR-VrT" eventType="touchUpInside" id="Lul-aK-HPj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -94,10 +105,12 @@
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" constant="312" id="JZM-5M-GyA"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="bottom" secondItem="5wb-vL-tSD" secondAttribute="bottom" id="MWG-W3-TQh"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="Ftl-2f-hAb" secondAttribute="bottom" constant="9" id="Xlc-Cy-nIM"/>
+                            <constraint firstItem="zLX-kg-2bt" firstAttribute="top" secondItem="RE3-wq-GAf" secondAttribute="bottom" constant="26" id="b7Z-Mb-cYO"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="trailing" secondItem="5wb-vL-tSD" secondAttribute="trailing" id="b9F-zI-MXZ"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="efT-qd-CDk" secondAttribute="trailing" constant="32" id="e8k-J9-NL3"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" id="eA4-0K-9PG"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="top" secondItem="87f-mc-WB1" secondAttribute="top" id="gJw-pt-OmL"/>
+                            <constraint firstItem="RE3-wq-GAf" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="13" id="mrc-eO-5VG"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="efT-qd-CDk" secondAttribute="bottom" constant="68" id="nK6-xw-izw"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="7gH-Ib-BkH" secondAttribute="trailing" constant="34" id="ofM-7P-CSZ"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="p2J-Dp-9oy"/>
@@ -128,6 +141,7 @@
         <image name="reset" width="44" height="44"/>
         <image name="restart" width="20" height="23"/>
         <image name="set" width="48" height="48"/>
+        <image name="shutter" width="48" height="48"/>
         <image name="targetWhite" width="60" height="60"/>
     </resources>
 </document>

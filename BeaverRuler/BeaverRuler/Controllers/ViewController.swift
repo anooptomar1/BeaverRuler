@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import Photos
 
 class ViewController: UIViewController {
 
@@ -28,6 +29,7 @@ class ViewController: UIViewController {
     fileprivate lazy var lines: [RulerLine] = []
     fileprivate var currentLine: RulerLine?
     fileprivate lazy var unit: DistanceUnit = .centimeter
+    fileprivate var alertController: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +128,52 @@ class ViewController: UIViewController {
             currentLine = nil
         }
     }
+
+    @IBAction func takeScreenshot() {
+
+        let takeScreenshotBlock = {
+            UIImageWriteToSavedPhotosAlbum(self.sceneView.snapshot(), nil, nil, nil)
+            DispatchQueue.main.async {
+                // Briefly flash the screen.
+                let flashOverlay = UIView(frame: self.sceneView.frame)
+                flashOverlay.backgroundColor = UIColor.white
+                self.sceneView.addSubview(flashOverlay)
+                UIView.animate(withDuration: 0.25, animations: {
+                    flashOverlay.alpha = 0.0
+                }, completion: { _ in
+                    flashOverlay.removeFromSuperview()
+                })
+            }
+        }
+
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized:
+            takeScreenshotBlock()
+        case .restricted, .denied:
+            let title = "Photos access denied"
+            let message = "Please enable Photos access for this application in Settings > Privacy to allow saving screenshots."
+            showAlert(title: title, message: message)
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({ (authorizationStatus) in
+                if authorizationStatus == .authorized {
+                    takeScreenshotBlock()
+                }
+            })
+        }
+    }
+
+    func showAlert(title: String, message: String, actions: [UIAlertAction]? = nil) {
+        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        if let actions = actions {
+            for action in actions {
+                alertController!.addAction(action)
+            }
+        } else {
+            alertController!.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        }
+        self.present(alertController!, animated: true, completion: nil)
+    }
+
 }
 
 // MARK: - ARSCNViewDelegate
