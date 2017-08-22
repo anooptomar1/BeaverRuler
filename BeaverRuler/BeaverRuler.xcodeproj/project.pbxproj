@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40389ECD1F4C5E8200666725 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40389ECC1F4C5E8200666725 /* SettingsController.swift */; };
 		403D9F071F45B1A20071C351 /* RulerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F061F45B0290071C351 /* RulerLine.swift */; };
 		403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F0A1F45B3920071C351 /* SCNVector3.swift */; };
 		403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F091F45B3860071C351 /* ARSCNView.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40389ECC1F4C5E8200666725 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		403D9F061F45B0290071C351 /* RulerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerLine.swift; sourceTree = "<group>"; };
 		403D9F091F45B3860071C351 /* ARSCNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNView.swift; sourceTree = "<group>"; };
 		403D9F0A1F45B3920071C351 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				D9E919601F43B30D00C480ED /* ViewController.swift */,
+				40389ECC1F4C5E8200666725 /* SettingsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40389ECD1F4C5E8200666725 /* SettingsController.swift in Sources */,
 				403D9F071F45B1A20071C351 /* RulerLine.swift in Sources */,
 				403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */,
 				403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */,

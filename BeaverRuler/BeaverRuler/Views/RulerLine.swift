@@ -9,10 +9,10 @@
 import SceneKit
 import ARKit
 
-enum DistanceUnit {
-    case centimeter
-    case inch
-    case meter
+enum DistanceUnit: String {
+    case centimeter = "centimeter"
+    case inch = "inch"
+    case meter = "meter"
     
     var fator: Float {
         switch self {

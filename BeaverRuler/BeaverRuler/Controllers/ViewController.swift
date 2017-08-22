@@ -17,11 +17,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var targetImageView: UIImageView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var meterImageView: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
 
     fileprivate lazy var session = ARSession()
-    fileprivate lazy var sessionConfiguration = ARWorldTrackingConfiguration()
+    fileprivate lazy var sessionConfiguration = ARWorldTrackingSessionConfiguration()
     fileprivate lazy var isMeasuring = false;
     fileprivate lazy var vectorZero = SCNVector3()
     fileprivate lazy var startValue = SCNVector3()
@@ -102,19 +102,70 @@ class ViewController: UIViewController {
 
     }
 
-    @IBAction func meterButtonTapped(_ sender: Any) {
-        let alertVC = UIAlertController(title: "Settings", message: "Please select distance unit options", preferredStyle: .actionSheet)
-        alertVC.addAction(UIAlertAction(title: DistanceUnit.centimeter.title, style: .default) { [weak self] _ in
-            self?.unit = .centimeter
-        })
-        alertVC.addAction(UIAlertAction(title: DistanceUnit.inch.title, style: .default) { [weak self] _ in
-            self?.unit = .inch
-        })
-        alertVC.addAction(UIAlertAction(title: DistanceUnit.meter.title, style: .default) { [weak self] _ in
-            self?.unit = .meter
-        })
-        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alertVC, animated: true, completion: nil)
+    @IBAction func showSettings(_ sender: Any) {
+
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "SettingsController") as? SettingsController else {
+            return
+        }
+
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
+        settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
+        settingsViewController.title = "Options"
+
+        let navigationController = UINavigationController(rootViewController: settingsViewController)
+        navigationController.modalPresentationStyle = .popover
+        navigationController.popoverPresentationController?.delegate = self
+        navigationController.preferredContentSize = CGSize(width: sceneView.bounds.size.width - 20, height: sceneView.bounds.size.height - 50)
+        self.present(navigationController, animated: true, completion: nil)
+
+        navigationController.popoverPresentationController?.sourceView = settingsButton
+        navigationController.popoverPresentationController?.sourceRect = settingsButton.bounds
+
+        
+
+
+
+
+
+//        let alertVC = UIAlertController(title: "Settings", message: "Please select distance unit options", preferredStyle: .actionSheet)
+//        alertVC.addAction(UIAlertAction(title: DistanceUnit.centimeter.title, style: .default) { [weak self] _ in
+//            self?.unit = .centimeter
+//        })
+//        alertVC.addAction(UIAlertAction(title: DistanceUnit.inch.title, style: .default) { [weak self] _ in
+//            self?.unit = .inch
+//        })
+//        alertVC.addAction(UIAlertAction(title: DistanceUnit.meter.title, style: .default) { [weak self] _ in
+//            self?.unit = .meter
+//        })
+//        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        present(alertVC, animated: true, completion: nil)
+
+    }
+
+    @objc
+    func dismissSettings() {
+        self.dismiss(animated: true, completion: nil)
+        updateSettings()
+    }
+
+    private func updateSettings() {
+        let defaults = UserDefaults.standard
+
+        self.unit = DistanceUnit(rawValue: defaults.string(forKey: Setting.measureUnits.rawValue)!)!
+
+        //self.unit = defaults.integer(forKey: Setting.measureUnits.rawValue) as DistanceUnit
+
+//        showDebugVisuals = defaults.bool(for: .debugMode)
+//        toggleAmbientLightEstimation(defaults.bool(for: .ambientLightEstimation))
+//        dragOnInfinitePlanesEnabled = defaults.bool(for: .dragOnInfinitePlanes)
+//        showHitTestAPIVisualization = defaults.bool(for: .showHitTestAPI)
+//        use3DOFTracking    = defaults.bool(for: .use3DOFTracking)
+//        use3DOFTrackingFallback = defaults.bool(for: .use3DOFFallback)
+//        for (_, plane) in planes {
+//            plane.updateOcclusionSetting()
+//        }
     }
 
     @IBAction func resetButtonTapped(_ sender: Any) {
@@ -198,6 +249,18 @@ extension ViewController: ARSCNViewDelegate {
     }
 }
 
+// MARK: - UIPopoverPresentationControllerDelegate
+
+extension ViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        updateSettings()
+    }
+}
+
 // MARK: - Privates
 
 extension ViewController {
@@ -206,7 +269,7 @@ extension ViewController {
         sceneView.delegate = self
         sceneView.session = session
         loadingView.startAnimating()
-        meterImageView.isHidden = true
+        settingsButton.isHidden = true
         messageLabel.text = "Detecting the world…"
         session.run(sessionConfiguration, options: [.resetTracking, .removeExistingAnchors])
         resetValues()
@@ -221,7 +284,7 @@ extension ViewController {
     fileprivate func detectObjects() {
         guard let worldPosition = sceneView.realWorldVector(screenPosition: view.center) else { return }
         targetImageView.isHidden = false
-        meterImageView.isHidden = false
+        settingsButton.isHidden = false
         if lines.isEmpty {
             messageLabel.text = "Hold screen & move your phone…"
         }
