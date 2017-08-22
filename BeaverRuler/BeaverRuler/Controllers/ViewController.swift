@@ -104,7 +104,6 @@ class ViewController: UIViewController {
 
     @IBAction func showSettings(_ sender: Any) {
 
-
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "SettingsController") as? SettingsController else {
             return
@@ -123,25 +122,6 @@ class ViewController: UIViewController {
         navigationController.popoverPresentationController?.sourceView = settingsButton
         navigationController.popoverPresentationController?.sourceRect = settingsButton.bounds
 
-        
-
-
-
-
-
-//        let alertVC = UIAlertController(title: "Settings", message: "Please select distance unit options", preferredStyle: .actionSheet)
-//        alertVC.addAction(UIAlertAction(title: DistanceUnit.centimeter.title, style: .default) { [weak self] _ in
-//            self?.unit = .centimeter
-//        })
-//        alertVC.addAction(UIAlertAction(title: DistanceUnit.inch.title, style: .default) { [weak self] _ in
-//            self?.unit = .inch
-//        })
-//        alertVC.addAction(UIAlertAction(title: DistanceUnit.meter.title, style: .default) { [weak self] _ in
-//            self?.unit = .meter
-//        })
-//        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        present(alertVC, animated: true, completion: nil)
-
     }
 
     @objc
@@ -152,20 +132,7 @@ class ViewController: UIViewController {
 
     private func updateSettings() {
         let defaults = UserDefaults.standard
-
         self.unit = DistanceUnit(rawValue: defaults.string(forKey: Setting.measureUnits.rawValue)!)!
-
-        //self.unit = defaults.integer(forKey: Setting.measureUnits.rawValue) as DistanceUnit
-
-//        showDebugVisuals = defaults.bool(for: .debugMode)
-//        toggleAmbientLightEstimation(defaults.bool(for: .ambientLightEstimation))
-//        dragOnInfinitePlanesEnabled = defaults.bool(for: .dragOnInfinitePlanes)
-//        showHitTestAPIVisualization = defaults.bool(for: .showHitTestAPI)
-//        use3DOFTracking    = defaults.bool(for: .use3DOFTracking)
-//        use3DOFTrackingFallback = defaults.bool(for: .use3DOFFallback)
-//        for (_, plane) in planes {
-//            plane.updateOcclusionSetting()
-//        }
     }
 
     @IBAction func resetButtonTapped(_ sender: Any) {
@@ -296,8 +263,7 @@ extension ViewController {
             }
 
             endValue = getEndValue(worldPosition: worldPosition)
-            //endValue = worldPosition
-
+            currentLine?.unit = unit
             currentLine?.update(to: endValue)
             messageLabel.text = currentLine?.distance(to: endValue) ?? "Calculating…"
         }

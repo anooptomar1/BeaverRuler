@@ -34,31 +34,15 @@ class SettingsController: UIViewController {
 
         let defaults = UserDefaults.standard
 
-//        let alertVC = UIAlertController(title: "Settings", message: "Please select distance unit options", preferredStyle: .actionSheet)
-//        alertVC.addAction(UIAlertAction(title: DistanceUnit.centimeter.title, style: .default) { [weak self] _ in
-//            self?.unit = .centimeter
-//        })
-//        alertVC.addAction(UIAlertAction(title: DistanceUnit.inch.title, style: .default) { [weak self] _ in
-//            self?.unit = .inch
-//        })
-//        alertVC.addAction(UIAlertAction(title: DistanceUnit.meter.title, style: .default) { [weak self] _ in
-//            self?.unit = .meter
-//        })
-//        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        present(alertVC, animated: true, completion: nil)
-
         let alertVC = UIAlertController(title: "Settings", message: "Please select distance unit options", preferredStyle: .actionSheet)
         alertVC.addAction(UIAlertAction(title: DistanceUnit.centimeter.title, style: .default) { [weak self] _ in
             defaults.set(DistanceUnit.centimeter.rawValue, forKey: Setting.measureUnits.rawValue)
-            //self?.unit = .centimeter
         })
         alertVC.addAction(UIAlertAction(title: DistanceUnit.inch.title, style: .default) { [weak self] _ in
             defaults.set(DistanceUnit.inch.rawValue, forKey: Setting.measureUnits.rawValue)
-            //self?.unit = .inch
         })
         alertVC.addAction(UIAlertAction(title: DistanceUnit.meter.title, style: .default) { [weak self] _ in
             defaults.set(DistanceUnit.meter.rawValue, forKey: Setting.measureUnits.rawValue)
-            //self?.unit = .meter
         })
         alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)

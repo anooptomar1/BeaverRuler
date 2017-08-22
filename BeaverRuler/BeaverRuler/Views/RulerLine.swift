@@ -51,6 +51,7 @@ enum DistanceUnit: String {
 final class RulerLine {
 
     let startVector: SCNVector3!
+    var unit: DistanceUnit!
 
     fileprivate var color: UIColor = .white
     
@@ -61,7 +62,6 @@ final class RulerLine {
     fileprivate var lineNode: SCNNode?
     
     fileprivate let sceneView: ARSCNView!
-    fileprivate let unit: DistanceUnit!
     
     init(sceneView: ARSCNView, startVector: SCNVector3, unit: DistanceUnit) {
         self.sceneView = sceneView
