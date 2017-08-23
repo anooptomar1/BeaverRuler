@@ -1,0 +1,6 @@
+framework module Pods_BeaverRuler {
+  umbrella header "Pods-BeaverRuler-umbrella.h"
+
+  export *
+  module * { export * }
+}

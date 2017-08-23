@@ -12,6 +12,7 @@
 		403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F0A1F45B3920071C351 /* SCNVector3.swift */; };
 		403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F091F45B3860071C351 /* ARSCNView.swift */; };
 		404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */; };
+		5F0A28FA4E972A6F894E9B57 /* Pods_BeaverRuler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */; };
 		D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9195C1F43B30D00C480ED /* AppDelegate.swift */; };
 		D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E9195E1F43B30D00C480ED /* art.scnassets */; };
 		D9E919611F43B30D00C480ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E919601F43B30D00C480ED /* ViewController.swift */; };
@@ -21,11 +22,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeaverRuler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40389ECC1F4C5E8200666725 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		403D9F061F45B0290071C351 /* RulerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerLine.swift; sourceTree = "<group>"; };
 		403D9F091F45B3860071C351 /* ARSCNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNView.swift; sourceTree = "<group>"; };
 		403D9F0A1F45B3920071C351 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsFoldersViewController.swift; sourceTree = "<group>"; };
+		40F22C6A058E444CFB671CE4 /* Pods-BeaverRuler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaverRuler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler.debug.xcconfig"; sourceTree = "<group>"; };
 		D9E919591F43B30D00C480ED /* BeaverRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaverRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E9195C1F43B30D00C480ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9E9195E1F43B30D00C480ED /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 		D9E919651F43B30D00C480ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9E919681F43B30D00C480ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9E9196A1F43B30D00C480ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF3E2896BFA1BDF9E3DE279F /* Pods-BeaverRuler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaverRuler.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F0A28FA4E972A6F894E9B57 /* Pods_BeaverRuler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,11 +86,30 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		9E8BA1A8B8290BF24E3578EE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				40F22C6A058E444CFB671CE4 /* Pods-BeaverRuler.debug.xcconfig */,
+				FF3E2896BFA1BDF9E3DE279F /* Pods-BeaverRuler.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C0ED6089D615ECBFB5A6977A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D9E919501F43B30C00C480ED = {
 			isa = PBXGroup;
 			children = (
 				D9E9195B1F43B30D00C480ED /* BeaverRuler */,
 				D9E9195A1F43B30D00C480ED /* Products */,
+				9E8BA1A8B8290BF24E3578EE /* Pods */,
+				C0ED6089D615ECBFB5A6977A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,9 +145,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9E9196D1F43B30D00C480ED /* Build configuration list for PBXNativeTarget "BeaverRuler" */;
 			buildPhases = (
+				FA0CACB7041FA95AE0592961 /* [CP] Check Pods Manifest.lock */,
 				D9E919551F43B30C00C480ED /* Sources */,
 				D9E919561F43B30C00C480ED /* Frameworks */,
 				D9E919571F43B30C00C480ED /* Resources */,
+				DDC78893FF7AC648134FECC1 /* [CP] Embed Pods Frameworks */,
+				A801F8F31597A6F4DFD0BCF2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -180,6 +207,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A801F8F31597A6F4DFD0BCF2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DDC78893FF7AC648134FECC1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA0CACB7041FA95AE0592961 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D9E919551F43B30C00C480ED /* Sources */ = {
@@ -327,6 +402,7 @@
 		};
 		D9E9196E1F43B30D00C480ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40F22C6A058E444CFB671CE4 /* Pods-BeaverRuler.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NYJEFU8C25;
@@ -341,6 +417,7 @@
 		};
 		D9E9196F1F43B30D00C480ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF3E2896BFA1BDF9E3DE279F /* Pods-BeaverRuler.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NYJEFU8C25;
