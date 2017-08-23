@@ -12,6 +12,10 @@
 		403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F0A1F45B3920071C351 /* SCNVector3.swift */; };
 		403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F091F45B3860071C351 /* ARSCNView.swift */; };
 		404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */; };
+		408F90C81F4DC162008E1961 /* UserObjectRm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90C71F4DC162008E1961 /* UserObjectRm.swift */; };
+		408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90C91F4DC50A008E1961 /* GRDatabaseManager.swift */; };
+		408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */; };
+		408F90CF1F4DCD9F008E1961 /* UserObjectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */; };
 		5F0A28FA4E972A6F894E9B57 /* Pods_BeaverRuler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */; };
 		D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9195C1F43B30D00C480ED /* AppDelegate.swift */; };
 		D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E9195E1F43B30D00C480ED /* art.scnassets */; };
@@ -28,6 +32,10 @@
 		403D9F091F45B3860071C351 /* ARSCNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNView.swift; sourceTree = "<group>"; };
 		403D9F0A1F45B3920071C351 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsFoldersViewController.swift; sourceTree = "<group>"; };
+		408F90C71F4DC162008E1961 /* UserObjectRm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectRm.swift; sourceTree = "<group>"; };
+		408F90C91F4DC50A008E1961 /* GRDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDatabaseManager.swift; sourceTree = "<group>"; };
+		408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectViewCell.swift; sourceTree = "<group>"; };
+		408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserObjectViewCell.xib; sourceTree = "<group>"; };
 		40F22C6A058E444CFB671CE4 /* Pods-BeaverRuler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaverRuler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler.debug.xcconfig"; sourceTree = "<group>"; };
 		D9E919591F43B30D00C480ED /* BeaverRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaverRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E9195C1F43B30D00C480ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +63,7 @@
 		403D9F031F45AFAE0071C351 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				408F90C71F4DC162008E1961 /* UserObjectRm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -72,6 +81,7 @@
 		403D9F051F45AFC90071C351 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				408F90CB1F4DC9D2008E1961 /* Cells */,
 				403D9F061F45B0290071C351 /* RulerLine.swift */,
 			);
 			path = Views;
@@ -80,10 +90,20 @@
 		403D9F081F45B3700071C351 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				408F90C91F4DC50A008E1961 /* GRDatabaseManager.swift */,
 				403D9F0A1F45B3920071C351 /* SCNVector3.swift */,
 				403D9F091F45B3860071C351 /* ARSCNView.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		408F90CB1F4DC9D2008E1961 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */,
+				408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		9E8BA1A8B8290BF24E3578EE /* Pods */ = {
@@ -201,6 +221,7 @@
 			files = (
 				D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */,
 				D9E919691F43B30D00C480ED /* LaunchScreen.storyboard in Resources */,
+				408F90CF1F4DCD9F008E1961 /* UserObjectViewCell.xib in Resources */,
 				D9E919661F43B30D00C480ED /* Assets.xcassets in Resources */,
 				D9E919641F43B30D00C480ED /* Main.storyboard in Resources */,
 			);
@@ -263,10 +284,13 @@
 			files = (
 				40389ECD1F4C5E8200666725 /* SettingsController.swift in Sources */,
 				404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */,
+				408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */,
+				408F90C81F4DC162008E1961 /* UserObjectRm.swift in Sources */,
 				403D9F071F45B1A20071C351 /* RulerLine.swift in Sources */,
 				403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */,
 				403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */,
 				D9E919611F43B30D00C480ED /* ViewController.swift in Sources */,
+				408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */,
 				D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
