@@ -94,6 +94,17 @@
                                     <action selector="showSettings:" destination="BV1-FR-VrT" eventType="touchUpInside" id="28v-qm-hV1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZo-jQ-gdA">
+                                <rect key="frame" x="13" y="29" width="57" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="N2b-FY-ojE"/>
+                                    <constraint firstAttribute="width" constant="57" id="liN-Sy-sXY"/>
+                                </constraints>
+                                <state key="normal" image="GalleryButton"/>
+                                <connections>
+                                    <action selector="galleryButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Otj-P4-V9Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -103,8 +114,10 @@
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" id="8lZ-5L-w5s"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="fvh-xL-3HH" secondAttribute="trailing" constant="15" id="9dr-Qj-uZK"/>
                             <constraint firstItem="Ftl-2f-hAb" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="13" id="Goi-vr-S8H"/>
+                            <constraint firstItem="KZo-jQ-gdA" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="13" id="JTI-dl-pl2"/>
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" constant="312" id="JZM-5M-GyA"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="bottom" secondItem="5wb-vL-tSD" secondAttribute="bottom" id="MWG-W3-TQh"/>
+                            <constraint firstItem="KZo-jQ-gdA" firstAttribute="top" secondItem="5wb-vL-tSD" secondAttribute="top" constant="9" id="OGV-u1-6nR"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="Ftl-2f-hAb" secondAttribute="bottom" constant="9" id="Xlc-Cy-nIM"/>
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="top" secondItem="RE3-wq-GAf" secondAttribute="bottom" constant="26" id="b7Z-Mb-cYO"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="trailing" secondItem="5wb-vL-tSD" secondAttribute="trailing" id="b9F-zI-MXZ"/>
@@ -124,6 +137,7 @@
                         <viewLayoutGuide key="safeArea" id="5wb-vL-tSD"/>
                     </view>
                     <connections>
+                        <outlet property="galleryButton" destination="KZo-jQ-gdA" id="DzQ-vR-FoM"/>
                         <outlet property="loadingView" destination="Ftl-2f-hAb" id="rbf-9P-HNU"/>
                         <outlet property="messageLabel" destination="zLX-kg-2bt" id="NCf-Fj-T04"/>
                         <outlet property="resetButton" destination="efT-qd-CDk" id="ls6-QL-Lo7"/>
@@ -135,6 +149,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="156.97151424287858"/>
+        </scene>
+        <!--Objects Folders View Controller-->
+        <scene sceneID="dk6-r8-tgv">
+            <objects>
+                <viewController storyboardIdentifier="ObjectsFoldersViewController" id="JzU-Vg-UA3" customClass="ObjectsFoldersViewController" customModule="BeaverRuler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides/>
+                    <view key="view" contentMode="scaleToFill" id="6DZ-Qc-lGl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8B3-xA-38L">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8B3-xA-38L" firstAttribute="top" secondItem="6DZ-Qc-lGl" secondAttribute="top" id="Spp-gR-FZS"/>
+                            <constraint firstItem="8B3-xA-38L" firstAttribute="bottom" secondItem="l89-QG-47h" secondAttribute="bottom" id="Zj5-Vw-Id0"/>
+                            <constraint firstItem="8B3-xA-38L" firstAttribute="trailing" secondItem="l89-QG-47h" secondAttribute="trailing" id="dCh-aV-CVJ"/>
+                            <constraint firstItem="8B3-xA-38L" firstAttribute="leading" secondItem="l89-QG-47h" secondAttribute="leading" id="sSN-ER-xB2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="l89-QG-47h"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="8B3-xA-38L" id="fUM-6J-gxH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ayp-0c-dEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="789.60000000000002" y="-493.40329835082463"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="hl9-W3-WzT">
@@ -206,6 +251,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="GalleryButton" width="200" height="200"/>
         <image name="reset" width="44" height="44"/>
         <image name="restart" width="20" height="23"/>
         <image name="set" width="48" height="48"/>

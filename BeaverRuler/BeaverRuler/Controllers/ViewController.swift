@@ -19,7 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
-
+    @IBOutlet weak var galleryButton: UIButton!
+    
     fileprivate lazy var session = ARSession()
     fileprivate lazy var sessionConfiguration = ARWorldTrackingSessionConfiguration()
     fileprivate lazy var isMeasuring = false;
@@ -141,6 +142,26 @@ class ViewController: UIViewController {
     private func updateSettings() {
         let defaults = UserDefaults.standard
         self.unit = DistanceUnit(rawValue: defaults.string(forKey: Setting.measureUnits.rawValue)!)!
+    }
+
+    @IBAction func galleryButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "ObjectsFoldersViewController") as? ObjectsFoldersViewController else {
+            return
+        }
+
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
+        settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
+        settingsViewController.title = "Gallery"
+
+        let navigationController = UINavigationController(rootViewController: settingsViewController)
+        navigationController.modalPresentationStyle = .popover
+        navigationController.popoverPresentationController?.delegate = self
+        navigationController.preferredContentSize = CGSize(width: sceneView.bounds.size.width - 20, height: sceneView.bounds.size.height - 50)
+        self.present(navigationController, animated: true, completion: nil)
+
+        navigationController.popoverPresentationController?.sourceView = galleryButton
+        navigationController.popoverPresentationController?.sourceRect = galleryButton.bounds
     }
 
     @IBAction func resetButtonTapped(_ sender: Any) {
