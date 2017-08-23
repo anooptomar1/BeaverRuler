@@ -179,7 +179,26 @@ class ViewController: UIViewController {
     @IBAction func takeScreenshot() {
 
         let takeScreenshotBlock = {
-            UIImageWriteToSavedPhotosAlbum(self.sceneView.snapshot(), nil, nil, nil)
+            
+            let image = self.sceneView.snapshot()
+            
+            let date = Date()
+            let uuid = String(Int(date.timeIntervalSince1970))
+            
+            let userObjectRm = UserObjectRm()
+            userObjectRm.name = uuid
+            userObjectRm.id = uuid
+            
+            if let data = UIImagePNGRepresentation(image) {
+                let filename = self.getDocumentsDirectory().appendingPathComponent(uuid + ".png")
+                try? data.write(to: filename)
+            }
+            
+            try! GRDatabaseManager.sharedDatabaseManager.grRealm.write({
+                GRDatabaseManager.sharedDatabaseManager.grRealm.add(userObjectRm, update:true)
+            })
+            
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             DispatchQueue.main.async {
                 // Briefly flash the screen.
                 let flashOverlay = UIView(frame: self.sceneView.frame)
@@ -207,6 +226,12 @@ class ViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
 
     func showAlert(title: String, message: String, actions: [UIAlertAction]? = nil) {

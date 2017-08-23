@@ -8,12 +8,17 @@
 
 import RealmSwift
 
-class UserAddressRm: Object {
+class UserObjectRm: Object {
 
+    @objc dynamic var id: String?
     @objc dynamic var name: String?
     @objc dynamic var folderName: String?
     @objc dynamic var image: String?
     @objc dynamic var size = 0
     @objc dynamic var sizeUnit: String?
+    
+    override class func primaryKey() -> String{
+        return "id"
+    }
 
 }
