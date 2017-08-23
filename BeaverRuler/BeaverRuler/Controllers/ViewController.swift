@@ -33,6 +33,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let defaults = UserDefaults.standard
+
+        if let measureString = defaults.string(forKey: Setting.measureUnits.rawValue) {
+            self.unit = DistanceUnit(rawValue: measureString)!
+        } else {
+            self.unit = .centimeter
+            defaults.set(DistanceUnit.centimeter.rawValue, forKey: Setting.measureUnits.rawValue)
+        }
+
         setupScene()
     }
     
@@ -61,7 +71,6 @@ class ViewController: UIViewController {
             if let line = currentLine {
                 lines.append(line)
                 currentLine = RulerLine(sceneView: sceneView, startVector: endValue, unit: unit)
-                //currentLine = nil
             }
         }
     }
@@ -72,10 +81,8 @@ class ViewController: UIViewController {
         if currentLine != nil {
             isMeasuring = false
             targetImageView.image = UIImage(named: "targetWhite")
-            if currentLine != nil {
-                currentLine?.removeFromParentNode()
-                currentLine = nil
-            }
+            currentLine?.removeFromParentNode()
+            currentLine = nil
         }
     }
 
@@ -95,6 +102,7 @@ class ViewController: UIViewController {
 
                 currentLine = RulerLine(sceneView: sceneView, startVector: (previouseLine?.startVector)!, unit: unit)
                 currentLine?.update(to: endValue)
+                isMeasuring = true
 
             }
 
