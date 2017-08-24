@@ -68,5 +68,22 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 220
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            let userObject = userObjects[indexPath.row]
+            
+            try! GRDatabaseManager.sharedDatabaseManager.grRealm.write {
+                GRDatabaseManager.sharedDatabaseManager.grRealm.delete(userObject)
+            }
+            
+            userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 
 }
