@@ -188,6 +188,11 @@ class ViewController: UIViewController {
             let userObjectRm = UserObjectRm()
             userObjectRm.name = uuid
             userObjectRm.id = uuid
+            userObjectRm.sizeUnit = self.unit.rawValue
+            
+            if let lastLine = self.lines.last {
+                userObjectRm.size = lastLine.lineLength()
+            }
             
             if let data = UIImagePNGRepresentation(image) {
                 let filename = self.getDocumentsDirectory().appendingPathComponent(uuid + ".png")

@@ -11,9 +11,9 @@ import UIKit
 class UserObjectViewCell: UITableViewCell {
 
     @IBOutlet weak var objectPhoto: UIImageView!
-    @IBOutlet weak var objectName: UILabel!
-    @IBOutlet weak var objectSize: UILabel!
-
+    @IBOutlet weak var objectName: UITextField!
+    @IBOutlet weak var objectSize: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

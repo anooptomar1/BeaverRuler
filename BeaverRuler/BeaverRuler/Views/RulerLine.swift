@@ -51,6 +51,7 @@ enum DistanceUnit: String {
 final class RulerLine {
 
     let startVector: SCNVector3!
+    
     var unit: DistanceUnit!
 
     fileprivate var color: UIColor = .white
@@ -60,6 +61,7 @@ final class RulerLine {
     fileprivate var text: SCNText!
     fileprivate var textNode: SCNNode!
     fileprivate var lineNode: SCNNode?
+    fileprivate var endVector: SCNVector3!
     
     fileprivate let sceneView: ARSCNView!
     
@@ -100,6 +102,7 @@ final class RulerLine {
     }
     
     func update(to vector: SCNVector3) {
+        endVector = vector
         lineNode?.removeFromParentNode()
         lineNode = startVector.line(to: vector, color: color)
         sceneView.scene.rootNode.addChildNode(lineNode!)
@@ -111,6 +114,10 @@ final class RulerLine {
         if endNode.parent == nil {
             sceneView?.scene.rootNode.addChildNode(endNode)
         }
+    }
+    
+    func lineLength() -> Float {
+        return (startVector.distance(from: endVector) * unit.fator)
     }
     
     func distance(to vector: SCNVector3) -> String {

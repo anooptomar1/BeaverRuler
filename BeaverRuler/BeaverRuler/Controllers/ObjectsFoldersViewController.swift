@@ -12,11 +12,18 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
 
     @IBOutlet weak var tableView: UITableView!
 
-    var userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+    fileprivate var userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+    fileprivate var unit: DistanceUnit = .centimeter
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let defaults = UserDefaults.standard
+        
+        if let measureString = defaults.string(forKey: Setting.measureUnits.rawValue) {
+            self.unit = DistanceUnit(rawValue: measureString)!
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "UserObjectViewCell", bundle: nil),  forCellReuseIdentifier:"UserObjectViewCell")
@@ -45,7 +52,9 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
             cell.objectName.text = name
         }
         
-        cell.objectSize.text = String(userObjectData.size)
+        let objectUnit = DistanceUnit(rawValue: userObjectData.sizeUnit!)
+        let conversionFator = unit.fator / (objectUnit?.fator)!
+        cell.objectSize.text = String(format: "%.2f%", userObjectData.size * conversionFator) + " " + unit.unit
         
         if let imageName = userObjectData.image {
             let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory

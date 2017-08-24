@@ -14,7 +14,7 @@ class UserObjectRm: Object {
     @objc dynamic var name: String?
     @objc dynamic var folderName: String?
     @objc dynamic var image: String?
-    @objc dynamic var size = 0
+    @objc dynamic var size: Float = 0.00
     @objc dynamic var sizeUnit: String?
     
     override class func primaryKey() -> String{
