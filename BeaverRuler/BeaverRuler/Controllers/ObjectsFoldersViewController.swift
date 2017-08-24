@@ -21,25 +21,6 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         tableView.register(UINib(nibName: "UserObjectViewCell", bundle: nil),  forCellReuseIdentifier:"UserObjectViewCell")
         
-        let userObjectRm1 = UserObjectRm()
-        userObjectRm1.name = "1"
-        userObjectRm1.id = "1"
-        
-        let userObjectRm2 = UserObjectRm()
-        userObjectRm2.name = "2"
-        userObjectRm2.id = "2"
-        
-        let userObjectRm3 = UserObjectRm()
-        userObjectRm3.name = "3"
-        userObjectRm3.id = "3"
-        
-        try! GRDatabaseManager.sharedDatabaseManager.grRealm.write({
-            GRDatabaseManager.sharedDatabaseManager.grRealm.add(userObjectRm1, update:true)
-            GRDatabaseManager.sharedDatabaseManager.grRealm.add(userObjectRm2, update:true)
-            GRDatabaseManager.sharedDatabaseManager.grRealm.add(userObjectRm3, update:true)
-        })
-        
-        userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
     }
 
     override func didReceiveMemoryWarning() {

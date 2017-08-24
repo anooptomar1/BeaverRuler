@@ -192,12 +192,15 @@ class ViewController: UIViewController {
             if let data = UIImagePNGRepresentation(image) {
                 let filename = self.getDocumentsDirectory().appendingPathComponent(uuid + ".png")
                 try? data.write(to: filename)
+                userObjectRm.image = uuid + ".png"
             }
-            
-            try! GRDatabaseManager.sharedDatabaseManager.grRealm.write({
-                GRDatabaseManager.sharedDatabaseManager.grRealm.add(userObjectRm, update:true)
-            })
-            
+
+            DispatchQueue.main.async {
+                try! GRDatabaseManager.sharedDatabaseManager.grRealm.write({
+                    GRDatabaseManager.sharedDatabaseManager.grRealm.add(userObjectRm, update:true)
+                })
+            }
+
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             DispatchQueue.main.async {
                 // Briefly flash the screen.
