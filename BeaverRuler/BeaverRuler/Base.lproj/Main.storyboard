@@ -293,9 +293,9 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJj-rO-72R">
-                                <rect key="frame" x="16" y="595" width="343" height="30"/>
+                                <rect key="frame" x="16" y="595" width="343" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="MyF-Sx-nz8"/>
+                                    <constraint firstAttribute="height" constant="52" id="MyF-Sx-nz8"/>
                                 </constraints>
                                 <state key="normal" title="Share"/>
                                 <connections>
@@ -317,7 +317,7 @@
                             <constraint firstItem="wpC-XY-Vyn" firstAttribute="top" secondItem="ZGA-QH-EWS" secondAttribute="top" id="5Ej-l2-AIf"/>
                             <constraint firstItem="ZGA-QH-EWS" firstAttribute="trailing" secondItem="ix3-Jj-yIM" secondAttribute="trailing" constant="16" id="6vJ-Mo-MeN"/>
                             <constraint firstItem="NJj-rO-72R" firstAttribute="leading" secondItem="ZGA-QH-EWS" secondAttribute="leading" constant="16" id="Bi4-Za-RpU"/>
-                            <constraint firstItem="ZGA-QH-EWS" firstAttribute="bottom" secondItem="NJj-rO-72R" secondAttribute="bottom" constant="42" id="Ea8-VS-nfk"/>
+                            <constraint firstItem="ZGA-QH-EWS" firstAttribute="bottom" secondItem="NJj-rO-72R" secondAttribute="bottom" constant="20" id="Ea8-VS-nfk"/>
                             <constraint firstItem="NJj-rO-72R" firstAttribute="top" secondItem="cGm-TL-Jjy" secondAttribute="bottom" constant="29" id="Fqi-Wd-fs0"/>
                             <constraint firstItem="wNt-zG-H9N" firstAttribute="leading" secondItem="ZGA-QH-EWS" secondAttribute="leading" constant="16" id="KiX-KM-aAq"/>
                             <constraint firstItem="ix3-Jj-yIM" firstAttribute="leading" secondItem="ZGA-QH-EWS" secondAttribute="leading" constant="16" id="NJW-He-JmO"/>

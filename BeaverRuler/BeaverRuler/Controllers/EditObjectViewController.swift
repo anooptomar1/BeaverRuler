@@ -128,6 +128,19 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     }
     
     @IBAction func sharePressed(_ sender: Any) {
+        let size = objectSizeTextField.text! + " " + unit.unit
+        let firstActivityItem = objectNameTextField.text! + " " + size + " #GRuler"
+        let secondActivityItem : NSURL = NSURL(string: "https://itunes.apple.com/us/app/gruler/id1274233742?ls=1&mt=8")!
+        let image : UIImage = objectImage.image!
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [firstActivityItem, secondActivityItem, image], applicationActivities: nil)
+        
+        activityViewController.popoverPresentationController?.sourceView = (sender as! UIButton)
+        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.unknown
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     // MARK: - UITextFieldDelegate
@@ -136,8 +149,8 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         view.endEditing(true)
