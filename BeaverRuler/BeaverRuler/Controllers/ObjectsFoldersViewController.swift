@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EditObjectVCDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
 
     fileprivate var userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
@@ -62,6 +62,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
             let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
             if let dirPath = paths.first {
                 let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName)
+                cell.imageView?.clipsToBounds = true
                 cell.imageView?.image = UIImage(contentsOfFile: imageURL.path)
             }
         }
@@ -72,6 +73,12 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let editObjectVC = storyboard.instantiateViewController(withIdentifier: "EditObjectViewController") as! EditObjectViewController
+        editObjectVC.selectedObjectIndex = indexPath.row
+        editObjectVC.delegate = self
+        editObjectVC.modalPresentationStyle = .overCurrentContext
+        self.present(editObjectVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,6 +100,11 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
             userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+    
+    // MARK: - EditObjectVCDelegate
+    func reloadObjects() {
+        tableView.reloadData()
     }
 
 }

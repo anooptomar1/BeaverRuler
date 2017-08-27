@@ -17,6 +17,7 @@
 		408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */; };
 		408F90CF1F4DCD9F008E1961 /* UserObjectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */; };
 		5F0A28FA4E972A6F894E9B57 /* Pods_BeaverRuler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */; };
+		D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */; };
 		D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9195C1F43B30D00C480ED /* AppDelegate.swift */; };
 		D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E9195E1F43B30D00C480ED /* art.scnassets */; };
 		D9E919611F43B30D00C480ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E919601F43B30D00C480ED /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 		408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectViewCell.swift; sourceTree = "<group>"; };
 		408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserObjectViewCell.xib; sourceTree = "<group>"; };
 		40F22C6A058E444CFB671CE4 /* Pods-BeaverRuler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaverRuler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler.debug.xcconfig"; sourceTree = "<group>"; };
+		D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditObjectViewController.swift; sourceTree = "<group>"; };
 		D9E919591F43B30D00C480ED /* BeaverRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaverRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E9195C1F43B30D00C480ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9E9195E1F43B30D00C480ED /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				D9E919601F43B30D00C480ED /* ViewController.swift */,
 				40389ECC1F4C5E8200666725 /* SettingsController.swift */,
 				404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */,
+				D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */,
 				408F90C81F4DC162008E1961 /* UserObjectRm.swift in Sources */,
 				403D9F071F45B1A20071C351 /* RulerLine.swift in Sources */,
+				D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */,
 				403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */,
 				403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */,
 				D9E919611F43B30D00C480ED /* ViewController.swift in Sources */,
