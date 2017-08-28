@@ -12,7 +12,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var tableView: UITableView!
 
-    fileprivate var userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+    fileprivate var userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
     fileprivate var unit: DistanceUnit = .centimeter
 
     override func viewDidLoad() {
@@ -97,7 +97,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
                 GRDatabaseManager.sharedDatabaseManager.grRealm.delete(userObject)
             }
             
-            userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+            userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

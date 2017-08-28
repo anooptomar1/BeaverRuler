@@ -16,6 +16,7 @@ class UserObjectRm: Object {
     @objc dynamic var image: String?
     @objc dynamic var size: Float = 0.00
     @objc dynamic var sizeUnit: String?
+    @objc dynamic var createdAt: Date?
     
     override class func primaryKey() -> String{
         return "id"

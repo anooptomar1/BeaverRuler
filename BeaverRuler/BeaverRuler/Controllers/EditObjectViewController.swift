@@ -43,7 +43,7 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
             measureUnitLabel.text = unit.unit
         }
         
-        let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+        let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
         let selectedObject = userObjects[selectedObjectIndex]
         
         objectNameTextField.text = selectedObject.name
@@ -77,7 +77,7 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     
     @IBAction func savePressed(_ sender: Any) {
         
-        let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+        let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
         let selectedObject = userObjects[selectedObjectIndex]
         
         if objectSizeTextField.text?.characters.count == 0 || (objectNameTextField.text?.characters.count)! == 0 {

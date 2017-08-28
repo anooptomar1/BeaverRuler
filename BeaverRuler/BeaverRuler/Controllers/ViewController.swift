@@ -186,6 +186,7 @@ class ViewController: UIViewController {
             let uuid = String(Int(date.timeIntervalSince1970))
             
             let userObjectRm = UserObjectRm()
+            userObjectRm.createdAt = date
             userObjectRm.name = uuid
             userObjectRm.id = uuid
             userObjectRm.sizeUnit = self.unit.rawValue
