@@ -1,4 +1,36 @@
 PODS:
+  - Appodeal/APDAvocarrotAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/AppLovinAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/Core (2.0.0)
+  - Appodeal/FacebookAudienceAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/FlurryAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/InMobiAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/MyTargetAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/Native (2.0.0):
+    - Appodeal/APDAvocarrotAdapter
+    - Appodeal/AppLovinAdapter
+    - Appodeal/FacebookAudienceAdapter
+    - Appodeal/FlurryAdapter
+    - Appodeal/InMobiAdapter
+    - Appodeal/MyTargetAdapter
+    - Appodeal/PubnativeAdapter
+    - Appodeal/StartAppAdapter
+    - Appodeal/TwitterMoPubAdapter
+    - Appodeal/ZPlayAdapter
+  - Appodeal/PubnativeAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/StartAppAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/TwitterMoPubAdapter (2.0.0):
+    - Appodeal/Core
+  - Appodeal/ZPlayAdapter (2.0.0):
+    - Appodeal/Core
   - Realm (2.10.0):
     - Realm/Headers (= 2.10.0)
   - Realm/Headers (2.10.0)
@@ -6,6 +38,7 @@ PODS:
     - Realm (= 2.10.0)
 
 DEPENDENCIES:
+  - Appodeal/Native (~> 2.0)
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
 
@@ -30,9 +63,10 @@ CHECKOUT OPTIONS:
     :submodules: true
 
 SPEC CHECKSUMS:
+  Appodeal: 66798d5db8f86996cd540609f801376c2af326d0
   Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
   RealmSwift: 4c4087e298e38826f722b887e6a7fc2e3b802da4
 
-PODFILE CHECKSUM: 5a7ac9300e0168673d86397f3883c209fb8133b3
+PODFILE CHECKSUM: 68467697860c513579551e5050c9aac58a53a8b3
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1
