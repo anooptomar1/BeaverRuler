@@ -468,6 +468,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NYJEFU8C25;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Realm\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RealmSwift\"",
+					"\"${PODS_ROOT}/Appodeal/APDAvocarrotAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDAppLovinAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal\"/**",
+					"\"${PODS_ROOT}/Appodeal/APDFacebookAudienceAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDFlurryAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDInMobiAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDMyTargetAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDStartAppAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework\"",
+					"$(PROJECT_DIR)/**",
+				);
 				INFOPLIST_FILE = BeaverRuler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comDarkWind.GRuler;
@@ -483,6 +498,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NYJEFU8C25;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Realm\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/RealmSwift\"",
+					"\"${PODS_ROOT}/Appodeal/APDAvocarrotAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDAppLovinAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal\"/**",
+					"\"${PODS_ROOT}/Appodeal/APDFacebookAudienceAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDFlurryAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDInMobiAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDMyTargetAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDStartAppAdapter.embeddedframework\"",
+					"\"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework\"",
+					"$(PROJECT_DIR)/**",
+				);
 				INFOPLIST_FILE = BeaverRuler/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comDarkWind.GRuler;
