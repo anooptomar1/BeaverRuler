@@ -13,7 +13,6 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var tableView: UITableView!
 
-    private var apdLoader : APDNativeAdLoader! = APDNativeAdLoader()
     private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
     fileprivate var apdNativeArray : [APDNativeAd]! = Array()
     var capacity : Int = 4
@@ -35,9 +34,10 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "UserObjectViewCell", bundle: nil),  forCellReuseIdentifier:"UserObjectViewCell")
-
-        apdLoader.delegate = self
-        apdLoader.loadAd(with: type, capacity: capacity)
+        tableView.register(UINib(nibName: "NativeAppInstallAdCell", bundle: nil),
+                           forCellReuseIdentifier: "NativeAppInstallAdCell")
+//        tableView.register(UINib(nibName: "NativeContentAdCell", bundle: nil),
+//                           forCellReuseIdentifier: "NativeContentAdCell")
 
         guard !isAdQueue else {
             apdAdQueue.delegate = self
@@ -62,7 +62,8 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = (tableView.dequeueReusableCell(withIdentifier: "UserObjectViewCell", for: indexPath) as? UserObjectViewCell)!
+
+//        let cell = (tableView.dequeueReusableCell(withIdentifier: "UserObjectViewCell", for: indexPath) as? UserObjectViewCell)!
 
 //        let userObjectData = userObjects[indexPath.row]
 //
@@ -85,12 +86,27 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
 //            }
 //        }
 
+        let nativeAppInstallAdCell = (tableView.dequeueReusableCell(
+            withIdentifier: "NativeAppInstallAdCell", for: indexPath) as? NativeAppInstallAdCell)!
+
         if indexPath.row < apdNativeArray.count {
+
             let nativeAd = apdNativeArray[indexPath.row]
-            nativeAd.attach(to: cell.objectName, viewController: self)
+
+            nativeAd.attach(to: nativeAppInstallAdCell.contentView, viewController: self)
+
+            let mediaView = APDMediaView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
+            nativeAppInstallAdCell.contentView.addSubview(mediaView)
+            nativeAppInstallAdCell.mediaView.setNativeAd(nativeAd, rootViewController: self)
+
+            nativeAppInstallAdCell.titleLabel.text = nativeAd.title;
+            nativeAppInstallAdCell.descriptionLabel.text = nativeAd.descriptionText;
+            nativeAppInstallAdCell.callToActionLabel.text = nativeAd.callToActionText;
+
+            //nativeAd.attach(to: cell.objectName, viewController: self)
         }
 
-        return cell
+        return nativeAppInstallAdCell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -133,19 +149,6 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
 }
 
 // MARK: - NativeAd
-
-extension ObjectsFoldersViewController : APDNativeAdLoaderDelegate {
-
-    func nativeAdLoader(_ loader: APDNativeAdLoader!, didLoad nativeAds: [APDNativeAd]!) {
-        print("\n ****************** \n adLoader didLoadNativeAd... \n ************************* \n")
-        //apdNativeArray = nativeAds
-        //let _ = nativeAds.map {( $0.delegate = self )}
-    }
-
-    func nativeAdLoader(_ loader: APDNativeAdLoader!, didFailToLoadWithError error: Error!){
-        print("\n ****************** \n adLoader failed!!! \n ************************* \n")
-    }
-}
 
 extension ObjectsFoldersViewController : APDNativeAdPresentationDelegate {
 
