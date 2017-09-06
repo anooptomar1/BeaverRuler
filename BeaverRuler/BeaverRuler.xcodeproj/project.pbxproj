@@ -12,14 +12,13 @@
 		403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F0A1F45B3920071C351 /* SCNVector3.swift */; };
 		403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F091F45B3860071C351 /* ARSCNView.swift */; };
 		404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */; };
-		405F49751F5F204400F6143B /* NativeContentAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 405F49731F5F204400F6143B /* NativeContentAdCell.xib */; };
-		405F49761F5F204400F6143B /* NativeAppInstallAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 405F49741F5F204400F6143B /* NativeAppInstallAdCell.xib */; };
 		405F49781F5F206800F6143B /* NativeAppInstallAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F49771F5F206800F6143B /* NativeAppInstallAdCell.swift */; };
 		408F90C81F4DC162008E1961 /* UserObjectRm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90C71F4DC162008E1961 /* UserObjectRm.swift */; };
 		408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90C91F4DC50A008E1961 /* GRDatabaseManager.swift */; };
 		408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */; };
 		408F90CF1F4DCD9F008E1961 /* UserObjectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */; };
 		5F0A28FA4E972A6F894E9B57 /* Pods_BeaverRuler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */; };
+		CE5BB5E41F60BDCE004A38C7 /* NativeAppInstallAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */; };
 		D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */; };
 		D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9195C1F43B30D00C480ED /* AppDelegate.swift */; };
 		D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E9195E1F43B30D00C480ED /* art.scnassets */; };
@@ -36,14 +35,13 @@
 		403D9F091F45B3860071C351 /* ARSCNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNView.swift; sourceTree = "<group>"; };
 		403D9F0A1F45B3920071C351 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsFoldersViewController.swift; sourceTree = "<group>"; };
-		405F49731F5F204400F6143B /* NativeContentAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NativeContentAdCell.xib; path = "../../../../../../../Downloads/admob-native-advanced-feed-master/ios/final/NativeAdvancedTableViewExample/NativeContentAdCell.xib"; sourceTree = "<group>"; };
-		405F49741F5F204400F6143B /* NativeAppInstallAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NativeAppInstallAdCell.xib; path = "../../../../../../../Downloads/admob-native-advanced-feed-master/ios/final/NativeAdvancedTableViewExample/NativeAppInstallAdCell.xib"; sourceTree = "<group>"; };
 		405F49771F5F206800F6143B /* NativeAppInstallAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAppInstallAdCell.swift; sourceTree = "<group>"; };
 		408F90C71F4DC162008E1961 /* UserObjectRm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectRm.swift; sourceTree = "<group>"; };
 		408F90C91F4DC50A008E1961 /* GRDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDatabaseManager.swift; sourceTree = "<group>"; };
 		408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectViewCell.swift; sourceTree = "<group>"; };
 		408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserObjectViewCell.xib; sourceTree = "<group>"; };
 		40F22C6A058E444CFB671CE4 /* Pods-BeaverRuler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaverRuler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler.debug.xcconfig"; sourceTree = "<group>"; };
+		CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAppInstallAdCell.xib; sourceTree = "<group>"; };
 		D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditObjectViewController.swift; sourceTree = "<group>"; };
 		D9E919591F43B30D00C480ED /* BeaverRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaverRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E9195C1F43B30D00C480ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,9 +107,8 @@
 		408F90CB1F4DC9D2008E1961 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */,
 				405F49771F5F206800F6143B /* NativeAppInstallAdCell.swift */,
-				405F49741F5F204400F6143B /* NativeAppInstallAdCell.xib */,
-				405F49731F5F204400F6143B /* NativeContentAdCell.xib */,
 				408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */,
 				408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */,
 			);
@@ -232,10 +229,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */,
-				405F49761F5F204400F6143B /* NativeAppInstallAdCell.xib in Resources */,
+				CE5BB5E41F60BDCE004A38C7 /* NativeAppInstallAdCell.xib in Resources */,
 				D9E919691F43B30D00C480ED /* LaunchScreen.storyboard in Resources */,
 				408F90CF1F4DCD9F008E1961 /* UserObjectViewCell.xib in Resources */,
-				405F49751F5F204400F6143B /* NativeContentAdCell.xib in Resources */,
 				D9E919661F43B30D00C480ED /* Assets.xcassets in Resources */,
 				D9E919641F43B30D00C480ED /* Main.storyboard in Resources */,
 			);

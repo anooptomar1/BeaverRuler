@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="iMx-gh-QyP">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NativeAppInstallAdCell" rowHeight="120" id="iMx-gh-QyP" customClass="NativeAppInstallAdCell" customModule="BeaverRuler">
             <rect key="frame" x="0.0" y="0.0" width="519" height="120"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iMx-gh-QyP" id="pDx-7J-V26">
@@ -23,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGv-Gc-Hgz" customClass="GADNativeAppInstallAdView">
                         <rect key="frame" x="0.0" y="0.0" width="519" height="119.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-ot-3zO" customClass="GADMediaView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-ot-3zO" customClass="APDMediaView">
                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -49,13 +48,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZuS-Zx-xbR">
-                                <rect key="frame" x="240" y="41" width="91" height="30"/>
-                                <state key="normal" title="Call to Action"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ub5-5p-3BQ">
                                 <rect key="frame" x="128" y="48.5" width="29" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Call to Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6s-5g-Xc2">
+                                <rect key="frame" x="238" y="49" width="101.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -63,28 +64,20 @@
                         <color key="backgroundColor" red="1" green="1" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JZo-PY-cYo" firstAttribute="top" secondItem="ub5-5p-3BQ" secondAttribute="bottom" constant="20" id="27Q-8q-ZxY"/>
-                            <constraint firstItem="ZuS-Zx-xbR" firstAttribute="centerY" secondItem="AbB-kP-4eu" secondAttribute="centerY" id="9UG-Vo-D17"/>
+                            <constraint firstItem="q6s-5g-Xc2" firstAttribute="leading" secondItem="AbB-kP-4eu" secondAttribute="trailing" constant="8" id="8Mz-pE-sMT"/>
                             <constraint firstItem="JZo-PY-cYo" firstAttribute="leading" secondItem="D1l-ot-3zO" secondAttribute="trailing" constant="8" id="CUj-Pj-FkC"/>
                             <constraint firstItem="AbB-kP-4eu" firstAttribute="leading" secondItem="ub5-5p-3BQ" secondAttribute="trailing" constant="10" id="IsV-wO-Qwb"/>
-                            <constraint firstItem="ZuS-Zx-xbR" firstAttribute="leading" secondItem="AbB-kP-4eu" secondAttribute="trailing" constant="10" id="KQu-zf-yJd"/>
                             <constraint firstItem="D1l-ot-3zO" firstAttribute="top" secondItem="dGv-Gc-Hgz" secondAttribute="top" id="N2m-CP-g3q"/>
                             <constraint firstItem="AbB-kP-4eu" firstAttribute="centerY" secondItem="ub5-5p-3BQ" secondAttribute="centerY" id="UAe-Cy-WQS"/>
                             <constraint firstAttribute="trailing" secondItem="wj1-k6-oyy" secondAttribute="trailing" constant="8" id="XpU-l3-VYP"/>
                             <constraint firstItem="ub5-5p-3BQ" firstAttribute="top" secondItem="wj1-k6-oyy" secondAttribute="bottom" constant="20" id="ZhX-E9-579"/>
+                            <constraint firstItem="q6s-5g-Xc2" firstAttribute="centerY" secondItem="dGv-Gc-Hgz" secondAttribute="centerY" id="d37-lU-1ba"/>
                             <constraint firstItem="ub5-5p-3BQ" firstAttribute="leading" secondItem="D1l-ot-3zO" secondAttribute="trailing" constant="8" id="dQZ-6f-vZI"/>
                             <constraint firstItem="wj1-k6-oyy" firstAttribute="leading" secondItem="D1l-ot-3zO" secondAttribute="trailing" constant="8" id="fj8-Ow-QnT"/>
                             <constraint firstItem="D1l-ot-3zO" firstAttribute="leading" secondItem="dGv-Gc-Hgz" secondAttribute="leading" id="gf9-Ao-ZhM"/>
                             <constraint firstAttribute="trailing" secondItem="JZo-PY-cYo" secondAttribute="trailing" constant="8" id="vCw-Pp-KEi"/>
                             <constraint firstItem="wj1-k6-oyy" firstAttribute="top" secondItem="dGv-Gc-Hgz" secondAttribute="top" constant="8" id="vl1-kG-Fyp"/>
                         </constraints>
-                        <connections>
-                            <outlet property="bodyView" destination="JZo-PY-cYo" id="3Pb-i8-Vyx"/>
-                            <outlet property="callToActionView" destination="ZuS-Zx-xbR" id="sdP-SD-AjM"/>
-                            <outlet property="headlineView" destination="wj1-k6-oyy" id="NBm-aP-ftg"/>
-                            <outlet property="mediaView" destination="D1l-ot-3zO" id="aa1-vl-nGd"/>
-                            <outlet property="priceView" destination="ub5-5p-3BQ" id="Hu9-PQ-oFX"/>
-                            <outlet property="starRatingView" destination="AbB-kP-4eu" id="6Ql-Kn-jVI"/>
-                        </connections>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="1" green="1" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -95,6 +88,12 @@
                     <constraint firstAttribute="trailingMargin" secondItem="dGv-Gc-Hgz" secondAttribute="trailing" constant="-8" id="e6T-h3-Gh2"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="callToActionLabel" destination="q6s-5g-Xc2" id="62O-Wy-WBd"/>
+                <outlet property="descriptionLabel" destination="JZo-PY-cYo" id="CBj-vI-8vU"/>
+                <outlet property="mediaView" destination="D1l-ot-3zO" id="awf-vO-Mai"/>
+                <outlet property="titleLabel" destination="wj1-k6-oyy" id="WqU-g7-wPh"/>
+            </connections>
             <point key="canvasLocation" x="12.5" y="-176"/>
         </tableViewCell>
     </objects>
