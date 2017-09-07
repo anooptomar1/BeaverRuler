@@ -36,8 +36,6 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         tableView.register(UINib(nibName: "UserObjectViewCell", bundle: nil),  forCellReuseIdentifier:"UserObjectViewCell")
         tableView.register(UINib(nibName: "NativeAppInstallAdCell", bundle: nil),
                            forCellReuseIdentifier: "NativeAppInstallAdCell")
-//        tableView.register(UINib(nibName: "NativeContentAdCell", bundle: nil),
-//                           forCellReuseIdentifier: "NativeContentAdCell")
 
         guard !isAdQueue else {
             apdAdQueue.delegate = self
@@ -91,19 +89,19 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
 
         if indexPath.row < apdNativeArray.count {
 
+            if nativeAppInstallAdCell.nativeAd != nil {
+                nativeAppInstallAdCell.nativeAd.detachFromView()
+            }
+            
             let nativeAd = apdNativeArray[indexPath.row]
 
             nativeAd.attach(to: nativeAppInstallAdCell.contentView, viewController: self)
-
-            let mediaView = APDMediaView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
-            nativeAppInstallAdCell.contentView.addSubview(mediaView)
             nativeAppInstallAdCell.mediaView.setNativeAd(nativeAd, rootViewController: self)
 
             nativeAppInstallAdCell.titleLabel.text = nativeAd.title;
             nativeAppInstallAdCell.descriptionLabel.text = nativeAd.descriptionText;
             nativeAppInstallAdCell.callToActionLabel.text = nativeAd.callToActionText;
 
-            //nativeAd.attach(to: cell.objectName, viewController: self)
         }
 
         return nativeAppInstallAdCell
