@@ -15,7 +15,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
 
     private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
     fileprivate var apdNativeArray : [APDNativeAd]! = Array()
-    var capacity : Int = 4
+    var capacity : Int = 7
     let adDivisor = 3
     var type : APDNativeAdType = .auto
     var isAdQueue = true
@@ -77,13 +77,15 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         let nativeAppInstallAdCell = (tableView.dequeueReusableCell(
             withIdentifier: "NativeAppInstallAdCell", for: indexPath) as? NativeAppInstallAdCell)!
         
-        if indexPath.row < apdNativeArray.count {
+        if apdNativeArray.count > 0 {
             
             if nativeAppInstallAdCell.nativeAd != nil {
                 nativeAppInstallAdCell.nativeAd.detachFromView()
             }
             
-            let nativeAd = apdNativeArray[indexPath.row]
+            let adIndex = arc4random_uniform(UInt32(apdNativeArray.count))
+            
+            let nativeAd = apdNativeArray[Int(adIndex)]
             
             nativeAd.attach(to: nativeAppInstallAdCell.contentView, viewController: self)
             nativeAppInstallAdCell.mediaView.setNativeAd(nativeAd, rootViewController: self)
@@ -91,6 +93,11 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
             nativeAppInstallAdCell.titleLabel.text = nativeAd.title;
             nativeAppInstallAdCell.descriptionLabel.text = nativeAd.descriptionText;
             nativeAppInstallAdCell.callToActionLabel.text = nativeAd.callToActionText;
+            
+            if let adChoices = nativeAd.adChoicesView {
+                adChoices.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24)
+                nativeAppInstallAdCell.contentView.addSubview(adChoices)
+            }
         }
         
         return nativeAppInstallAdCell
