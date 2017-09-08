@@ -16,6 +16,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
     fileprivate var apdNativeArray : [APDNativeAd]! = Array()
     var capacity : Int = 4
+    let adDivisor = 3
     var type : APDNativeAdType = .auto
     var isAdQueue = true
 
@@ -56,66 +57,86 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userObjects.count
+        return userObjects.count + (userObjects.count / adDivisor)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-//        let cell = (tableView.dequeueReusableCell(withIdentifier: "UserObjectViewCell", for: indexPath) as? UserObjectViewCell)!
-
-//        let userObjectData = userObjects[indexPath.row]
-//
-//        if let name = userObjectData.name {
-//            cell.objectName.text = name
-//        }
-//
-//        let objectUnit = DistanceUnit(rawValue: userObjectData.sizeUnit!)
-//        let conversionFator = unit.fator / (objectUnit?.fator)!
-//        cell.objectSize.text = String(format: "%.2f%", userObjectData.size * conversionFator) + " " + unit.unit
-//
-//        if let imageName = userObjectData.image {
-//            let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-//            let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
-//            let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-//            if let dirPath = paths.first {
-//                let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName)
-//                cell.imageView?.clipsToBounds = true
-//                cell.imageView?.image = UIImage(contentsOfFile: imageURL.path)
-//            }
-//        }
-
+        var cell = UITableViewCell()
+        
+        if (indexPath.row % adDivisor) == 0 && indexPath.row != 0 {
+            cell = showAds(indexPath: indexPath)
+        } else {
+            cell = showUserObject(indexPath: indexPath)
+        }
+        
+        return cell
+    }
+    
+    func showAds(indexPath: IndexPath) -> UITableViewCell {
         let nativeAppInstallAdCell = (tableView.dequeueReusableCell(
             withIdentifier: "NativeAppInstallAdCell", for: indexPath) as? NativeAppInstallAdCell)!
-
+        
         if indexPath.row < apdNativeArray.count {
-
+            
             if nativeAppInstallAdCell.nativeAd != nil {
                 nativeAppInstallAdCell.nativeAd.detachFromView()
             }
             
             let nativeAd = apdNativeArray[indexPath.row]
-
+            
             nativeAd.attach(to: nativeAppInstallAdCell.contentView, viewController: self)
             nativeAppInstallAdCell.mediaView.setNativeAd(nativeAd, rootViewController: self)
-
+            
             nativeAppInstallAdCell.titleLabel.text = nativeAd.title;
             nativeAppInstallAdCell.descriptionLabel.text = nativeAd.descriptionText;
             nativeAppInstallAdCell.callToActionLabel.text = nativeAd.callToActionText;
-
         }
-
+        
         return nativeAppInstallAdCell
+    }
+    
+    func showUserObject(indexPath: IndexPath) -> UITableViewCell {
+        let cell = (tableView.dequeueReusableCell(withIdentifier: "UserObjectViewCell", for: indexPath) as? UserObjectViewCell)!
+        
+        cell.objectIndex = indexPath.row - (indexPath.row / adDivisor)
+        let userObjectData = userObjects[cell.objectIndex]
+        
+        if let name = userObjectData.name {
+            cell.objectName.text = name
+        }
+        
+        let objectUnit = DistanceUnit(rawValue: userObjectData.sizeUnit!)
+        let conversionFator = unit.fator / (objectUnit?.fator)!
+        cell.objectSize.text = String(format: "%.2f%", userObjectData.size * conversionFator) + " " + unit.unit
+        
+        if let imageName = userObjectData.image {
+            let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+            let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+            let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+            if let dirPath = paths.first {
+                let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName)
+                cell.imageView?.clipsToBounds = true
+                cell.imageView?.image = UIImage(contentsOfFile: imageURL.path)
+            }
+        }
+        
+        return cell
+
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let editObjectVC = storyboard.instantiateViewController(withIdentifier: "EditObjectViewController") as! EditObjectViewController
-        editObjectVC.selectedObjectIndex = indexPath.row
-        editObjectVC.delegate = self
-        editObjectVC.modalPresentationStyle = .overCurrentContext
-        self.present(editObjectVC, animated: true, completion: nil)
+        if let cell = tableView.cellForRow(at: indexPath) as? UserObjectViewCell {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let editObjectVC = storyboard.instantiateViewController(withIdentifier: "EditObjectViewController") as! EditObjectViewController
+            editObjectVC.selectedObjectIndex = cell.objectIndex
+            editObjectVC.delegate = self
+            editObjectVC.modalPresentationStyle = .overCurrentContext
+            self.present(editObjectVC, animated: true, completion: nil)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -128,13 +149,15 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            let userObject = userObjects[indexPath.row]
+            let objectIndex = indexPath.row - (indexPath.row / adDivisor)
+            let userObject = userObjects[objectIndex]
             
             try! GRDatabaseManager.sharedDatabaseManager.grRealm.write {
                 GRDatabaseManager.sharedDatabaseManager.grRealm.delete(userObject)
             }
             
             userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -175,7 +198,6 @@ extension ObjectsFoldersViewController : APDNativeAdQueueDelegate {
         } else {
             apdNativeArray.append(contentsOf:adQueue.getNativeAds(ofCount: 1))
             let _ = apdNativeArray.map {( $0.delegate = self )}
-
         }
     }
 

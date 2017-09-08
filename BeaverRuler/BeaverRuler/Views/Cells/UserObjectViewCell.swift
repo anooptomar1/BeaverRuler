@@ -14,6 +14,8 @@ class UserObjectViewCell: UITableViewCell {
     @IBOutlet weak var objectName: UITextField!
     @IBOutlet weak var objectSize: UITextField!
     
+    var objectIndex = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
