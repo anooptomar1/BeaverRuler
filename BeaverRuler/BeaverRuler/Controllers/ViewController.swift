@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import ARKit
 import Photos
+import StoreKit
 
 class ViewController: UIViewController {
 
@@ -32,6 +33,8 @@ class ViewController: UIViewController {
     fileprivate lazy var unit: DistanceUnit = .centimeter
     fileprivate var alertController: UIAlertController?
     
+    fileprivate var products = [SKProduct]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +48,7 @@ class ViewController: UIViewController {
         }
 
         setupScene()
+        reloadInAppsPurchases()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,6 +125,7 @@ class ViewController: UIViewController {
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
         settingsViewController.title = "Options"
+        settingsViewController.products = products
 
         let navigationController = UINavigationController(rootViewController: settingsViewController)
         navigationController.modalPresentationStyle = .popover
@@ -253,6 +258,18 @@ class ViewController: UIViewController {
             alertController!.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         }
         self.present(alertController!, animated: true, completion: nil)
+    }
+    
+    // MARK: - In app purchases
+    
+    func reloadInAppsPurchases() {
+        products = []
+        
+        RageProducts.store.requestProducts{success, products in
+            if success {
+                self.products = products!
+            }
+        }
     }
 
 }

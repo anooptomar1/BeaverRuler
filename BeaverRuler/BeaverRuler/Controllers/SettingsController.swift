@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 enum Setting: String {
     case measureUnits = "measureUnits"
@@ -14,8 +15,35 @@ enum Setting: String {
 
 class SettingsController: UIViewController {
 
+    static let removeAdProductId = "com.darkwind.gRuler.removeAd"
+    static let removeUserGalleryProductId = "com.darkwind.gRuler.removeAdPlusUserGalleryLimit"
+    static let removeAdsPlusLimitProductId = "com.darkwind.gRuler.removeUserGalleryLimit"
+    
+    @IBOutlet weak var removeAdsButton: UIButton!
+    @IBOutlet weak var removeLimitsButton: UIButton!
+    @IBOutlet weak var removeAdsPlusLimitButton: UIButton!
+    
+    var products = [SKProduct]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SettingsController.handlePurchaseNotification(_:)),
+                                               name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
+                                               object: nil)
+        
+        if RageProducts.store.isProductPurchased(SettingsController.removeAdProductId) {
+             removeAdsButton.isHidden = true
+        }
+        
+        if RageProducts.store.isProductPurchased(SettingsController.removeUserGalleryProductId) {
+             removeLimitsButton.isHidden = true
+        }
+        
+        if RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId) {
+            removeAdsButton.isHidden = true
+            removeLimitsButton.isHidden = true
+        }
 
     }
 
@@ -28,6 +56,10 @@ class SettingsController: UIViewController {
 
     @IBAction func loginFacebookPressed(_ sender: Any) {
         
+    }
+    
+    @IBAction func restoreTapped(_ sender: Any) {
+        RageProducts.store.restorePurchases()
     }
 
     @IBAction func measureUnitPressed(_ sender: Any) {
@@ -50,17 +82,41 @@ class SettingsController: UIViewController {
     }
 
     @IBAction func removeAdsPressed(_ sender: Any) {
-
+        for (index, product) in products.enumerated() {
+            guard product.productIdentifier == SettingsController.removeAdProductId else { continue }
+            RageProducts.store.buyProduct(product)
+        }
+    }
+    
+    @IBAction func removeLimitsPressed(_ sender: Any) {
+        for (index, product) in products.enumerated() {
+            guard product.productIdentifier == SettingsController.removeUserGalleryProductId else { continue }
+            RageProducts.store.buyProduct(product)
+        }
+    }
+    
+    @IBAction func removeAdsPlusLimitPressed(_ sender: Any) {
+        for (index, product) in products.enumerated() {
+            guard product.productIdentifier == SettingsController.removeAdsPlusLimitProductId else { continue }
+            RageProducts.store.buyProduct(product)
+        }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        guard let productID = notification.object as? String else { return }
+        
+        if productID == SettingsController.removeAdProductId {
+            removeAdsButton.isHidden = true
+        }
+        
+        if productID == SettingsController.removeUserGalleryProductId {
+            removeLimitsButton.isHidden = true
+        }
+        
+        if productID == SettingsController.removeAdsPlusLimitProductId {
+            removeAdsButton.isHidden = true
+            removeLimitsButton.isHidden = true
+        }
     }
-    */
 
 }

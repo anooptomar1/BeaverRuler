@@ -10,7 +10,7 @@ import UIKit
 import Appodeal
 
 class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EditObjectVCDelegate {
-    
+
     @IBOutlet weak var tableView: UITableView!
 
     private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
@@ -18,7 +18,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     var capacity : Int = 7
     let adDivisor = 3
     var type : APDNativeAdType = .auto
-    var isAdQueue = true
+    var blockAd = false
 
     fileprivate var userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
     fileprivate var unit: DistanceUnit = .centimeter
@@ -38,11 +38,10 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         tableView.register(UINib(nibName: "NativeAppInstallAdCell", bundle: nil),
                            forCellReuseIdentifier: "NativeAppInstallAdCell")
 
-        guard !isAdQueue else {
+        if blockAd == false {
             apdAdQueue.delegate = self
             apdAdQueue.setMaxAdSize(capacity)
             apdAdQueue.loadAd(of: type)
-            return
         }
         
     }
@@ -57,14 +56,18 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userObjects.count + (userObjects.count / adDivisor)
+        if blockAd == false {
+            return userObjects.count + (userObjects.count / adDivisor)
+        } else {
+            return userObjects.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         var cell = UITableViewCell()
         
-        if (indexPath.row % adDivisor) == 0 && indexPath.row != 0 {
+        if (indexPath.row % adDivisor) == 0 && indexPath.row != 0 && blockAd == false {
             cell = showAds(indexPath: indexPath)
         } else {
             cell = showUserObject(indexPath: indexPath)
@@ -106,7 +109,13 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     func showUserObject(indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "UserObjectViewCell", for: indexPath) as? UserObjectViewCell)!
         
-        cell.objectIndex = indexPath.row - (indexPath.row / adDivisor)
+        if blockAd == false {
+            cell.objectIndex = indexPath.row - (indexPath.row / adDivisor)
+            
+        } else {
+            cell.objectIndex = indexPath.row
+        }
+        
         let userObjectData = userObjects[cell.objectIndex]
         
         if let name = userObjectData.name {
@@ -129,7 +138,6 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         return cell
-
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
