@@ -82,23 +82,29 @@ class SettingsController: UIViewController {
     }
 
     @IBAction func removeAdsPressed(_ sender: Any) {
-        for (index, product) in products.enumerated() {
-            guard product.productIdentifier == SettingsController.removeAdProductId else { continue }
-            RageProducts.store.buyProduct(product)
+        for (_, product) in products.enumerated() {
+            if product.productIdentifier == SettingsController.removeAdProductId {
+                RageProducts.store.buyProduct(product)
+                break
+            }
         }
     }
     
     @IBAction func removeLimitsPressed(_ sender: Any) {
         for (index, product) in products.enumerated() {
-            guard product.productIdentifier == SettingsController.removeUserGalleryProductId else { continue }
-            RageProducts.store.buyProduct(product)
+            if product.productIdentifier == SettingsController.removeUserGalleryProductId {
+                RageProducts.store.buyProduct(product)
+                break
+            }
         }
     }
     
     @IBAction func removeAdsPlusLimitPressed(_ sender: Any) {
         for (index, product) in products.enumerated() {
-            guard product.productIdentifier == SettingsController.removeAdsPlusLimitProductId else { continue }
-            RageProducts.store.buyProduct(product)
+            if product.productIdentifier == SettingsController.removeAdsPlusLimitProductId {
+                RageProducts.store.buyProduct(product)
+                break
+            }
         }
     }
 

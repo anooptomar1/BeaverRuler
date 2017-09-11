@@ -13,7 +13,9 @@ import Photos
 import StoreKit
 
 class ViewController: UIViewController {
-
+    
+    let maxObjectsInUserGallery = 30
+    
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var targetImageView: UIImageView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
@@ -34,6 +36,7 @@ class ViewController: UIViewController {
     fileprivate var alertController: UIAlertController?
     
     fileprivate var products = [SKProduct]()
+    fileprivate var removeObjectsLimit = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +49,13 @@ class ViewController: UIViewController {
             self.unit = .centimeter
             defaults.set(DistanceUnit.centimeter.rawValue, forKey: Setting.measureUnits.rawValue)
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handlePurchaseNotification(_:)),
+                                               name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
+                                               object: nil)
 
         setupScene()
-        reloadInAppsPurchases()
+        loadInAppsPurchases()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -182,7 +189,11 @@ class ViewController: UIViewController {
     }
 
     @IBAction func takeScreenshot() {
-
+        
+        if checkUserLimit() == true {
+            return
+        }
+        
         let takeScreenshotBlock = {
             
             let image = self.sceneView.snapshot()
@@ -242,6 +253,31 @@ class ViewController: UIViewController {
         }
     }
     
+    func checkUserLimit() -> Bool {
+        
+        let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+        
+        if userObjects.count >= maxObjectsInUserGallery && removeObjectsLimit == false {
+            
+            let alertController = UIAlertController(title: "Objects limit: \(maxObjectsInUserGallery)", message:
+                "Do you whant to remove limit?", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "NO", style: UIAlertActionStyle.default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "BUY", style: UIAlertActionStyle.default, handler: { UIAlertAction in
+                for (_, product) in self.products.enumerated() {
+                    if product.productIdentifier == SettingsController.removeUserGalleryProductId {
+                        RageProducts.store.buyProduct(product)
+                        break
+                    }
+                }
+            }))
+            self.present(alertController, animated: true, completion: nil)
+            
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
@@ -262,14 +298,27 @@ class ViewController: UIViewController {
     
     // MARK: - In app purchases
     
-    func reloadInAppsPurchases() {
-        products = []
+    func loadInAppsPurchases() {
         
+        if RageProducts.store.isProductPurchased(SettingsController.removeUserGalleryProductId) || RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId) {
+            removeObjectsLimit = true
+        }
+        
+        products = []
         RageProducts.store.requestProducts{success, products in
             if success {
                 self.products = products!
             }
         }
+    }
+    
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        guard let productID = notification.object as? String else { return }
+        
+        if productID == SettingsController.removeUserGalleryProductId  {
+            removeObjectsLimit = true
+        }
+        
     }
 
 }

@@ -24,9 +24,7 @@ import Foundation
 
 public struct RageProducts {
   
-  public static let GirlfriendOfDrummerRage = "com.razeware.rageswift3.GirlfriendOfDrummerRage"
-  
-  fileprivate static let productIdentifiers: Set<ProductIdentifier> = [RageProducts.GirlfriendOfDrummerRage]
+  fileprivate static let productIdentifiers: Set<ProductIdentifier> = [SettingsController.removeAdProductId, SettingsController.removeUserGalleryProductId, SettingsController.removeAdsPlusLimitProductId]
 
   public static let store = IAPHelper(productIds: RageProducts.productIdentifiers)
 }
