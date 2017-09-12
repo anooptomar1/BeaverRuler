@@ -474,7 +474,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="removeAdsPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="cmv-Vk-TpM"/>
                                     <action selector="removeLimitsPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="7fo-ec-6S8"/>
                                 </connections>
                             </button>
@@ -489,7 +488,6 @@
                                 </state>
                                 <connections>
                                     <action selector="removeAdsPlusLimitPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="Bfz-fu-8V3"/>
-                                    <action selector="removeAdsPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="KWI-2c-Upd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihE-Un-OtH">
