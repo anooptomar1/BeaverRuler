@@ -25,6 +25,7 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     fileprivate var unit: DistanceUnit = .centimeter
     fileprivate let imagePicker = UIImagePickerController()
     fileprivate var imageName = ""
+    fileprivate var selectedObject: UserObjectRm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,17 +45,17 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
         }
         
         let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
-        let selectedObject = userObjects[selectedObjectIndex]
+        self.selectedObject = userObjects[selectedObjectIndex]
         
-        objectNameTextField.text = selectedObject.name
+        objectNameTextField.text = selectedObject?.name
         
-        let objectUnit = DistanceUnit(rawValue: selectedObject.sizeUnit!)
+        let objectUnit = DistanceUnit(rawValue: (selectedObject?.sizeUnit!)!)
         let conversionFator = unit.fator / (objectUnit?.fator)!
-        objectSizeTextField.text = String(format: "%.2f%", selectedObject.size * conversionFator)
+        objectSizeTextField.text = String(format: "%.2f%", (selectedObject?.size)! * conversionFator)
         
         measureUnitLabel.text = unit.unit
         
-        if let imageName = selectedObject.image {
+        if let imageName = selectedObject?.image {
             let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
             let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
             let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
@@ -69,6 +70,18 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        try! GRDatabaseManager.sharedDatabaseManager.grRealm.write {
+            GRDatabaseManager.sharedDatabaseManager.grRealm.delete(selectedObject!)
+            
+            if (self.delegate != nil) {
+                self.delegate?.reloadObjects()
+            }
+            
+            dismiss(animated: true, completion: nil)
+        }
     }
 
     @IBAction func backPressed(_ sender: Any) {

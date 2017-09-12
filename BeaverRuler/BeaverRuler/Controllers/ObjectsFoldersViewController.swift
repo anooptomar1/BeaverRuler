@@ -162,21 +162,6 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            let objectIndex = indexPath.row - (indexPath.row / adDivisor)
-            let userObject = userObjects[objectIndex]
-            
-            try! GRDatabaseManager.sharedDatabaseManager.grRealm.write {
-                GRDatabaseManager.sharedDatabaseManager.grRealm.delete(userObject)
-            }
-            
-            userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-    
     // MARK: - EditObjectVCDelegate
     func reloadObjects() {
         tableView.reloadData()
