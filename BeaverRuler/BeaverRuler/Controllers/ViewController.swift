@@ -14,6 +14,7 @@ import StoreKit
 
 class ViewController: UIViewController {
     
+    let finishTutorialKey = "finishTutorialKey"
     let maxObjectsInUserGallery = 30
     
     @IBOutlet var sceneView: ARSCNView!
@@ -23,6 +24,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var galleryButton: UIButton!
+    
+    
+    @IBOutlet weak var tutorialStep1Image: UIImageView!
+    @IBOutlet weak var tutorialStep2Image: UIImageView!
+    @IBOutlet weak var tutorialStep3Image: UIImageView!
+    @IBOutlet weak var tutorialStep4Image: UIImageView!
     
     fileprivate lazy var session = ARSession()
     fileprivate lazy var sessionConfiguration = ARWorldTrackingSessionConfiguration()
@@ -38,6 +45,9 @@ class ViewController: UIViewController {
     fileprivate var products = [SKProduct]()
     fileprivate var removeObjectsLimit = false
     
+    fileprivate var finishTutorial = false
+    fileprivate var tutorialStep = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,6 +58,21 @@ class ViewController: UIViewController {
         } else {
             self.unit = .centimeter
             defaults.set(DistanceUnit.centimeter.rawValue, forKey: Setting.measureUnits.rawValue)
+        }
+        
+        finishTutorial = defaults.bool(forKey: finishTutorialKey)
+        
+        if finishTutorial {
+            tutorialStep1Image.isHidden = true
+            tutorialStep2Image.isHidden = true
+            tutorialStep3Image.isHidden = true
+            tutorialStep4Image.isHidden = true
+        } else {
+            tutorialStep1Image.isHidden = false
+            tutorialStep2Image.isHidden = true
+            tutorialStep3Image.isHidden = true
+            tutorialStep4Image.isHidden = true
+            tutorialStep = 1
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handlePurchaseNotification(_:)),
@@ -74,12 +99,18 @@ class ViewController: UIViewController {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if currentLine == nil {
+            
+            if finishTutorial == false && tutorialStep == 2 {
+                tutorialStep2Image.isHidden = true
+                tutorialStep3Image.isHidden = false
+                tutorialStep = 3
+            }
+            
             resetValues()
             isMeasuring = true
             targetImageView.image = UIImage(named: "targetGreen")
 
         } else {
-
             if let line = currentLine {
                 lines.append(line)
                 currentLine = RulerLine(sceneView: sceneView, startVector: endValue, unit: unit)
@@ -105,7 +136,6 @@ class ViewController: UIViewController {
             currentLine = nil
 
         } else {
-
             if lines.count > 0 {
 
                 let previouseLine = lines.last
@@ -115,11 +145,8 @@ class ViewController: UIViewController {
                 currentLine = RulerLine(sceneView: sceneView, startVector: (previouseLine?.startVector)!, unit: unit)
                 currentLine?.update(to: endValue)
                 isMeasuring = true
-
             }
-
         }
-
     }
 
     @IBAction func showSettings(_ sender: Any) {
@@ -157,6 +184,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func galleryButtonPressed(_ sender: Any) {
+        
+        if finishTutorial == false && tutorialStep == 4 {
+            tutorialStep4Image.isHidden = true
+            finishTutorial = true
+            
+            let defaults = UserDefaults.standard
+            defaults.set(finishTutorial, forKey: finishTutorialKey)
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "ObjectsFoldersViewController") as? ObjectsFoldersViewController else {
             return
@@ -189,6 +225,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func takeScreenshot() {
+        
+        if finishTutorial == false && tutorialStep == 3 {
+            tutorialStep3Image.isHidden = true
+            tutorialStep4Image.isHidden = false
+            tutorialStep = 4
+        }
         
         if checkUserLimit() == true {
             return
@@ -378,7 +420,15 @@ extension ViewController {
     }
 
     fileprivate func detectObjects() {
+        
         guard let worldPosition = sceneView.realWorldVector(screenPosition: view.center) else { return }
+        
+        if finishTutorial == false && tutorialStep == 1 {
+            tutorialStep1Image.isHidden = true
+            tutorialStep2Image.isHidden = false
+            tutorialStep = 2
+        }
+        
         targetImageView.isHidden = false
         settingsButton.isHidden = false
         if lines.isEmpty {

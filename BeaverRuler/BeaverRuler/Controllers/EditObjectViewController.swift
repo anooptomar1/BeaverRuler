@@ -20,6 +20,10 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     @IBOutlet weak var objectImage: UIImageView!
     @IBOutlet weak var measureUnitLabel: UILabel!
     
+    
+    
+    
+    
     var selectedObjectIndex = 0
     var delegate: EditObjectVCDelegate?
     fileprivate var unit: DistanceUnit = .centimeter
