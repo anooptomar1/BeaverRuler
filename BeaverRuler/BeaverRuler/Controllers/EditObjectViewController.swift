@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import Crashlytics
 
 protocol EditObjectVCDelegate {
     func reloadObjects()
@@ -19,10 +20,7 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     @IBOutlet weak var objectSizeTextField: UITextField!
     @IBOutlet weak var objectImage: UIImageView!
     @IBOutlet weak var measureUnitLabel: UILabel!
-    
-    
-    
-    
+
     
     var selectedObjectIndex = 0
     var delegate: EditObjectVCDelegate?
@@ -70,6 +68,7 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
             }
         }
         
+        Answers.logCustomEvent(withName: "Edit object Screen")
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +76,7 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     }
     
     @IBAction func deleteButtonPressed(_ sender: Any) {
+        Answers.logCustomEvent(withName: "Delete object pressed")
         try! GRDatabaseManager.sharedDatabaseManager.grRealm.write {
             GRDatabaseManager.sharedDatabaseManager.grRealm.delete(selectedObject!)
             
@@ -93,7 +93,7 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     }
     
     @IBAction func savePressed(_ sender: Any) {
-        
+        Answers.logCustomEvent(withName: "Save object pressed")
         let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
         let selectedObject = userObjects[selectedObjectIndex]
         
@@ -145,6 +145,7 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     }
     
     @IBAction func sharePressed(_ sender: Any) {
+        Answers.logCustomEvent(withName: "Share object pressed")
         let size = objectSizeTextField.text! + " " + unit.unit
         let firstActivityItem = objectNameTextField.text! + " " + size + " #GRuler"
         let secondActivityItem : NSURL = NSURL(string: "https://itunes.apple.com/us/app/gruler/id1274233742?ls=1&mt=8")!

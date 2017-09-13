@@ -8,6 +8,7 @@
 
 import UIKit
 import Appodeal
+import Crashlytics
 
 class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EditObjectVCDelegate {
 
@@ -44,6 +45,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
             apdAdQueue.loadAd(of: type)
         }
         
+        Answers.logCustomEvent(withName: "User gallery Screen")
     }
 
     override func didReceiveMemoryWarning() {
@@ -149,6 +151,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
             editObjectVC.selectedObjectIndex = cell.objectIndex
             editObjectVC.delegate = self
             editObjectVC.modalPresentationStyle = .overCurrentContext
+            Answers.logCustomEvent(withName: "User select object: \(cell.objectIndex)")
             self.present(editObjectVC, animated: true, completion: nil)
         }
         
@@ -178,6 +181,7 @@ extension ObjectsFoldersViewController : APDNativeAdPresentationDelegate {
     }
 
     func nativeAdWillLogUserInteraction(_ nativeAd: APDNativeAd!) {
+        Answers.logCustomEvent(withName: "User click on ad")
         print("\n ****************** \n nativeAdWillLogUserInteraction ", apdNativeArray.index(of: nativeAd)!, "\n ************************* \n")
     }
 }

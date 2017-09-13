@@ -190,6 +190,7 @@
 				D9E919571F43B30C00C480ED /* Resources */,
 				DDC78893FF7AC648134FECC1 /* [CP] Embed Pods Frameworks */,
 				A801F8F31597A6F4DFD0BCF2 /* [CP] Copy Pods Resources */,
+				CE2E86AD1F69C513004212E9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -293,6 +294,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CE2E86AD1F69C513004212E9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 192e859af758c035575a858cb3d354fadb830818 0f9dbfd3d1924f435564838bb6e38981805294e8a28ea2df8b1874483d2ebfc5";
 		};
 		DDC78893FF7AC648134FECC1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
