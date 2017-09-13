@@ -44,36 +44,15 @@ DEPENDENCIES:
   - Appodeal/Native (~> 2.0)
   - Crashlytics
   - Fabric
-  - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
-  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
-
-EXTERNAL SOURCES:
-  Realm:
-    :branch: master
-    :git: https://github.com/realm/realm-cocoa.git
-    :submodules: true
-  RealmSwift:
-    :branch: master
-    :git: https://github.com/realm/realm-cocoa.git
-    :submodules: true
-
-CHECKOUT OPTIONS:
-  Realm:
-    :commit: 3971ecbc053da2a5762ce1dfc20475ee38547189
-    :git: https://github.com/realm/realm-cocoa.git
-    :submodules: true
-  RealmSwift:
-    :commit: 3971ecbc053da2a5762ce1dfc20475ee38547189
-    :git: https://github.com/realm/realm-cocoa.git
-    :submodules: true
+  - RealmSwift
 
 SPEC CHECKSUMS:
   Appodeal: 66798d5db8f86996cd540609f801376c2af326d0
   Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
   Fabric: 2fb5676bc811af011a04513451f463dac6803206
   Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
-  RealmSwift: 4c4087e298e38826f722b887e6a7fc2e3b802da4
+  RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
 
-PODFILE CHECKSUM: 70ce9a0820534dd8688d18c8f0e78d5b641ceb6a
+PODFILE CHECKSUM: 957abc75cdc311606978ef0a332cefe550ee7d57
 
 COCOAPODS: 1.3.1

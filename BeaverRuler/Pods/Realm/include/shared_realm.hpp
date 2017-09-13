@@ -51,7 +51,10 @@ typedef std::weak_ptr<Realm> WeakRealm;
 namespace _impl {
     class AnyHandover;
     class CollectionNotifier;
+    class ListNotifier;
+    class ObjectNotifier;
     class RealmCoordinator;
+    class ResultsNotifier;
     class RealmFriend;
 }
 
@@ -310,7 +313,10 @@ public:
     // without making it public to everyone
     class Internal {
         friend class _impl::CollectionNotifier;
+        friend class _impl::ListNotifier;
+        friend class _impl::ObjectNotifier;
         friend class _impl::RealmCoordinator;
+        friend class _impl::ResultsNotifier;
         friend class ThreadSafeReferenceBase;
         friend class GlobalNotifier;
         friend class TestHelper;

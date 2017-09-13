@@ -149,10 +149,6 @@ using namespace realm;
     }
 }
 
-- (NSString *)objectClassName {
-    return @"RLMSyncPermission";
-}
-
 - (NSString *)description {
     // FIXME: rather than force-casting to a protocol we don't formally implement,
     // we should change RLMDescriptionWithMaxDepth to take a less restrictive

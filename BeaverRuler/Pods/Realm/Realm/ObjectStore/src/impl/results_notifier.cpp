@@ -18,8 +18,6 @@
 
 #include "impl/results_notifier.hpp"
 
-#include "shared_realm.hpp"
-
 using namespace realm;
 using namespace realm::_impl;
 
@@ -30,7 +28,7 @@ ResultsNotifier::ResultsNotifier(Results& target)
 {
     Query q = target.get_query();
     set_table(*q.get_table());
-    m_query_handover = source_shared_group().export_for_handover(q, MutableSourcePayload::Move);
+    m_query_handover = Realm::Internal::get_shared_group(*get_realm())->export_for_handover(q, MutableSourcePayload::Move);
     DescriptorOrdering::generate_patch(target.get_descriptor_ordering(), m_ordering_handover);
 }
 
@@ -73,22 +71,10 @@ bool ResultsNotifier::do_add_required_change_info(TransactionChangeInfo& info)
     REALM_ASSERT(m_query);
     m_info = &info;
 
-    auto& table = *m_query->get_table();
-    if (!table.is_attached())
-        return false;
-
-    auto table_ndx = table.get_index_in_group();
-    if (table_ndx == npos) { // is a subtable
-        auto& parent = *table.get_parent_table();
-        size_t row_ndx = table.get_parent_row_index();
-        size_t col_ndx = find_container_column(parent, row_ndx, &table, type_Table, &Table::get_subtable);
-        info.lists.push_back({parent.get_index_in_group(), row_ndx, col_ndx, &m_changes});
-    }
-    else { // is a top-level table
-        if (info.table_moves_needed.size() <= table_ndx)
-            info.table_moves_needed.resize(table_ndx + 1);
-        info.table_moves_needed[table_ndx] = true;
-    }
+    auto table_ndx = m_query->get_table()->get_index_in_group();
+    if (info.table_moves_needed.size() <= table_ndx)
+        info.table_moves_needed.resize(table_ndx + 1);
+    info.table_moves_needed[table_ndx] = true;
 
     return has_run() && have_callbacks();
 }
@@ -118,11 +104,7 @@ void ResultsNotifier::calculate_changes()
 {
     size_t table_ndx = m_query->get_table()->get_index_in_group();
     if (has_run()) {
-        CollectionChangeBuilder* changes = nullptr;
-        if (table_ndx == npos)
-            changes = &m_changes;
-        else if (table_ndx < m_info->tables.size())
-            changes = &m_info->tables[table_ndx];
+        auto changes = table_ndx < m_info->tables.size() ? &m_info->tables[table_ndx] : nullptr;
 
         std::vector<size_t> next_rows;
         next_rows.reserve(m_tv.size());
@@ -161,14 +143,6 @@ void ResultsNotifier::calculate_changes()
 
 void ResultsNotifier::run()
 {
-    // Table's been deleted, so report all rows as deleted
-    if (!m_query->get_table()->is_attached()) {
-        m_changes = {};
-        m_changes.deletions.set(m_previous_rows.size());
-        m_previous_rows.clear();
-        return;
-    }
-
     if (!need_to_run())
         return;
 
@@ -198,7 +172,7 @@ void ResultsNotifier::do_prepare_handover(SharedGroup& sg)
 
         // add_changes() needs to be called even if there are no changes to
         // clear the skip flag on the callbacks
-        add_changes(std::move(m_changes));
+        add_changes({});
         return;
     }
 

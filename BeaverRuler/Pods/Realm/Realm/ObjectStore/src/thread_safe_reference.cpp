@@ -78,15 +78,12 @@ void ThreadSafeReferenceBase::invalidate() {
 
 ThreadSafeReference<List>::ThreadSafeReference(List const& list)
 : ThreadSafeReferenceBase(list.get_realm())
-, m_link_view(get_source_shared_group().export_linkview_for_handover(list.m_link_view))
-, m_table(get_source_shared_group().export_table_for_handover(list.m_table))
-{ }
+, m_link_view(get_source_shared_group().export_linkview_for_handover(list.m_link_view)) { }
 
 List ThreadSafeReference<List>::import_into_realm(SharedRealm realm) && {
     return invalidate_after_import<List>(*realm, [&](SharedGroup& shared_group) {
-        if (auto link_view = shared_group.import_linkview_from_handover(std::move(m_link_view)))
-            return List(std::move(realm), std::move(link_view));
-        return List(std::move(realm), shared_group.import_table_from_handover(std::move(m_table)));
+        LinkViewRef link_view = shared_group.import_linkview_from_handover(std::move(m_link_view));
+        return List(std::move(realm), std::move(link_view));
     });
 }
 

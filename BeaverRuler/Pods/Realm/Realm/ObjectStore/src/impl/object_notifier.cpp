@@ -29,7 +29,8 @@ ObjectNotifier::ObjectNotifier(Row const& row, std::shared_ptr<Realm> realm)
     REALM_ASSERT(row.get_table());
     set_table(*row.get_table());
 
-    m_handover = source_shared_group().export_for_handover(row);
+    auto& sg = Realm::Internal::get_shared_group(*get_realm());
+    m_handover = sg->export_for_handover(row);
 }
 
 void ObjectNotifier::release_data() noexcept
