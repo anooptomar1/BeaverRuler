@@ -121,19 +121,32 @@ class SettingsController: UIViewController {
         
         if productID == SettingsController.removeAdProductId {
             removeAdsButton.isHidden = true
+            self.logPurchase(name: "Remove ad", id: productID, price: 1.99)
             Answers.logCustomEvent(withName: "User buy remove ad")
         }
         
         if productID == SettingsController.removeUserGalleryProductId {
             removeLimitsButton.isHidden = true
+            self.logPurchase(name: "Remove object limit", id: productID, price: 1.99)
             Answers.logCustomEvent(withName: "User buy remove objects limits(Settinds screen)")
         }
         
         if productID == SettingsController.removeAdsPlusLimitProductId {
             removeAdsButton.isHidden = true
             removeLimitsButton.isHidden = true
+            self.logPurchase(name: "Remove ad and objects limit", id: productID, price: 2.99)
             Answers.logCustomEvent(withName: "User buy remove ad and objects limit")
         }
+    }
+    
+    func logPurchase(name: String, id: String, price: NSDecimalNumber) {
+        Answers.logPurchase(withPrice: price,
+                            currency: "USD",
+                            success: true,
+                            itemName: name,
+                            itemType: "In app",
+                            itemId: id,
+                            customAttributes: [:])
     }
 
 }

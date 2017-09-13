@@ -133,6 +133,7 @@ class ViewController: UIViewController {
             targetImageView.image = UIImage(named: "targetWhite")
             currentLine?.removeFromParentNode()
             currentLine = nil
+            setUpMessageLabel()
         }
     }
 
@@ -259,9 +260,11 @@ class ViewController: UIViewController {
             userObjectRm.id = uuid
             userObjectRm.sizeUnit = self.unit.rawValue
             
-            if let lastLine = self.lines.last {
-                userObjectRm.size = lastLine.lineLength()
+            var polygonLength: Float = 0.0
+            for line in self.lines {
+                polygonLength = polygonLength + line.lineLength()
             }
+            userObjectRm.size = polygonLength
             
             if let data = UIImagePNGRepresentation(image) {
                 let filename = self.getDocumentsDirectory().appendingPathComponent(uuid + ".png")
@@ -370,6 +373,13 @@ class ViewController: UIViewController {
         
         if productID == SettingsController.removeUserGalleryProductId  {
             Answers.logCustomEvent(withName: "User buy objects(Ruler screen) limit")
+            Answers.logPurchase(withPrice: 1.99,
+                                         currency: "USD",
+                                         success: true,
+                                         itemName: "Remove objects limit",
+                                         itemType: "In app",
+                                         itemId: productID,
+                                         customAttributes: [:])
             removeObjectsLimit = true
         }
         
@@ -456,6 +466,22 @@ extension ViewController {
             endValue = getEndValue(worldPosition: worldPosition)
             currentLine?.unit = unit
             currentLine?.update(to: endValue)
+            setUpMessageLabel()
+        }
+    }
+    
+    func setUpMessageLabel() {
+        if lines.count > 0 {
+            var polygonLength: Float = 0.0
+            for line in self.lines {
+                polygonLength = polygonLength + line.lineLength()
+            }
+            if currentLine != nil {
+                polygonLength += (currentLine?.lineLength())!
+            }
+                
+            messageLabel.text = String(format: "%.2f %@", polygonLength, unit.unit)
+        } else {
             messageLabel.text = currentLine?.distance(to: endValue) ?? "Calculating…"
         }
     }
