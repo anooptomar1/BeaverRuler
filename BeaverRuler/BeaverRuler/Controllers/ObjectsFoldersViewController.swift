@@ -39,6 +39,10 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         tableView.register(UINib(nibName: "NativeAppInstallAdCell", bundle: nil),
                            forCellReuseIdentifier: "NativeAppInstallAdCell")
 
+        if RageProducts.store.isProductPurchased(SettingsController.removeAdProductId) {
+            blockAd = true
+        }
+        
         if blockAd == false {
             apdAdQueue.delegate = self
             apdAdQueue.setMaxAdSize(capacity)

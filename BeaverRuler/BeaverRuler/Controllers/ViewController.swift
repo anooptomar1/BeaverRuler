@@ -256,7 +256,7 @@ class ViewController: UIViewController {
             
             let userObjectRm = UserObjectRm()
             userObjectRm.createdAt = date
-            userObjectRm.name = uuid
+            userObjectRm.name = "Object" + uuid
             userObjectRm.id = uuid
             userObjectRm.sizeUnit = self.unit.rawValue
             
