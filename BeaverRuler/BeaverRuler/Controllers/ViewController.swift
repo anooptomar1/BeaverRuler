@@ -12,6 +12,7 @@ import ARKit
 import Photos
 import StoreKit
 import Crashlytics
+import Vision
 
 class ViewController: UIViewController {
     
@@ -256,9 +257,12 @@ class ViewController: UIViewController {
             
             let userObjectRm = UserObjectRm()
             userObjectRm.createdAt = date
-            userObjectRm.name = "Object" + uuid
             userObjectRm.id = uuid
             userObjectRm.sizeUnit = self.unit.rawValue
+            
+            DispatchQueue.main.async {
+                userObjectRm.name = self.getObjectName(id: uuid)
+            }
             
             var polygonLength: Float = 0.0
             for line in self.lines {
@@ -306,6 +310,32 @@ class ViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    func getObjectName(id: String) -> String {
+        
+        var objectName = "Object" + id
+        
+        if let currentFrame = sceneView.session.currentFrame {
+            do {
+                let model = try VNCoreMLModel(for: SqueezeNet().model)
+                let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
+                    // Jump onto the main thread
+                    
+                    guard let results = request.results as? [VNClassificationObservation], let result = results.first else {
+                        print ("No results?")
+                        return
+                    }
+                    
+                    objectName = result.identifier
+                })
+                
+                let handler = VNImageRequestHandler(cvPixelBuffer: currentFrame.capturedImage, options: [:])
+                try handler.perform([request])
+            } catch {}
+        }
+        
+        return objectName
     }
     
     func checkUserLimit() -> Bool {
