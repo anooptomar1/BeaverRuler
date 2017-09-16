@@ -133,7 +133,11 @@ extension IAPHelper: SKPaymentTransactionObserver {
       }
     }
   }
- 
+    
+  public func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+        return true
+  }
+    
   private func complete(transaction: SKPaymentTransaction) {
     print("complete...")
     deliverPurchaseNotificationFor(identifier: transaction.payment.productIdentifier)
