@@ -67,12 +67,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RE3-wq-GAf">
-                                <rect key="frame" x="13" y="590" width="57" height="57"/>
+                                <rect key="frame" x="13" y="592" width="62" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="57" id="E67-S6-sB1"/>
-                                    <constraint firstAttribute="height" constant="57" id="XoG-ZZ-64v"/>
+                                    <constraint firstAttribute="width" constant="62" id="E67-S6-sB1"/>
+                                    <constraint firstAttribute="height" constant="55" id="XoG-ZZ-64v"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="makePhotoButton"/>
+                                <state key="normal" image="makePhotoButton"/>
                                 <connections>
                                     <action selector="takeScreenshot" destination="BV1-FR-VrT" eventType="touchUpInside" id="Lul-aK-HPj"/>
                                 </connections>
@@ -151,7 +151,7 @@
                             <constraint firstItem="F05-cT-k3T" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="AV8-fF-wEJ"/>
                             <constraint firstItem="KZo-jQ-gdA" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="15" id="JTI-dl-pl2"/>
                             <constraint firstItem="Ftl-2f-hAb" firstAttribute="leading" secondItem="KZo-jQ-gdA" secondAttribute="trailing" constant="10" id="JhQ-p2-dEw"/>
-                            <constraint firstItem="RE3-wq-GAf" firstAttribute="top" secondItem="Y8V-EA-o4V" secondAttribute="bottom" constant="-14" id="Kf3-hv-WOB"/>
+                            <constraint firstItem="RE3-wq-GAf" firstAttribute="top" secondItem="Y8V-EA-o4V" secondAttribute="bottom" constant="-12" id="Kf3-hv-WOB"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="bottom" secondItem="5wb-vL-tSD" secondAttribute="bottom" id="MWG-W3-TQh"/>
                             <constraint firstItem="F05-cT-k3T" firstAttribute="top" secondItem="7gH-Ib-BkH" secondAttribute="bottom" constant="21" id="Ncs-oR-ZNP"/>
                             <constraint firstItem="KZo-jQ-gdA" firstAttribute="top" secondItem="5wb-vL-tSD" secondAttribute="top" constant="10" id="OGV-u1-6nR"/>
