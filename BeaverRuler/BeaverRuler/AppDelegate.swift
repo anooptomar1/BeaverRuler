@@ -15,11 +15,13 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var appRater: APAppRater?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
         let adTypes: AppodealAdType = [.nativeAd]
         Appodeal.initialize(withApiKey: "982a00948cdaa99b8e99b8f83a35d8afaa5fbb697ed398a7", types: adTypes)
+        appRater = APAppRater.sharedInstance
 
         return true
     }

@@ -60,6 +60,11 @@ class SettingsController: UIViewController {
         
     }
     
+    @IBAction func rateAppPressed(_ sender: Any) {
+        Answers.logCustomEvent(withName: "Rate app pressed(Settings screen)")
+        RateAppHelper.rateApp()
+    }
+    
     @IBAction func restoreTapped(_ sender: Any) {
         RageProducts.store.restorePurchases()
         Answers.logCustomEvent(withName: "Restore purchases pressed")

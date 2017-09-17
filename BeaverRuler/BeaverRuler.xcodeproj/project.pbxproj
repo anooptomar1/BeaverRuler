@@ -19,6 +19,8 @@
 		408F90CF1F4DCD9F008E1961 /* UserObjectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */; };
 		5F0A28FA4E972A6F894E9B57 /* Pods_BeaverRuler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */; };
 		CE05936A1F6D9DBC003FF700 /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CE0593691F6D9DB3003FF700 /* SqueezeNet.mlmodel */; };
+		CE05936C1F6EEFA2003FF700 /* RateAppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05936B1F6EEFA2003FF700 /* RateAppHelper.swift */; };
+		CE05936E1F6F0A8F003FF700 /* APAppRater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05936D1F6F0A8F003FF700 /* APAppRater.swift */; };
 		CE47D8431F65B3F600166345 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D8421F65B3F500166345 /* IAPHelper.swift */; };
 		CE47D8451F65B56B00166345 /* RageProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D8441F65B56B00166345 /* RageProducts.swift */; };
 		CE5BB5E41F60BDCE004A38C7 /* NativeAppInstallAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */; };
@@ -46,6 +48,8 @@
 		408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserObjectViewCell.xib; sourceTree = "<group>"; };
 		40F22C6A058E444CFB671CE4 /* Pods-BeaverRuler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaverRuler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler.debug.xcconfig"; sourceTree = "<group>"; };
 		CE0593691F6D9DB3003FF700 /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
+		CE05936B1F6EEFA2003FF700 /* RateAppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppHelper.swift; sourceTree = "<group>"; };
+		CE05936D1F6F0A8F003FF700 /* APAppRater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APAppRater.swift; sourceTree = "<group>"; };
 		CE47D8421F65B3F500166345 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		CE47D8441F65B56B00166345 /* RageProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RageProducts.swift; sourceTree = "<group>"; };
 		CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAppInstallAdCell.xib; sourceTree = "<group>"; };
@@ -106,11 +110,13 @@
 		403D9F081F45B3700071C351 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CE05936D1F6F0A8F003FF700 /* APAppRater.swift */,
 				CE47D8441F65B56B00166345 /* RageProducts.swift */,
 				CE47D8421F65B3F500166345 /* IAPHelper.swift */,
 				408F90C91F4DC50A008E1961 /* GRDatabaseManager.swift */,
 				403D9F0A1F45B3920071C351 /* SCNVector3.swift */,
 				403D9F091F45B3860071C351 /* ARSCNView.swift */,
+				CE05936B1F6EEFA2003FF700 /* RateAppHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE05936E1F6F0A8F003FF700 /* APAppRater.swift in Sources */,
 				CE47D8451F65B56B00166345 /* RageProducts.swift in Sources */,
 				40389ECD1F4C5E8200666725 /* SettingsController.swift in Sources */,
 				CE47D8431F65B3F600166345 /* IAPHelper.swift in Sources */,
@@ -375,6 +382,7 @@
 				D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */,
 				403D9F0B1F45B4120071C351 /* SCNVector3.swift in Sources */,
 				405F49781F5F206800F6143B /* NativeAppInstallAdCell.swift in Sources */,
+				CE05936C1F6EEFA2003FF700 /* RateAppHelper.swift in Sources */,
 				403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */,
 				D9E919611F43B30D00C480ED /* ViewController.swift in Sources */,
 				408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */,

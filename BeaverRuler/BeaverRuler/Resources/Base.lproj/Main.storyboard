@@ -503,6 +503,19 @@
                                     <action selector="restoreTapped:" destination="wOF-np-z4Y" eventType="touchUpInside" id="uZk-mp-ghB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WI7-yj-toa">
+                                <rect key="frame" x="16" y="316" width="343" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="V1b-77-rv4"/>
+                                </constraints>
+                                <state key="normal" title="Rate GRuler!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="rateAppPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="JeO-GQ-k4S"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -510,6 +523,7 @@
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="ImD-sf-mCF" secondAttribute="trailing" constant="16" id="4A6-AT-JrG"/>
                             <constraint firstItem="g5c-EH-cuo" firstAttribute="top" secondItem="ImD-sf-mCF" secondAttribute="bottom" constant="16" id="6uW-WC-NnS"/>
                             <constraint firstItem="ImD-sf-mCF" firstAttribute="top" secondItem="OfO-pa-iGW" secondAttribute="bottom" constant="16" id="8q1-zN-jDq"/>
+                            <constraint firstItem="WI7-yj-toa" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="9RW-tc-N2c"/>
                             <constraint firstItem="ihE-Un-OtH" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="9pm-5u-SDs"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="w8m-JL-v7f" secondAttribute="trailing" constant="16" id="B3e-7g-jFF"/>
                             <constraint firstItem="w8m-JL-v7f" firstAttribute="top" secondItem="W8d-2w-692" secondAttribute="top" constant="20" id="Djp-5T-0oa"/>
@@ -517,7 +531,9 @@
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="yNL-4E-LlT" secondAttribute="trailing" constant="16" id="ImN-2t-apG"/>
                             <constraint firstItem="w8m-JL-v7f" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="Mgz-Ln-Sqe"/>
                             <constraint firstItem="eff-4F-ZD7" firstAttribute="top" secondItem="kLQ-O7-D5b" secondAttribute="topMargin" id="U69-nD-d2a"/>
+                            <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="WI7-yj-toa" secondAttribute="trailing" constant="16" id="UWL-XR-KnW"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="eff-4F-ZD7" secondAttribute="trailing" id="UyB-5o-azG"/>
+                            <constraint firstItem="WI7-yj-toa" firstAttribute="top" secondItem="ihE-Un-OtH" secondAttribute="bottom" constant="16" id="XES-PO-CP8"/>
                             <constraint firstItem="yNL-4E-LlT" firstAttribute="top" secondItem="g5c-EH-cuo" secondAttribute="bottom" constant="16" id="XK1-hv-wjg"/>
                             <constraint firstItem="OfO-pa-iGW" firstAttribute="top" secondItem="w8m-JL-v7f" secondAttribute="bottom" constant="16" id="YdT-ZZ-Tk3"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="OfO-pa-iGW" secondAttribute="trailing" constant="16" id="cAo-G6-7o3"/>
