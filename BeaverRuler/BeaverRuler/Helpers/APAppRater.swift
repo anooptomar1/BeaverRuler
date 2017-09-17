@@ -17,7 +17,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
 @objc public class APAppRater: NSObject, UIAlertViewDelegate {
     var application: UIApplication!
     var userdefaults = UserDefaults()
-    let requiredLaunchesBeforeRating = 3
+    let requiredLaunchesBeforeRating = 2
     public var appId: String!
     
     @objc public static var sharedInstance = APAppRater()
@@ -85,14 +85,16 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
     }
     
     //MARK: - Rating the App
-    private func displayRatingsPromptIfRequired(){
-        let appLaunchCount = getAppLaunchCount()
-        if appLaunchCount >= self.requiredLaunchesBeforeRating {
-            Answers.logCustomEvent(withName: "Rate app show(Ruler screen)")
-            rateTheApp()
+    private func displayRatingsPromptIfRequired() {
+        if hasShownAppRating() == false {
+            let appLaunchCount = getAppLaunchCount()
+            if appLaunchCount >= self.requiredLaunchesBeforeRating {
+                Answers.logCustomEvent(withName: "Rate app show(Ruler screen)")
+                rateTheApp()
+            }
+            
+            incrementAppLaunches()
         }
-        
-        incrementAppLaunches()
     }
     
     @available(iOS 8.0, *)
@@ -107,6 +109,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
         
         let cancelAction = UIAlertAction(title: "Not Now", style: .cancel, handler: { (action) -> Void in
            self.setAppRatingShown()
+           Answers.logCustomEvent(withName: "Rate app cancel pressed(Ruler screen)")
         })
         
         rateAlert.addAction(cancelAction)
