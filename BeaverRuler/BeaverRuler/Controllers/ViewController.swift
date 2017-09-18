@@ -432,6 +432,8 @@ extension ViewController: ARSCNViewDelegate {
         
         if errorCode == 103 {
             
+            Answers.logCustomEvent(withName: "User cancel camera permissions")
+            
             let alert = UIAlertController(title: "GRuler Would Like To Access the Camera", message: "Please grant permission to use the Camera.", preferredStyle: .alert )
             alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel) { alert in
 
