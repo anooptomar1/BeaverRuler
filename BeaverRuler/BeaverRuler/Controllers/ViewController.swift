@@ -427,6 +427,22 @@ extension ViewController: ARSCNViewDelegate {
     }
 
     func session(_ session: ARSession, didFailWithError error: Error) {
+        
+        let errorCode = (error as NSError).code
+        
+        if errorCode == 103 {
+            
+            let alert = UIAlertController(title: "GRuler Would Like To Access the Camera", message: "Please grant permission to use the Camera.", preferredStyle: .alert )
+            alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel) { alert in
+
+                UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: { (success) in
+                })
+
+            })
+            present(alert, animated: true, completion: nil)
+
+        }
+        
         messageLabel.text = "Error occurred"
     }
 
@@ -436,6 +452,27 @@ extension ViewController: ARSCNViewDelegate {
 
     func sessionInterruptionEnded(_ session: ARSession) {
         messageLabel.text = "Interruption ended"
+    }
+    
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+//        switch camera.trackingState {
+//        case .notAvailable:
+//            trackingStateLabel.text = "Tracking not available"
+//            trackingStateLabel.textColor = .red
+//        case .normal:
+//            trackingStateLabel.text = "Tracking normal"
+//            trackingStateLabel.textColor = .green
+//        case .limited(let reason):
+//            switch reason {
+//            case .excessiveMotion:
+//                trackingStateLabel.text = "Tracking limited: excessive motion"
+//            case .insufficientFeatures:
+//                trackingStateLabel.text = "Tracking limited: insufficient features"
+//            case .initializing:
+//                trackingStateLabel.text = "Tracking limited: initializing"
+//            }
+//            trackingStateLabel.textColor = .yellow
+//        }
     }
 }
 

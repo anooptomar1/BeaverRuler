@@ -99,16 +99,15 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
     
     @available(iOS 8.0, *)
     private func rateTheApp(){
+        
+        self.setAppRatingShown()
         let message = "Do you love the GRuler app?  Please rate us!"
         let rateAlert = UIAlertController(title: "Rate Us", message: message, preferredStyle: .alert)
         let goToItunesAction = UIAlertAction(title: "Rate Us", style: .default, handler: { (action) -> Void in
-            RateAppHelper.rateApp()
-            self.setAppRatingShown()
             Answers.logCustomEvent(withName: "Rate app pressed(Ruler screen)")
         })
         
         let cancelAction = UIAlertAction(title: "Not Now", style: .cancel, handler: { (action) -> Void in
-           self.setAppRatingShown()
            Answers.logCustomEvent(withName: "Rate app cancel pressed(Ruler screen)")
         })
         
