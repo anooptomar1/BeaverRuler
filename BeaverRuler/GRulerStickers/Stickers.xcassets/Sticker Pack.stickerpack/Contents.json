@@ -1,0 +1,26 @@
+{
+  "stickers" : [
+    {
+      "filename" : "стикеры без фона-1.sticker"
+    },
+    {
+      "filename" : "стикеры без фона-2.sticker"
+    },
+    {
+      "filename" : "стикеры без фона-3.sticker"
+    },
+    {
+      "filename" : "стикеры без фона-4.sticker"
+    },
+    {
+      "filename" : "стикеры без фона-5.sticker"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "properties" : {
+    "grid-size" : "regular"
+  }
+}
