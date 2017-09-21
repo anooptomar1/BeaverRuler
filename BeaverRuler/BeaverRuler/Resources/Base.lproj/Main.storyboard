@@ -516,6 +516,13 @@
                                     <action selector="rateAppPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="JeO-GQ-k4S"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nGO-SD-dUO">
+                                <rect key="frame" x="16" y="40" width="324" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2hC-DQ-RMM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -527,9 +534,11 @@
                             <constraint firstItem="ihE-Un-OtH" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="9pm-5u-SDs"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="w8m-JL-v7f" secondAttribute="trailing" constant="16" id="B3e-7g-jFF"/>
                             <constraint firstItem="w8m-JL-v7f" firstAttribute="top" secondItem="W8d-2w-692" secondAttribute="top" constant="20" id="Djp-5T-0oa"/>
+                            <constraint firstItem="nGO-SD-dUO" firstAttribute="top" secondItem="W8d-2w-692" secondAttribute="top" constant="20" id="ER7-m4-spW"/>
                             <constraint firstItem="ihE-Un-OtH" firstAttribute="top" secondItem="yNL-4E-LlT" secondAttribute="bottom" constant="16" id="HGW-TI-i45"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="yNL-4E-LlT" secondAttribute="trailing" constant="16" id="ImN-2t-apG"/>
                             <constraint firstItem="w8m-JL-v7f" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="Mgz-Ln-Sqe"/>
+                            <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="nGO-SD-dUO" secondAttribute="trailing" constant="35" id="QW7-S5-fcZ"/>
                             <constraint firstItem="eff-4F-ZD7" firstAttribute="top" secondItem="kLQ-O7-D5b" secondAttribute="topMargin" id="U69-nD-d2a"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="WI7-yj-toa" secondAttribute="trailing" constant="16" id="UWL-XR-KnW"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="eff-4F-ZD7" secondAttribute="trailing" id="UyB-5o-azG"/>
@@ -540,6 +549,7 @@
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="g5c-EH-cuo" secondAttribute="trailing" constant="16" id="e8v-xh-IIe"/>
                             <constraint firstAttribute="bottomMargin" secondItem="eff-4F-ZD7" secondAttribute="bottom" id="eIR-jX-UMm"/>
                             <constraint firstItem="ImD-sf-mCF" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="ipP-LF-NVt"/>
+                            <constraint firstItem="nGO-SD-dUO" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="j8w-bP-3As"/>
                             <constraint firstItem="OfO-pa-iGW" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="nyN-cx-ZPK"/>
                             <constraint firstItem="g5c-EH-cuo" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="s0T-o0-YLd"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="ihE-Un-OtH" secondAttribute="trailing" constant="16" id="umC-MH-iba"/>
@@ -548,6 +558,7 @@
                         <viewLayoutGuide key="safeArea" id="W8d-2w-692"/>
                     </view>
                     <connections>
+                        <outlet property="facebookButtonView" destination="nGO-SD-dUO" id="Mp9-cp-SGS"/>
                         <outlet property="removeAdsButton" destination="ImD-sf-mCF" id="6Sv-RI-1Iv"/>
                         <outlet property="removeAdsPlusLimitButton" destination="yNL-4E-LlT" id="ZsX-ec-OQV"/>
                         <outlet property="removeLimitsButton" destination="g5c-EH-cuo" id="3va-xA-NM4"/>

@@ -498,7 +498,6 @@ extension ViewController {
         sceneView.delegate = self
         sceneView.session = session
         loadingView.startAnimating()
-        settingsButton.isHidden = true
         messageLabel.text = "Detecting the world…"
         session.run(sessionConfiguration, options: [.resetTracking, .removeExistingAnchors])
         resetValues()
@@ -521,11 +520,11 @@ extension ViewController {
         }
         
         targetImageView.isHidden = false
-        settingsButton.isHidden = false
         if lines.isEmpty {
             messageLabel.text = "Touch your phone screen…"
         }
         loadingView.stopAnimating()
+        loadingView.isHidden = true
         if isMeasuring {
             if startValue == vectorZero {
                 startValue = worldPosition

@@ -9,6 +9,8 @@
 import UIKit
 import StoreKit
 import Crashlytics
+import FacebookCore
+import FacebookLogin
 
 enum Setting: String {
     case measureUnits = "measureUnits"
@@ -23,7 +25,9 @@ class SettingsController: UIViewController {
     @IBOutlet weak var removeAdsButton: UIButton!
     @IBOutlet weak var removeLimitsButton: UIButton!
     @IBOutlet weak var removeAdsPlusLimitButton: UIButton!
-    
+
+    @IBOutlet weak var facebookButtonView: UIView!
+
     var products = [SKProduct]()
     
     override func viewDidLoad() {
@@ -47,6 +51,10 @@ class SettingsController: UIViewController {
         }
 
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Settings Screen")
+
+        let loginButton = LoginButton(frame: CGRect(origin: CGPoint(x:0,y:0), size: facebookButtonView.bounds.size) ,readPermissions: [ ReadPermission.publicProfile ])
+
+        facebookButtonView.addSubview(loginButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,7 +65,19 @@ class SettingsController: UIViewController {
     // MARK: - Users Interactions
 
     @IBAction func loginFacebookPressed(_ sender: Any) {
-        
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Login Facebook pressed")
+
+        let loginManager = LoginManager()
+        loginManager.logIn([ ReadPermission.publicProfile ], viewController: self) { loginResult in
+            switch loginResult {
+            case .failed(let error):
+                print(error)
+            case .cancelled:
+                print("User cancelled login.")
+            case .success( _, _, _):
+                print("Logged in!")
+            }
+        }
     }
     
     @IBAction func rateAppPressed(_ sender: Any) {
