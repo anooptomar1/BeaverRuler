@@ -8,17 +8,19 @@
 
 import UIKit
 import Crashlytics
+import MessageUI
 
 let AP_APP_LAUNCHES = "com.gittielabs.applaunches"
 let AP_APP_LAUNCHES_CHANGED = "com.gittielabs.applaunches.changed"
 let AP_INSTALL_DATE = "com.gittielabs.install_date"
 let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
 
-@objc public class APAppRater: NSObject, UIAlertViewDelegate {
+@objc public class APAppRater: NSObject, UIAlertViewDelegate, MFMailComposeViewControllerDelegate {
     var application: UIApplication!
     var userdefaults = UserDefaults()
-    let requiredLaunchesBeforeRating = 2
+    let requiredLaunchesBeforeRating = 0
     public var appId: String!
+    let appFeedbackHelper = AppFeedbackHelper()
     
     @objc public static var sharedInstance = APAppRater()
     
@@ -30,7 +32,6 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
     
     func setup(){
         NotificationCenter.default.addObserver(self, selector: #selector(APAppRater.appDidFinishLaunching), name: .UIApplicationDidFinishLaunching, object: nil)
-        //NotificationCenter.default.addObserver(self, selector: Selector(("appDidFinishLaunching")) , name: NSNotification.Name.UIApplicationDidFinishLaunching, object: nil)
     }
     
     //MARK: - NSNotification Observers
@@ -104,6 +105,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
         let message = "Do you love the GRuler app?  Please rate us!"
         let rateAlert = UIAlertController(title: "Rate Us", message: message, preferredStyle: .alert)
         let goToItunesAction = UIAlertAction(title: "Rate Us", style: .default, handler: { (action) -> Void in
+            RateAppHelper.rateApp()
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app pressed(Ruler screen)")
         })
         
@@ -111,8 +113,14 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app cancel pressed(Ruler screen)")
         })
         
+        let feedbackAction = UIAlertAction(title: "Send feedback", style: .default, handler: { (action) -> Void in
+            self.appFeedbackHelper.showFeedback()
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app cancel pressed(Ruler screen)")
+        })
+        
         rateAlert.addAction(cancelAction)
         rateAlert.addAction(goToItunesAction)
+        rateAlert.addAction(feedbackAction)
         
         DispatchQueue.main.async {
             let window = self.application.windows[0]

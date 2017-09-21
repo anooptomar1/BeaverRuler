@@ -28,6 +28,7 @@
 		CE47D8451F65B56B00166345 /* RageProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D8441F65B56B00166345 /* RageProducts.swift */; };
 		CE5BB5E41F60BDCE004A38C7 /* NativeAppInstallAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */; };
 		CE5BB5EA1F644CDA004A38C7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5BB5E91F644CDA004A38C7 /* StoreKit.framework */; };
+		CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */; };
 		D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */; };
 		D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9195C1F43B30D00C480ED /* AppDelegate.swift */; };
 		D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E9195E1F43B30D00C480ED /* art.scnassets */; };
@@ -85,6 +86,7 @@
 		CE47D8441F65B56B00166345 /* RageProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RageProducts.swift; sourceTree = "<group>"; };
 		CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAppInstallAdCell.xib; sourceTree = "<group>"; };
 		CE5BB5E91F644CDA004A38C7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackHelper.swift; sourceTree = "<group>"; };
 		D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditObjectViewController.swift; sourceTree = "<group>"; };
 		D9E919591F43B30D00C480ED /* BeaverRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaverRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E9195C1F43B30D00C480ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				403D9F091F45B3860071C351 /* ARSCNView.swift */,
 				CE05936B1F6EEFA2003FF700 /* RateAppHelper.swift */,
 				406CBA091F73E679006C4BD0 /* AppAnalyticsHelper.swift */,
+				CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				CE47D8451F65B56B00166345 /* RageProducts.swift in Sources */,
 				40389ECD1F4C5E8200666725 /* SettingsController.swift in Sources */,
 				CE47D8431F65B3F600166345 /* IAPHelper.swift in Sources */,
+				CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */,
 				404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */,
 				408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */,
 				406CBA0A1F73E679006C4BD0 /* AppAnalyticsHelper.swift in Sources */,

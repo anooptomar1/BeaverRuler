@@ -81,6 +81,10 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handlePurchaseNotification(_:)),
                                                name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleStartARSessionNotification(_:)),
+                                               name: Notification.Name(rawValue:AppFeedbackHelper.appFeedbackHelperNotificationKey),
+                                               object: nil)
 
         setupScene()
         loadInAppsPurchases()
@@ -413,6 +417,10 @@ class ViewController: UIViewController {
             removeObjectsLimit = true
         }
         
+    }
+    
+    @objc func handleStartARSessionNotification(_ notification: Notification) {
+        session.run(sessionConfiguration)
     }
 
 }
