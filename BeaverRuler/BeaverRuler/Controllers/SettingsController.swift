@@ -11,12 +11,13 @@ import StoreKit
 import Crashlytics
 import FacebookCore
 import FacebookLogin
+import MessageUI
 
 enum Setting: String {
     case measureUnits = "measureUnits"
 }
 
-class SettingsController: UIViewController {
+class SettingsController: UIViewController, MFMailComposeViewControllerDelegate {
 
     static let removeAdProductId = "com.darkwind.gRuler.removeAd"
     static let removeUserGalleryProductId = "com.darkwind.gRuler.removeAdPlusUserGalleryLimit"
@@ -79,6 +80,18 @@ class SettingsController: UIViewController {
             }
         }
     }
+
+    @IBAction func sendFeedbackPressed(_ sender: Any) {
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Send feedback pressed")
+
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+
+    }
     
     @IBAction func rateAppPressed(_ sender: Any) {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app pressed(Settings screen)")
@@ -139,6 +152,28 @@ class SettingsController: UIViewController {
                 break
             }
         }
+    }
+
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+
+        mailComposerVC.setToRecipients(["darkwinddev@gmail.com"])
+        mailComposerVC.setSubject("GRuler Feedback/Suggestion")
+        mailComposerVC.setMessageBody("Please Enter your message here", isHTML: false)
+
+        return mailComposerVC
+    }
+
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+
+    // MARK: MFMailComposeViewControllerDelegate
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 
     @objc func handlePurchaseNotification(_ notification: Notification) {
