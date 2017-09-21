@@ -13,6 +13,7 @@
 		403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D9F091F45B3860071C351 /* ARSCNView.swift */; };
 		404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */; };
 		405F49781F5F206800F6143B /* NativeAppInstallAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405F49771F5F206800F6143B /* NativeAppInstallAdCell.swift */; };
+		406CBA0A1F73E679006C4BD0 /* AppAnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406CBA091F73E679006C4BD0 /* AppAnalyticsHelper.swift */; };
 		408F90C81F4DC162008E1961 /* UserObjectRm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90C71F4DC162008E1961 /* UserObjectRm.swift */; };
 		408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90C91F4DC50A008E1961 /* GRDatabaseManager.swift */; };
 		408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */; };
@@ -68,6 +69,7 @@
 		403D9F0A1F45B3920071C351 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		404A94921F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsFoldersViewController.swift; sourceTree = "<group>"; };
 		405F49771F5F206800F6143B /* NativeAppInstallAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAppInstallAdCell.swift; sourceTree = "<group>"; };
+		406CBA091F73E679006C4BD0 /* AppAnalyticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnalyticsHelper.swift; sourceTree = "<group>"; };
 		408F90C71F4DC162008E1961 /* UserObjectRm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectRm.swift; sourceTree = "<group>"; };
 		408F90C91F4DC50A008E1961 /* GRDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDatabaseManager.swift; sourceTree = "<group>"; };
 		408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectViewCell.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				403D9F0A1F45B3920071C351 /* SCNVector3.swift */,
 				403D9F091F45B3860071C351 /* ARSCNView.swift */,
 				CE05936B1F6EEFA2003FF700 /* RateAppHelper.swift */,
+				406CBA091F73E679006C4BD0 /* AppAnalyticsHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				CE47D8431F65B3F600166345 /* IAPHelper.swift in Sources */,
 				404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */,
 				408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */,
+				406CBA0A1F73E679006C4BD0 /* AppAnalyticsHelper.swift in Sources */,
 				408F90C81F4DC162008E1961 /* UserObjectRm.swift in Sources */,
 				403D9F071F45B1A20071C351 /* RulerLine.swift in Sources */,
 				CE05936A1F6D9DBC003FF700 /* SqueezeNet.mlmodel in Sources */,

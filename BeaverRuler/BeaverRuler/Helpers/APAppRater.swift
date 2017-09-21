@@ -89,7 +89,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
         if hasShownAppRating() == false {
             let appLaunchCount = getAppLaunchCount()
             if appLaunchCount >= self.requiredLaunchesBeforeRating {
-                Answers.logCustomEvent(withName: "Rate app show(Ruler screen)")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app show(Ruler screen)")
                 rateTheApp()
             }
             
@@ -104,11 +104,11 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
         let message = "Do you love the GRuler app?  Please rate us!"
         let rateAlert = UIAlertController(title: "Rate Us", message: message, preferredStyle: .alert)
         let goToItunesAction = UIAlertAction(title: "Rate Us", style: .default, handler: { (action) -> Void in
-            Answers.logCustomEvent(withName: "Rate app pressed(Ruler screen)")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app pressed(Ruler screen)")
         })
         
         let cancelAction = UIAlertAction(title: "Not Now", style: .cancel, handler: { (action) -> Void in
-           Answers.logCustomEvent(withName: "Rate app cancel pressed(Ruler screen)")
+           AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app cancel pressed(Ruler screen)")
         })
         
         rateAlert.addAction(cancelAction)

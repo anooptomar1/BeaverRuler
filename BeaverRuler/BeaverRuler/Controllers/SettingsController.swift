@@ -46,7 +46,7 @@ class SettingsController: UIViewController {
             removeLimitsButton.isHidden = true
         }
 
-        Answers.logCustomEvent(withName: "Settings Screen")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Settings Screen")
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,18 +61,18 @@ class SettingsController: UIViewController {
     }
     
     @IBAction func rateAppPressed(_ sender: Any) {
-        Answers.logCustomEvent(withName: "Rate app pressed(Settings screen)")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app pressed(Settings screen)")
         RateAppHelper.rateApp()
     }
     
     @IBAction func restoreTapped(_ sender: Any) {
         RageProducts.store.restorePurchases()
-        Answers.logCustomEvent(withName: "Restore purchases pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Restore purchases pressed")
     }
 
     @IBAction func measureUnitPressed(_ sender: Any) {
         
-        Answers.logCustomEvent(withName: "Change measure unit pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Change measure unit pressed")
 
         let defaults = UserDefaults.standard
 
@@ -95,7 +95,7 @@ class SettingsController: UIViewController {
         for (_, product) in products.enumerated() {
             if product.productIdentifier == SettingsController.removeAdProductId {
                 RageProducts.store.buyProduct(product)
-                Answers.logCustomEvent(withName: "Remove ad pressed")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove ad pressed")
                 break
             }
         }
@@ -105,7 +105,7 @@ class SettingsController: UIViewController {
         for (index, product) in products.enumerated() {
             if product.productIdentifier == SettingsController.removeUserGalleryProductId {
                 RageProducts.store.buyProduct(product)
-                Answers.logCustomEvent(withName: "Remove objects limit pressed(Settings screen)")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove objects limit pressed(Settings screen)")
                 break
             }
         }
@@ -115,7 +115,7 @@ class SettingsController: UIViewController {
         for (index, product) in products.enumerated() {
             if product.productIdentifier == SettingsController.removeAdsPlusLimitProductId {
                 RageProducts.store.buyProduct(product)
-                Answers.logCustomEvent(withName: "Remove ad objects limit pressed")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove ad objects limit pressed")
                 break
             }
         }
@@ -127,20 +127,20 @@ class SettingsController: UIViewController {
         if productID == SettingsController.removeAdProductId {
             removeAdsButton.isHidden = true
             self.logPurchase(name: "Remove ad", id: productID, price: 1.99)
-            Answers.logCustomEvent(withName: "User buy remove ad")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User buy remove ad")
         }
         
         if productID == SettingsController.removeUserGalleryProductId {
             removeLimitsButton.isHidden = true
             self.logPurchase(name: "Remove object limit", id: productID, price: 1.99)
-            Answers.logCustomEvent(withName: "User buy remove objects limits(Settinds screen)")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User buy remove objects limits(Settinds screen)")
         }
         
         if productID == SettingsController.removeAdsPlusLimitProductId {
             removeAdsButton.isHidden = true
             removeLimitsButton.isHidden = true
             self.logPurchase(name: "Remove ad and objects limit", id: productID, price: 2.99)
-            Answers.logCustomEvent(withName: "User buy remove ad and objects limit")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User buy remove ad and objects limit")
         }
     }
     
