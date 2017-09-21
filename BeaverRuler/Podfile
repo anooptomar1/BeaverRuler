@@ -11,5 +11,7 @@ pod 'RealmSwift'
 pod 'Appodeal/Native', '~>2.0'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'FacebookCore'
+pod 'FacebookLogin'
 
 end
