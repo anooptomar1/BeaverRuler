@@ -25,9 +25,13 @@ class SettingsController: UIViewController {
     @IBOutlet weak var removeAdsButton: UIButton!
     @IBOutlet weak var removeLimitsButton: UIButton!
     @IBOutlet weak var removeAdsPlusLimitButton: UIButton!
-
     @IBOutlet weak var facebookButtonView: UIView!
-
+    @IBOutlet weak var measureUnitsButton: UIButton!
+    @IBOutlet weak var restorePurchasesButton: UIButton!
+    @IBOutlet weak var rateAppButton: UIButton!
+    @IBOutlet weak var sendFeedbackButton: UIButton!
+    
+    
     var products = [SKProduct]()
     let appFeedbackHelper = AppFeedbackHelper()
     
@@ -56,6 +60,23 @@ class SettingsController: UIViewController {
         let loginButton = LoginButton(frame: CGRect(origin: CGPoint(x:0,y:0), size: facebookButtonView.bounds.size) ,readPermissions: [ ReadPermission.publicProfile ])
 
         facebookButtonView.addSubview(loginButton)
+        setUpButtons()
+    }
+    
+    func setUpButtons() {
+        setupButtonStyle(button: removeAdsButton)
+        setupButtonStyle(button: removeLimitsButton)
+        setupButtonStyle(button: removeAdsPlusLimitButton)
+        setupButtonStyle(button: measureUnitsButton)
+        setupButtonStyle(button: restorePurchasesButton)
+        setupButtonStyle(button: rateAppButton)
+        setupButtonStyle(button: sendFeedbackButton)
+    }
+    
+    func setupButtonStyle(button: UIButton) {
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.layer.borderColor = rateAppButton.backgroundColor?.cgColor
     }
 
     override func didReceiveMemoryWarning() {
