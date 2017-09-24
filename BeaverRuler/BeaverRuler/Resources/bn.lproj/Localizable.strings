@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  BeaverRuler
+
+  Created by user on 9/24/17.
+  Copyright © 2017 Sasha. All rights reserved.
+*/
+
+"settingsScreenTitle" = "Settings";
+"userGalleryScreenTitle" = "Gallery";
+"photosAccessDeniedTitle" = "Photos access denied";
+"photosAccessDeniedMessage" = "Please enable Photos access for this application in Settings > Privacy to allow saving screenshots.";
+"doYouWhantToRemoveLimitMessage?" = "Do you whant to remove limit?";
+"objectsLimit" = "Objects limit:";
+"noKey" = "NO";
+"okKey" = "OK";
+"buyKey" = "BUY";
+"userCancelCameraPermissions" = "User cancel camera permissions";
+"GRulerWouldLikeToAccessTheCamera" = "GRuler Would Like To Access the Camera";
+"pleaseGrantPermissionToUseTheCamera" = "Please grant permission to use the Camera.";
+"openSettings" = "Open Settings";
+"errorOccurred" = "Error occurred!";
+"interrupted" = "Interrupted";
+"interruptionEnded" = "Interruption ended";
+"detectingTheWorld" = "Detecting the world…";
+"touchYourPhoneScreen" = "Touch your phone screen…";
+"сalculating" = "Calculating…";
+"measureUnitsButtonTitle" = "Measure units";
+"removeAdsButtonTitle" = "Remove ads";
+"removeLimitButtonTitle" = "Remove limit";
+"removeAdsPlusLimitButtonTitle" = "Remove ads + limit";
+"restorePurchasesButtonTitle" = "Restore purchases";
+"rateGRulerButtonTitle" = "Rate GRuler!";
+"sendFeedbackButtonTitle" = "Send feedback";
+"pleaseSelectDistanceUnitOptions" = "Please select distance unit options";
+"cancelKey" = "Cancel";
+"inputError" = "INPUT ERROR";
+"inputRightSize" = "Input right size";
+"backButtonTitle" = "Back";
+"saveButtonTitle" = "Save";
+"rateAppProposal" = "Do you love the GRuler app?  Please rate us!";
+"rateUsKey" = "Rate Us";
+"notNowKey" = "Not Now";
+

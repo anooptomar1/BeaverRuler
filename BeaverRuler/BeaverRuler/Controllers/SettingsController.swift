@@ -71,6 +71,15 @@ class SettingsController: UIViewController {
         setupButtonStyle(button: restorePurchasesButton)
         setupButtonStyle(button: rateAppButton)
         setupButtonStyle(button: sendFeedbackButton)
+        
+        removeAdsButton.setTitle(NSLocalizedString("removeAdsButtonTitle", comment: ""), for: [])
+        removeLimitsButton.setTitle(NSLocalizedString("removeLimitButtonTitle", comment: ""), for: [])
+        removeAdsPlusLimitButton.setTitle(NSLocalizedString("removeAdsPlusLimitButtonTitle", comment: ""), for: [])
+        measureUnitsButton.setTitle(NSLocalizedString("restorePurchasesButtonTitle", comment: ""), for: [])
+        restorePurchasesButton.setTitle(NSLocalizedString("restorePurchasesButtonTitle", comment: ""), for: [])
+        rateAppButton.setTitle(NSLocalizedString("rateGRulerButtonTitle", comment: ""), for: [])
+        sendFeedbackButton.setTitle(NSLocalizedString("sendFeedbackButtonTitle", comment: ""), for: [])
+        
     }
     
     func setupButtonStyle(button: UIButton) {
@@ -123,7 +132,7 @@ class SettingsController: UIViewController {
 
         let defaults = UserDefaults.standard
 
-        let alertVC = UIAlertController(title: "Settings", message: "Please select distance unit options", preferredStyle: .actionSheet)
+        let alertVC = UIAlertController(title: NSLocalizedString("settingsScreenTitle", comment: ""), message: NSLocalizedString("pleaseSelectDistanceUnitOptions", comment: ""), preferredStyle: .actionSheet)
         alertVC.addAction(UIAlertAction(title: DistanceUnit.centimeter.title, style: .default) { [weak self] _ in
             defaults.set(DistanceUnit.centimeter.rawValue, forKey: Setting.measureUnits.rawValue)
         })
@@ -133,7 +142,8 @@ class SettingsController: UIViewController {
         alertVC.addAction(UIAlertAction(title: DistanceUnit.meter.title, style: .default) { [weak self] _ in
             defaults.set(DistanceUnit.meter.rawValue, forKey: Setting.measureUnits.rawValue)
         })
-        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        alertVC.addAction(UIAlertAction(title: NSLocalizedString("cancelKey", comment: ""), style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
 
     }

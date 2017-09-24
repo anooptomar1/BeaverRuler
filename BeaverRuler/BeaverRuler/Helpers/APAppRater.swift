@@ -102,18 +102,18 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
     private func rateTheApp(){
         
         self.setAppRatingShown()
-        let message = "Do you love the GRuler app?  Please rate us!"
-        let rateAlert = UIAlertController(title: "Rate Us", message: message, preferredStyle: .alert)
-        let goToItunesAction = UIAlertAction(title: "Rate Us", style: .default, handler: { (action) -> Void in
+        let message = NSLocalizedString("rateAppProposal", comment: "")
+        let rateAlert = UIAlertController(title: NSLocalizedString("rateUsKey", comment: ""), message: message, preferredStyle: .alert)
+        let goToItunesAction = UIAlertAction(title: NSLocalizedString("rateUsKey", comment: ""), style: .default, handler: { (action) -> Void in
             RateAppHelper.rateApp()
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app pressed(Ruler screen)")
         })
         
-        let cancelAction = UIAlertAction(title: "Not Now", style: .cancel, handler: { (action) -> Void in
+        let cancelAction = UIAlertAction(title: NSLocalizedString("notNowKey", comment: ""), style: .cancel, handler: { (action) -> Void in
            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app cancel pressed(Ruler screen)")
         })
         
-        let feedbackAction = UIAlertAction(title: "Send feedback", style: .default, handler: { (action) -> Void in
+        let feedbackAction = UIAlertAction(title: NSLocalizedString("sendFeedbackButtonTitle", comment: ""), style: .default, handler: { (action) -> Void in
             self.appFeedbackHelper.showFeedback()
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app cancel pressed(Ruler screen)")
         })

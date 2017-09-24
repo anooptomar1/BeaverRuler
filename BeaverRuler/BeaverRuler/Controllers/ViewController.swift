@@ -171,7 +171,7 @@ class ViewController: UIViewController {
 
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
-        settingsViewController.title = "Options"
+        settingsViewController.title = NSLocalizedString("settingsScreenTitle", comment: "")
         settingsViewController.products = products
 
         let navigationController = UINavigationController(rootViewController: settingsViewController)
@@ -214,7 +214,7 @@ class ViewController: UIViewController {
 
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
-        settingsViewController.title = "Gallery"
+        settingsViewController.title = NSLocalizedString("userGalleryScreenTitle", comment: "")
 
         let navigationController = UINavigationController(rootViewController: settingsViewController)
         navigationController.modalPresentationStyle = .popover
@@ -284,6 +284,9 @@ class ViewController: UIViewController {
                 try! GRDatabaseManager.sharedDatabaseManager.grRealm.write({
                     GRDatabaseManager.sharedDatabaseManager.grRealm.add(userObjectRm, update:true)
                 })
+                
+                let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User create object: \(userObjects.count)")
             }
 
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
@@ -304,8 +307,8 @@ class ViewController: UIViewController {
         case .authorized:
             takeScreenshotBlock()
         case .restricted, .denied:
-            let title = "Photos access denied"
-            let message = "Please enable Photos access for this application in Settings > Privacy to allow saving screenshots."
+            let title = NSLocalizedString("photosAccessDeniedTitle", comment: "")
+            let message = NSLocalizedString("photosAccessDeniedMessage", comment: "")
             showAlert(title: title, message: message)
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({ (authorizationStatus) in
@@ -348,10 +351,10 @@ class ViewController: UIViewController {
         
         if userObjects.count >= maxObjectsInUserGallery && removeObjectsLimit == false {
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User reach objects limit")
-            let alertController = UIAlertController(title: "Objects limit: \(maxObjectsInUserGallery)", message:
-                "Do you whant to remove limit?", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "NO", style: UIAlertActionStyle.default, handler: nil))
-            alertController.addAction(UIAlertAction(title: "BUY", style: UIAlertActionStyle.default, handler: { UIAlertAction in
+            let objectsLimitTitle = NSLocalizedString("objectsLimit", comment: "")
+            let alertController = UIAlertController(title: "\(objectsLimitTitle) \(maxObjectsInUserGallery)", message: NSLocalizedString("doYouWhantToRemoveLimitMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
                 for (_, product) in self.products.enumerated() {
                     if product.productIdentifier == SettingsController.removeUserGalleryProductId {
                         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy objects limit(Ruler Screen) pressed")
@@ -381,7 +384,7 @@ class ViewController: UIViewController {
                 alertController!.addAction(action)
             }
         } else {
-            alertController!.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            alertController!.addAction(UIAlertAction(title: NSLocalizedString("okKey", comment: ""), style: .default, handler: nil))
         }
         self.present(alertController!, animated: true, completion: nil)
     }
@@ -442,8 +445,8 @@ extension ViewController: ARSCNViewDelegate {
             
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User cancel camera permissions")
             
-            let alert = UIAlertController(title: "GRuler Would Like To Access the Camera", message: "Please grant permission to use the Camera.", preferredStyle: .alert )
-            alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel) { alert in
+            let alert = UIAlertController(title: NSLocalizedString("GRulerWouldLikeToAccessTheCamera", comment: ""), message: NSLocalizedString("pleaseGrantPermissionToUseTheCamera", comment: ""), preferredStyle: .alert )
+            alert.addAction(UIAlertAction(title: NSLocalizedString("openSettings", comment: ""), style: .cancel) { alert in
 
                 UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: { (success) in
                 })
@@ -453,15 +456,15 @@ extension ViewController: ARSCNViewDelegate {
 
         }
         
-        messageLabel.text = "Error occurred"
+        messageLabel.text = NSLocalizedString("errorOccurred", comment: "")
     }
 
     func sessionWasInterrupted(_ session: ARSession) {
-        messageLabel.text = "Interrupted"
+        messageLabel.text = NSLocalizedString("interrupted", comment: "")
     }
 
     func sessionInterruptionEnded(_ session: ARSession) {
-        messageLabel.text = "Interruption ended"
+        messageLabel.text = NSLocalizedString("interruptionEnded", comment: "")
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
@@ -506,7 +509,7 @@ extension ViewController {
         sceneView.delegate = self
         sceneView.session = session
         loadingView.startAnimating()
-        messageLabel.text = "Detecting the world…"
+        messageLabel.text = NSLocalizedString("detectingTheWorld", comment: "")
         session.run(sessionConfiguration, options: [.resetTracking, .removeExistingAnchors])
         resetValues()
     }
@@ -529,7 +532,7 @@ extension ViewController {
         
         targetImageView.isHidden = false
         if lines.isEmpty {
-            messageLabel.text = "Touch your phone screen…"
+            messageLabel.text = NSLocalizedString("touchYourPhoneScreen", comment: "")
         }
         loadingView.stopAnimating()
         loadingView.isHidden = true
@@ -558,7 +561,7 @@ extension ViewController {
                 
             messageLabel.text = String(format: "%.2f %@", polygonLength, unit.unit)
         } else {
-            messageLabel.text = currentLine?.distance(to: endValue) ?? "Calculating…"
+            messageLabel.text = currentLine?.distance(to: endValue) ?? NSLocalizedString("сalculating", comment: "")
         }
     }
 

@@ -21,6 +21,8 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     @IBOutlet weak var objectImage: UIImageView!
     @IBOutlet weak var measureUnitLabel: UILabel!
 
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     var selectedObjectIndex = 0
     var delegate: EditObjectVCDelegate?
@@ -31,6 +33,9 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        backButton.setTitle(NSLocalizedString("backButtonTitle", comment: ""), for: [])
+        saveButton.setTitle(NSLocalizedString("saveButtonTitle", comment: ""), for: [])
         
         objectNameTextField.delegate = self
         objectSizeTextField.delegate = self
@@ -104,10 +109,9 @@ class EditObjectViewController: UIViewController, UITextFieldDelegate, UIImagePi
         if Float(objectSizeTextField.text!) != nil {
             
         } else {
-            
-            let alertController = UIAlertController(title: "INPUT ERROR", message:
-                "Input right size", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            let alertController = UIAlertController(title: NSLocalizedString("inputError", comment: ""), message:
+                NSLocalizedString("inputRightSize", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("okKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
             
             return

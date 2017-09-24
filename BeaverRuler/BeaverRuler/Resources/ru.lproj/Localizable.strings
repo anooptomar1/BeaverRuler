@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  BeaverRuler
+
+  Created by user on 9/24/17.
+  Copyright © 2017 Sasha. All rights reserved.
+*/
+
+"settingsScreenTitle" = "Настройки";
+"userGalleryScreenTitle" = "Галерея";
+"photosAccessDeniedTitle" = "Запрещён доступ к фото";
+"photosAccessDeniedMessage" = "Пожалуйста разрешите доступ к фото в Настройки > Конфиденциальность > Фото > GRuler > Чтение и запись.";
+"doYouWhantToRemoveLimitMessage?" = "Хотите убрать лимит?";
+"objectsLimit" = "Лимит объектов:";
+"noKey" = "Нет";
+"okKey" = "OK";
+"buyKey" = "Купить";
+"userCancelCameraPermissions" = "Вы не дали разрешение для камеры";
+"GRulerWouldLikeToAccessTheCamera" = "GRuler хотел бы получить доступ к камере";
+"pleaseGrantPermissionToUseTheCamera" = "Пожалуйста, разрешите доступ к камере";
+"openSettings" = "Открыть настройки";
+"errorOccurred" = "Произошла ошибка!";
+"interrupted" = "Прерывание";
+"interruptionEnded" = "Прерывание закончено";
+"detectingTheWorld" = "Определение пространства…";
+"touchYourPhoneScreen" = "Коснитесь экрана…";
+"сalculating" = "Измерение…";
+"measureUnitsButtonTitle" = "Единицы измерения";
+"removeAdsButtonTitle" = "Убрать рекламу";
+"removeLimitButtonTitle" = "Убрать лимит";
+"removeAdsPlusLimitButtonTitle" = "Убрать рекламу и лимит";
+"restorePurchasesButtonTitle" = "Восстановить покупки";
+"rateGRulerButtonTitle" = "Оценить GRuler!";
+"sendFeedbackButtonTitle" = "Написать разработчику";
+"pleaseSelectDistanceUnitOptions" = "Выберите единицы измерения";
+"cancelKey" = "Отмена";
+"inputError" = "Ошибка ввода";
+"inputRightSize" = "Введите правильный размер";
+"backButtonTitle" = "Назад";
+"saveButtonTitle" = "Сохранить";
+"rateAppProposal" = "Вам понравился GRuler? Пожалуйста оцените!";
+"rateUsKey" = "Оценить!";
+"notNowKey" = "Не сейчас";
