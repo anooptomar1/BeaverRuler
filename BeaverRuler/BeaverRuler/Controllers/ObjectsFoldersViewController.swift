@@ -63,7 +63,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if blockAd == false {
-            return userObjects.count + (userObjects.count / adDivisor)
+            return userObjects.count * adDivisor
         } else {
             return userObjects.count
         }
