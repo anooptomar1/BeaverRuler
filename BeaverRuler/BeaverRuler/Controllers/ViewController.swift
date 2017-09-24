@@ -17,7 +17,7 @@ import Vision
 class ViewController: UIViewController {
     
     let finishTutorialKey = "finishTutorialKey"
-    let maxObjectsInUserGallery = 30
+    let maxObjectsInUserGallery = 5
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var targetImageView: UIImageView!

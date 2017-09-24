@@ -17,7 +17,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
     fileprivate var apdNativeArray : [APDNativeAd]! = Array()
     var capacity : Int = 7
-    let adDivisor = 3
+    let adDivisor = 2
     var type : APDNativeAdType = .auto
     var blockAd = false
 
@@ -73,7 +73,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
 
         var cell = UITableViewCell()
         
-        if (indexPath.row % adDivisor) == 0 && indexPath.row != 0 && blockAd == false {
+        if (indexPath.row % adDivisor) != 0 && blockAd == false {
             cell = showAds(indexPath: indexPath)
         } else {
             cell = showUserObject(indexPath: indexPath)
