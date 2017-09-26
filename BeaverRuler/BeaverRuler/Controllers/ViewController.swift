@@ -212,6 +212,7 @@ class ViewController: UIViewController {
             return
         }
 
+        settingsViewController.products = products
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
         settingsViewController.title = NSLocalizedString("userGalleryScreenTitle", comment: "")
@@ -419,7 +420,6 @@ class ViewController: UIViewController {
                                          customAttributes: [:])
             removeObjectsLimit = true
         }
-        
     }
     
     @objc func handleStartARSessionNotification(_ notification: Notification) {

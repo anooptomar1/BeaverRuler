@@ -10,7 +10,7 @@
 "userGalleryScreenTitle" = "Галерея";
 "photosAccessDeniedTitle" = "Запрещён доступ к фото";
 "photosAccessDeniedMessage" = "Пожалуйста разрешите доступ к фото в Настройки > Конфиденциальность > Фото > GRuler > Чтение и запись.";
-"doYouWhantToRemoveLimitMessage?" = "Хотите убрать лимит?";
+"doYouWhantToRemoveLimitMessage" = "Хотите убрать лимит? Или удалите ненужные объекты из Галереи";
 "objectsLimit" = "Лимит объектов:";
 "noKey" = "Нет";
 "okKey" = "OK";
@@ -41,3 +41,4 @@
 "rateAppProposal" = "Вам понравился GRuler? Пожалуйста оцените!";
 "rateUsKey" = "Оценить!";
 "notNowKey" = "Не сейчас";
+"doYouWhantToRemoveAdsMessage" = "Хотите убрать рекламу?";

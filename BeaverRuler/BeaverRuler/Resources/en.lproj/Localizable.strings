@@ -10,7 +10,7 @@
 "userGalleryScreenTitle" = "Gallery";
 "photosAccessDeniedTitle" = "Photos access denied";
 "photosAccessDeniedMessage" = "Please enable Photos access for this application in Settings > Privacy to allow saving screenshots.";
-"doYouWhantToRemoveLimitMessage?" = "Do you whant to remove limit?";
+"doYouWhantToRemoveLimitMessage" = "Do you want to remove limit? You also can remove some items from Gallery.";
 "objectsLimit" = "Objects limit:";
 "noKey" = "NO";
 "buyKey" = "BUY";
@@ -41,3 +41,4 @@
 "rateAppProposal" = "Do you love the GRuler app?  Please rate us!";
 "rateUsKey" = "Rate Us";
 "notNowKey" = "Not Now";
+"doYouWhantToRemoveAdsMessage" = "Do you want to remove ads?";
