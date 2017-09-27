@@ -13,6 +13,7 @@ import Photos
 import StoreKit
 import Crashlytics
 import Vision
+import Appodeal
 
 class ViewController: UIViewController {
     
@@ -49,6 +50,10 @@ class ViewController: UIViewController {
     
     fileprivate var finishTutorial = false
     fileprivate var tutorialStep = 0
+    
+    private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
+    var capacity : Int = 9
+    var type : APDNativeAdType = .auto
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -213,6 +218,7 @@ class ViewController: UIViewController {
         }
 
         settingsViewController.products = products
+        settingsViewController.apdAdQueue = apdAdQueue
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
         settingsViewController.title = NSLocalizedString("userGalleryScreenTitle", comment: "")
@@ -396,6 +402,11 @@ class ViewController: UIViewController {
         
         if RageProducts.store.isProductPurchased(SettingsController.removeUserGalleryProductId) || RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId) {
             removeObjectsLimit = true
+        }
+        
+        if RageProducts.store.isProductPurchased(SettingsController.removeAdProductId) == false {
+            apdAdQueue.setMaxAdSize(capacity)
+            apdAdQueue.loadAd(of: type)
         }
         
         products = []

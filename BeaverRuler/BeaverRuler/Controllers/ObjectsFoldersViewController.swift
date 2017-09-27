@@ -18,11 +18,9 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
 
     @IBOutlet weak var tableView: UITableView!
 
-    private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
+    var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
     fileprivate var apdNativeArray : [APDNativeAd]! = Array()
-    var capacity : Int = 7
     let adDivisor = 2
-    var type : APDNativeAdType = .auto
     var blockAd = false
     
     let maxShowAdsCountBeforeProposal = 5
@@ -57,8 +55,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         
         if blockAd == false {
             apdAdQueue.delegate = self
-            apdAdQueue.setMaxAdSize(capacity)
-            apdAdQueue.loadAd(of: type)
+            apdNativeArray.append(contentsOf:apdAdQueue.getNativeAds(ofCount: apdAdQueue.currentAdCount))
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(ObjectsFoldersViewController.handlePurchaseNotification(_:)),
@@ -140,9 +137,41 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
                 adChoices.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24)
                 nativeAppInstallAdCell.contentView.addSubview(adChoices)
             }
+            
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show ad")
+            tryToShowRemoveAdProposal()
         }
         
         return nativeAppInstallAdCell
+    }
+    
+    func tryToShowRemoveAdProposal() {
+        if showRemoveAdsProposal == false {
+            showAdsCount = showAdsCount + 1
+            userdefaults.set(showAdsCount, forKey: showAdsCountKey)
+            if showAdsCount >= maxShowAdsCountBeforeProposal {
+                showRemoveAdsProposal = true
+                userdefaults.set(showRemoveAdsProposal, forKey: showRemoveAdsProposalKey)
+                showRemoveAdsProposalAlert()
+            }
+        }
+    }
+    
+    func showRemoveAdsProposalAlert() {
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show remove ads proposal(Gallery screen)")
+        
+        let alertController = UIAlertController(title: NSLocalizedString("removeAdsButtonTitle", comment: ""), message: NSLocalizedString("doYouWhantToRemoveAdsMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
+            for (_, product) in self.products.enumerated() {
+                if product.productIdentifier == SettingsController.removeAdProductId {
+                    AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy remove ads(Gallery Screen) pressed")
+                    RageProducts.store.buyProduct(product)
+                    break
+                }
+            }
+        }))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func showUserObject(indexPath: IndexPath) -> UITableViewCell {
@@ -215,38 +244,11 @@ extension ObjectsFoldersViewController : APDNativeAdPresentationDelegate {
 
     func nativeAdWillLogImpression(_ nativeAd: APDNativeAd!) {
         print("\n ****************** \n nativeAdWillLogUserInteraction nativeAdWillLogImpression at index ", apdNativeArray.index(of: nativeAd)!, "\n ************************* \n")
-        
-        if showRemoveAdsProposal == false {
-            showAdsCount = showAdsCount + 1
-            userdefaults.set(showAdsCount, forKey: showAdsCountKey)
-            if showAdsCount >= maxShowAdsCountBeforeProposal {
-                showRemoveAdsProposal = true
-                userdefaults.set(showRemoveAdsProposal, forKey: showRemoveAdsProposalKey)
-                showRemoveAdsProposalAlert()
-            }
-        }
     }
 
     func nativeAdWillLogUserInteraction(_ nativeAd: APDNativeAd!) {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User click on ad")
         print("\n ****************** \n nativeAdWillLogUserInteraction ", apdNativeArray.index(of: nativeAd)!, "\n ************************* \n")
-    }
-    
-    func showRemoveAdsProposalAlert() {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show remove ads proposal(Gallery screen)")
-        
-        let alertController = UIAlertController(title: NSLocalizedString("removeAdsButtonTitle", comment: ""), message: NSLocalizedString("doYouWhantToRemoveAdsMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
-            for (_, product) in self.products.enumerated() {
-                if product.productIdentifier == SettingsController.removeAdProductId {
-                    AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy remove ads(Gallery Screen) pressed")
-                    RageProducts.store.buyProduct(product)
-                    break
-                }
-            }
-        }))
-        self.present(alertController, animated: true, completion: nil)
     }
 }
 

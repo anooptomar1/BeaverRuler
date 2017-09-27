@@ -115,7 +115,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
         
         let feedbackAction = UIAlertAction(title: NSLocalizedString("sendFeedbackButtonTitle", comment: ""), style: .default, handler: { (action) -> Void in
             self.appFeedbackHelper.showFeedback()
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app cancel pressed(Ruler screen)")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Send feedback pressed(Ruler screen)")
         })
         
         rateAlert.addAction(cancelAction)
