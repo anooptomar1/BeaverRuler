@@ -62,7 +62,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
                                                name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
                                                object: nil)
         
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User gallery Screen")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_gallery_Screen")
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,7 +73,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         guard let productID = notification.object as? String else { return }
         
         if productID == SettingsController.removeAdProductId  {
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User buy remove ads(Gallery screen)")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_remove_ads_Gallery_screen")
             Answers.logPurchase(withPrice: 1.99,
                                 currency: "USD",
                                 success: true,
@@ -138,7 +138,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
                 nativeAppInstallAdCell.contentView.addSubview(adChoices)
             }
             
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show ad")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_ad")
             tryToShowRemoveAdProposal()
         }
         
@@ -158,14 +158,14 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func showRemoveAdsProposalAlert() {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show remove ads proposal(Gallery screen)")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_remove_ads_proposal_Gallery_screen")
         
         let alertController = UIAlertController(title: NSLocalizedString("removeAdsButtonTitle", comment: ""), message: NSLocalizedString("doYouWhantToRemoveAdsMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
         alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
             for (_, product) in self.products.enumerated() {
                 if product.productIdentifier == SettingsController.removeAdProductId {
-                    AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy remove ads(Gallery Screen) pressed")
+                    AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy_remove_ads_Gallery_Screen_pressed")
                     RageProducts.store.buyProduct(product)
                     break
                 }
@@ -217,7 +217,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
             editObjectVC.selectedObjectIndex = cell.objectIndex
             editObjectVC.delegate = self
             editObjectVC.modalPresentationStyle = .overCurrentContext
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User select object: \(cell.objectIndex)")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_select_object_\(cell.objectIndex)")
             self.present(editObjectVC, animated: true, completion: nil)
         }
         
@@ -247,7 +247,7 @@ extension ObjectsFoldersViewController : APDNativeAdPresentationDelegate {
     }
 
     func nativeAdWillLogUserInteraction(_ nativeAd: APDNativeAd!) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User click on ad")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_click_on_ad")
         print("\n ****************** \n nativeAdWillLogUserInteraction ", apdNativeArray.index(of: nativeAd)!, "\n ************************* \n")
     }
 }

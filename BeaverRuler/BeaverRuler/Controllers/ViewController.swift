@@ -80,7 +80,7 @@ class ViewController: UIViewController {
             tutorialStep3Image.isHidden = true
             tutorialStep4Image.isHidden = true
             tutorialStep = 1
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User start tutorial")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_tutorial")
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handlePurchaseNotification(_:)),
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
 
         setupScene()
         loadInAppsPurchases()
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Ruler Screen")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Ruler_Screen")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,19 +117,19 @@ class ViewController: UIViewController {
                 tutorialStep2Image.isHidden = true
                 tutorialStep3Image.isHidden = false
                 tutorialStep = 3
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User finish tutorial step 2")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_2")
             }
             
             resetValues()
             isMeasuring = true
             targetImageView.image = UIImage(named: "targetGreen")
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User make start point")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_start_point")
 
         } else {
             if let line = currentLine {
                 lines.append(line)
                 currentLine = RulerLine(sceneView: sceneView, startVector: endValue, unit: unit)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User make next point")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_next_point")
             }
         }
     }
@@ -137,7 +137,7 @@ class ViewController: UIViewController {
     // MARK: - Users Interactions
 
     @IBAction func finishPolygonPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Finish polygon pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Finish_polygon_pressed")
         if currentLine != nil {
             isMeasuring = false
             targetImageView.image = UIImage(named: "targetWhite")
@@ -148,7 +148,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func undoPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Undo pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Undo_pressed")
         if let line = currentLine {
             line.removeFromParentNode()
             currentLine = nil
@@ -168,7 +168,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showSettings(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show settings pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_settings_pressed")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "SettingsController") as? SettingsController else {
             return
@@ -202,14 +202,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func galleryButtonPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show user gallery pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_user_gallery_pressed")
         if finishTutorial == false && tutorialStep == 4 {
             tutorialStep4Image.isHidden = true
             finishTutorial = true
             
             let defaults = UserDefaults.standard
             defaults.set(finishTutorial, forKey: finishTutorialKey)
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User finish tutorial")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial")
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -234,7 +234,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func resetButtonTapped(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Clean pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Clean_pressed")
         for line in lines {
             line.removeFromParentNode()
         }
@@ -247,12 +247,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func takeScreenshot() {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Take screenshot pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Take_screenshot_pressed")
         if finishTutorial == false && tutorialStep == 3 {
             tutorialStep3Image.isHidden = true
             tutorialStep4Image.isHidden = false
             tutorialStep = 4
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User finish tutorial step 3")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_3")
         }
         
         if checkUserLimit() == true {
@@ -293,7 +293,7 @@ class ViewController: UIViewController {
                 })
                 
                 let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User create object: \(userObjects.count)")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_create_object_\(userObjects.count)")
             }
 
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
@@ -357,14 +357,14 @@ class ViewController: UIViewController {
         let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
         
         if userObjects.count >= maxObjectsInUserGallery && removeObjectsLimit == false {
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User reach objects limit")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_reach_objects_limit")
             let objectsLimitTitle = NSLocalizedString("objectsLimit", comment: "")
             let alertController = UIAlertController(title: "\(objectsLimitTitle) \(maxObjectsInUserGallery)", message: NSLocalizedString("doYouWhantToRemoveLimitMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
             alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
                 for (_, product) in self.products.enumerated() {
                     if product.productIdentifier == SettingsController.removeUserGalleryProductId {
-                        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy objects limit(Ruler Screen) pressed")
+                        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy_objects_limit_Ruler_Screen_pressed")
                         RageProducts.store.buyProduct(product)
                         break
                     }
@@ -421,7 +421,7 @@ class ViewController: UIViewController {
         guard let productID = notification.object as? String else { return }
         
         if productID == SettingsController.removeUserGalleryProductId  {
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User buy objects(Ruler screen) limit")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_objects_Ruler_screen_limit")
             Answers.logPurchase(withPrice: 1.99,
                                          currency: "USD",
                                          success: true,
@@ -454,7 +454,7 @@ extension ViewController: ARSCNViewDelegate {
         
         if errorCode == 103 {
             
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User cancel camera permissions")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_cancel_camera_permissions")
             
             let alert = UIAlertController(title: NSLocalizedString("GRulerWouldLikeToAccessTheCamera", comment: ""), message: NSLocalizedString("pleaseGrantPermissionToUseTheCamera", comment: ""), preferredStyle: .alert )
             alert.addAction(UIAlertAction(title: NSLocalizedString("openSettings", comment: ""), style: .cancel) { alert in

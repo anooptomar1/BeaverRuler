@@ -19,6 +19,7 @@
 		408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */; };
 		408F90CF1F4DCD9F008E1961 /* UserObjectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */; };
 		5F0A28FA4E972A6F894E9B57 /* Pods_BeaverRuler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */; };
+		CE0248511F7C49D8008FC42A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE0248501F7C3F42008FC42A /* GoogleService-Info.plist */; };
 		CE05936A1F6D9DBC003FF700 /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = CE0593691F6D9DB3003FF700 /* SqueezeNet.mlmodel */; };
 		CE05936C1F6EEFA2003FF700 /* RateAppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05936B1F6EEFA2003FF700 /* RateAppHelper.swift */; };
 		CE05936E1F6F0A8F003FF700 /* APAppRater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE05936D1F6F0A8F003FF700 /* APAppRater.swift */; };
@@ -78,6 +79,7 @@
 		408F90CC1F4DCD9F008E1961 /* UserObjectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObjectViewCell.swift; sourceTree = "<group>"; };
 		408F90CD1F4DCD9F008E1961 /* UserObjectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserObjectViewCell.xib; sourceTree = "<group>"; };
 		40F22C6A058E444CFB671CE4 /* Pods-BeaverRuler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeaverRuler.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler.debug.xcconfig"; sourceTree = "<group>"; };
+		CE0248501F7C3F42008FC42A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE0593691F6D9DB3003FF700 /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
 		CE05936B1F6EEFA2003FF700 /* RateAppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppHelper.swift; sourceTree = "<group>"; };
 		CE05936D1F6F0A8F003FF700 /* APAppRater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APAppRater.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		D9E9195B1F43B30D00C480ED /* BeaverRuler */ = {
 			isa = PBXGroup;
 			children = (
+				CE0248501F7C3F42008FC42A /* GoogleService-Info.plist */,
 				D9E9196A1F43B30D00C480ED /* Info.plist */,
 				CE0593641F6D8E9F003FF700 /* Resources */,
 				403D9F081F45B3700071C351 /* Helpers */,
@@ -396,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */,
+				CE0248511F7C49D8008FC42A /* GoogleService-Info.plist in Resources */,
 				CE5BB5E41F60BDCE004A38C7 /* NativeAppInstallAdCell.xib in Resources */,
 				D9E919691F43B30D00C480ED /* LaunchScreen.storyboard in Resources */,
 				CEB20FD61F77BEA600429FB5 /* Localizable.strings in Resources */,
@@ -472,8 +476,10 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -482,8 +488,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

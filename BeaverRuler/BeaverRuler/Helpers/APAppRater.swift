@@ -90,7 +90,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
         if hasShownAppRating() == false {
             let appLaunchCount = getAppLaunchCount()
             if appLaunchCount >= self.requiredLaunchesBeforeRating {
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app show(Ruler screen)")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_show_Ruler_screen")
                 rateTheApp()
             }
             
@@ -106,16 +106,16 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
         let rateAlert = UIAlertController(title: NSLocalizedString("rateUsKey", comment: ""), message: message, preferredStyle: .alert)
         let goToItunesAction = UIAlertAction(title: NSLocalizedString("rateUsKey", comment: ""), style: .default, handler: { (action) -> Void in
             RateAppHelper.rateApp()
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app pressed(Ruler screen)")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_pressed_Ruler_screen")
         })
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("notNowKey", comment: ""), style: .cancel, handler: { (action) -> Void in
-           AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app cancel pressed(Ruler screen)")
+           AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_cancel_pressed_Ruler_screen")
         })
         
         let feedbackAction = UIAlertAction(title: NSLocalizedString("sendFeedbackButtonTitle", comment: ""), style: .default, handler: { (action) -> Void in
             self.appFeedbackHelper.showFeedback()
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Send feedback pressed(Ruler screen)")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Send_feedback_pressed_Ruler_screen")
         })
         
         rateAlert.addAction(cancelAction)

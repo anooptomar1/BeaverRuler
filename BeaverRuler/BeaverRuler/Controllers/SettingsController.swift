@@ -55,7 +55,7 @@ class SettingsController: UIViewController {
             removeLimitsButton.isHidden = true
         }
 
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Settings Screen")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Settings_Screen")
 
         let loginButton = LoginButton(frame: CGRect(origin: CGPoint(x:0,y:0), size: facebookButtonView.bounds.size) ,readPermissions: [ ReadPermission.publicProfile ])
 
@@ -96,7 +96,7 @@ class SettingsController: UIViewController {
     // MARK: - Users Interactions
 
     @IBAction func loginFacebookPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Login Facebook pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Login_Facebook_pressed")
 
         let loginManager = LoginManager()
         loginManager.logIn([ ReadPermission.publicProfile ], viewController: self) { loginResult in
@@ -112,23 +112,23 @@ class SettingsController: UIViewController {
     }
 
     @IBAction func sendFeedbackPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Send feedback pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Send_feedback_pressed")
         appFeedbackHelper.showFeedback()
     }
     
     @IBAction func rateAppPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate app pressed(Settings screen)")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_pressed_Settings_screen")
         RateAppHelper.rateApp()
     }
     
     @IBAction func restoreTapped(_ sender: Any) {
         RageProducts.store.restorePurchases()
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Restore purchases pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Restore_purchases_pressed")
     }
 
     @IBAction func measureUnitPressed(_ sender: Any) {
         
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Change measure unit pressed")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Change_measure_unit_pressed")
 
         let defaults = UserDefaults.standard
 
@@ -152,7 +152,7 @@ class SettingsController: UIViewController {
         for (_, product) in products.enumerated() {
             if product.productIdentifier == SettingsController.removeAdProductId {
                 RageProducts.store.buyProduct(product)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove ad pressed")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove_ad_pressed")
                 break
             }
         }
@@ -162,7 +162,7 @@ class SettingsController: UIViewController {
         for (index, product) in products.enumerated() {
             if product.productIdentifier == SettingsController.removeUserGalleryProductId {
                 RageProducts.store.buyProduct(product)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove objects limit pressed(Settings screen)")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove_objects_limit_pressed_Settings_screen")
                 break
             }
         }
@@ -172,7 +172,7 @@ class SettingsController: UIViewController {
         for (index, product) in products.enumerated() {
             if product.productIdentifier == SettingsController.removeAdsPlusLimitProductId {
                 RageProducts.store.buyProduct(product)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove ad objects limit pressed")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove_ad_objects_limit_pressed")
                 break
             }
         }
@@ -184,20 +184,20 @@ class SettingsController: UIViewController {
         if productID == SettingsController.removeAdProductId {
             removeAdsButton.isHidden = true
             self.logPurchase(name: "Remove ad", id: productID, price: 1.99)
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User buy remove ad")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_remove_ad")
         }
         
         if productID == SettingsController.removeUserGalleryProductId {
             removeLimitsButton.isHidden = true
             self.logPurchase(name: "Remove object limit", id: productID, price: 1.99)
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User buy remove objects limits(Settinds screen)")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_remove_objects_limits_Settinds_screen")
         }
         
         if productID == SettingsController.removeAdsPlusLimitProductId {
             removeAdsButton.isHidden = true
             removeLimitsButton.isHidden = true
             self.logPurchase(name: "Remove ad and objects limit", id: productID, price: 2.99)
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User buy remove ad and objects limit")
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_remove_ad_and_objects_limit")
         }
     }
     
