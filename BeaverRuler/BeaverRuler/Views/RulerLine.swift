@@ -117,7 +117,16 @@ final class RulerLine {
     }
     
     func lineLength() -> Float {
-        return (startVector.distance(from: endVector) * unit.fator)
+        
+        var length = Float(0.0)
+        
+        if let vector = startVector, let endVectorSafe = endVector {
+            length = (vector.distance(from: endVectorSafe) * unit.fator)
+        }
+        
+        return length
+        
+        //return (startVector.distance(from: endVector) * unit.fator)
     }
     
     func distance(to vector: SCNVector3) -> String {
