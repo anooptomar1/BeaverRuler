@@ -538,6 +538,19 @@
                                     <action selector="sendFeedbackPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="eEg-WW-RSP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-DA-GSC">
+                                <rect key="frame" x="16" y="408" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.72097843890000002" green="0.71373695140000004" blue="0.72215801479999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4nT-KC-Xjq"/>
+                                </constraints>
+                                <state key="normal" title="Subscribe to news!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="subscribeToNewsPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="TMT-7B-j9f"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -558,10 +571,12 @@
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="bHZ-JN-sua" secondAttribute="trailing" constant="16" id="Tat-sM-MzH"/>
                             <constraint firstItem="eff-4F-ZD7" firstAttribute="top" secondItem="kLQ-O7-D5b" secondAttribute="topMargin" id="U69-nD-d2a"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="WI7-yj-toa" secondAttribute="trailing" constant="16" id="UWL-XR-KnW"/>
+                            <constraint firstItem="VPY-DA-GSC" firstAttribute="top" secondItem="bHZ-JN-sua" secondAttribute="bottom" constant="16" id="Ubq-TH-iuo"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="eff-4F-ZD7" secondAttribute="trailing" id="UyB-5o-azG"/>
                             <constraint firstItem="WI7-yj-toa" firstAttribute="top" secondItem="ihE-Un-OtH" secondAttribute="bottom" constant="16" id="XES-PO-CP8"/>
                             <constraint firstItem="yNL-4E-LlT" firstAttribute="top" secondItem="g5c-EH-cuo" secondAttribute="bottom" constant="16" id="XK1-hv-wjg"/>
                             <constraint firstItem="OfO-pa-iGW" firstAttribute="top" secondItem="w8m-JL-v7f" secondAttribute="bottom" constant="16" id="YdT-ZZ-Tk3"/>
+                            <constraint firstItem="VPY-DA-GSC" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="aX0-DJ-Xdw"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="OfO-pa-iGW" secondAttribute="trailing" constant="16" id="cAo-G6-7o3"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="g5c-EH-cuo" secondAttribute="trailing" constant="16" id="e8v-xh-IIe"/>
                             <constraint firstAttribute="bottomMargin" secondItem="eff-4F-ZD7" secondAttribute="bottom" id="eIR-jX-UMm"/>
@@ -569,6 +584,7 @@
                             <constraint firstItem="ImD-sf-mCF" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="ipP-LF-NVt"/>
                             <constraint firstItem="nGO-SD-dUO" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="j8w-bP-3As"/>
                             <constraint firstItem="OfO-pa-iGW" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="nyN-cx-ZPK"/>
+                            <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="VPY-DA-GSC" secondAttribute="trailing" constant="16" id="qJk-pR-kCv"/>
                             <constraint firstItem="g5c-EH-cuo" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="s0T-o0-YLd"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="ihE-Un-OtH" secondAttribute="trailing" constant="16" id="umC-MH-iba"/>
                             <constraint firstItem="yNL-4E-LlT" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="zcJ-Mz-Hpt"/>
@@ -584,6 +600,7 @@
                         <outlet property="removeLimitsButton" destination="g5c-EH-cuo" id="3va-xA-NM4"/>
                         <outlet property="restorePurchasesButton" destination="ihE-Un-OtH" id="4k6-2u-h4B"/>
                         <outlet property="sendFeedbackButton" destination="bHZ-JN-sua" id="ttf-T8-mCv"/>
+                        <outlet property="subscribeToNewsButton" destination="VPY-DA-GSC" id="odN-18-2ez"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w8I-hK-fRq" userLabel="First Responder" sceneMemberID="firstResponder"/>

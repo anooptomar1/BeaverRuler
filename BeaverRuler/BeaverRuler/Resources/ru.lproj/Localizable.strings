@@ -42,3 +42,6 @@
 "rateUsKey" = "Оценить!";
 "notNowKey" = "Не сейчас";
 "doYouWhantToRemoveAdsMessage" = "Хотите убрать рекламу?";
+"subscribeToNews" = "Подписаться на новости!";
+"GRulerWouldLikeToAccessNotifications" = "GRuler хотел бы получить доступ к уведомлениям";
+"pleaseGrantPermissionToUseNotifications" = "Пожалуйста, разрешите доступ к уведомлениям";

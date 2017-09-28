@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
 
     var window: UIWindow?
     var appRater: APAppRater?
+    var pushNotificationHelper:PushNotificationHelper?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
@@ -39,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
         
         appRater = APAppRater.sharedInstance
+        pushNotificationHelper = PushNotificationHelper.sharedInstance
         return true
     }
 

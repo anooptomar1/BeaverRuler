@@ -11,6 +11,7 @@ import StoreKit
 import Crashlytics
 import FacebookCore
 import FacebookLogin
+import OneSignal
 
 enum Setting: String {
     case measureUnits = "measureUnits"
@@ -30,7 +31,7 @@ class SettingsController: UIViewController {
     @IBOutlet weak var restorePurchasesButton: UIButton!
     @IBOutlet weak var rateAppButton: UIButton!
     @IBOutlet weak var sendFeedbackButton: UIButton!
-    
+    @IBOutlet weak var subscribeToNewsButton: UIButton!
     
     var products = [SKProduct]()
     let appFeedbackHelper = AppFeedbackHelper()
@@ -71,14 +72,16 @@ class SettingsController: UIViewController {
         setupButtonStyle(button: restorePurchasesButton)
         setupButtonStyle(button: rateAppButton)
         setupButtonStyle(button: sendFeedbackButton)
+        setupButtonStyle(button: subscribeToNewsButton)
         
         removeAdsButton.setTitle(NSLocalizedString("removeAdsButtonTitle", comment: ""), for: [])
         removeLimitsButton.setTitle(NSLocalizedString("removeLimitButtonTitle", comment: ""), for: [])
         removeAdsPlusLimitButton.setTitle(NSLocalizedString("removeAdsPlusLimitButtonTitle", comment: ""), for: [])
-        measureUnitsButton.setTitle(NSLocalizedString("restorePurchasesButtonTitle", comment: ""), for: [])
+        measureUnitsButton.setTitle(NSLocalizedString("measureUnitsButtonTitle", comment: ""), for: [])
         restorePurchasesButton.setTitle(NSLocalizedString("restorePurchasesButtonTitle", comment: ""), for: [])
         rateAppButton.setTitle(NSLocalizedString("rateGRulerButtonTitle", comment: ""), for: [])
         sendFeedbackButton.setTitle(NSLocalizedString("sendFeedbackButtonTitle", comment: ""), for: [])
+        subscribeToNewsButton.setTitle(NSLocalizedString("subscribeToNews", comment: ""), for: [])
         
     }
     
@@ -110,7 +113,45 @@ class SettingsController: UIViewController {
             }
         }
     }
-
+    
+    @IBAction func subscribeToNewsPressed(_ sender: Any) {
+        
+        let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
+        let hasPrompted = status.permissionStatus.hasPrompted
+        
+        if hasPrompted {
+            showProposalToGoAppSettings()
+        } else {
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_push_notification_proposal_Settings_screen")
+            OneSignal.promptForPushNotifications(userResponse: { accepted in
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_accepted_push_notifications_Settings_screen_\(accepted)")
+            })
+        }
+        
+    }
+    
+    func showProposalToGoAppSettings() {
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_go_to_app_settings_notifications")
+        
+        let alert = UIAlertController(title: NSLocalizedString("GRulerWouldLikeToAccessNotifications", comment: ""), message: NSLocalizedString("pleaseGrantPermissionToUseNotifications", comment: ""), preferredStyle: .alert )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("openSettings", comment: ""), style: .default) { alert in
+            
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_go_to_app_settings_notifications")
+            
+            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: { (success) in
+            })
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("notNowKey", comment: ""), style: .cancel, handler: { (action) -> Void in
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Subscribe_notifications_cancel_Settings_screen")
+        })
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func sendFeedbackPressed(_ sender: Any) {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Send_feedback_pressed")
         appFeedbackHelper.showFeedback()

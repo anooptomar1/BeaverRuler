@@ -42,3 +42,6 @@
 "rateUsKey" = "Rate Us";
 "notNowKey" = "Not Now";
 "doYouWhantToRemoveAdsMessage" = "Do you want to remove ads?";
+"subscribeToNews" = "Subscribe to news!";
+"GRulerWouldLikeToAccessNotifications" = "GRuler Would Like To Access Notifications";
+"pleaseGrantPermissionToUseNotifications" = "Please grant permission to use notifications.";

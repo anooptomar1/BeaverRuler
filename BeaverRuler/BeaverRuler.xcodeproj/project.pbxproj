@@ -35,6 +35,7 @@
 		CEB20FD61F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEB20FD71F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */; };
+		CEEFD3A41F7D78E600378EE8 /* PushNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */; };
 		D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */; };
 		D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9195C1F43B30D00C480ED /* AppDelegate.swift */; };
 		D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E9195E1F43B30D00C480ED /* art.scnassets */; };
@@ -132,6 +133,7 @@
 		CEB20FF01F785ABA00429FB5 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackHelper.swift; sourceTree = "<group>"; };
 		CEEFD3A21F7D743300378EE8 /* BeaverRuler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeaverRuler.entitlements; sourceTree = "<group>"; };
+		CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationHelper.swift; sourceTree = "<group>"; };
 		CF3D4BED94EDA6BE1FDE0D69 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditObjectViewController.swift; sourceTree = "<group>"; };
 		D9E919591F43B30D00C480ED /* BeaverRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaverRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +215,7 @@
 				CE05936B1F6EEFA2003FF700 /* RateAppHelper.swift */,
 				406CBA091F73E679006C4BD0 /* AppAnalyticsHelper.swift */,
 				CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */,
+				CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				CE47D8431F65B3F600166345 /* IAPHelper.swift in Sources */,
 				CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */,
 				404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */,
+				CEEFD3A41F7D78E600378EE8 /* PushNotificationHelper.swift in Sources */,
 				408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */,
 				406CBA0A1F73E679006C4BD0 /* AppAnalyticsHelper.swift in Sources */,
 				408F90C81F4DC162008E1961 /* UserObjectRm.swift in Sources */,

@@ -18,7 +18,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
 @objc public class APAppRater: NSObject, UIAlertViewDelegate, MFMailComposeViewControllerDelegate {
     var application: UIApplication!
     var userdefaults = UserDefaults()
-    let requiredLaunchesBeforeRating = 2
+    let requiredLaunchesBeforeRating = 1
     public var appId: String!
     let appFeedbackHelper = AppFeedbackHelper()
     
@@ -87,15 +87,18 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
     
     //MARK: - Rating the App
     private func displayRatingsPromptIfRequired() {
+        
+        let appLaunchCount = getAppLaunchCount()
+        
         if hasShownAppRating() == false {
-            let appLaunchCount = getAppLaunchCount()
             if appLaunchCount >= self.requiredLaunchesBeforeRating {
                 AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_show_Ruler_screen")
                 rateTheApp()
             }
-            
-            incrementAppLaunches()
         }
+        
+        incrementAppLaunches()
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_launche_app_\(appLaunchCount)")
     }
     
     @available(iOS 8.0, *)
