@@ -49,7 +49,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         tableView.register(UINib(nibName: "NativeAppInstallAdCell", bundle: nil),
                            forCellReuseIdentifier: "NativeAppInstallAdCell")
 
-        if RageProducts.store.isProductPurchased(SettingsController.removeAdProductId) {
+        if RageProducts.store.isProductPurchased(SettingsController.removeAdProductId) || RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId) {
             blockAd = true
         }
         

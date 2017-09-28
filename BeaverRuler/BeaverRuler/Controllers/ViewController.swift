@@ -404,7 +404,9 @@ class ViewController: UIViewController {
             removeObjectsLimit = true
         }
         
-        if RageProducts.store.isProductPurchased(SettingsController.removeAdProductId) == false {
+        if (RageProducts.store.isProductPurchased(SettingsController.removeAdProductId)) || (RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId)) {
+            
+        } else {
             apdAdQueue.setMaxAdSize(capacity)
             apdAdQueue.loadAd(of: type)
         }
