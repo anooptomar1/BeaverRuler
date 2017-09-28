@@ -125,8 +125,6 @@ final class RulerLine {
         }
         
         return length
-        
-        //return (startVector.distance(from: endVector) * unit.fator)
     }
     
     func distance(to vector: SCNVector3) -> String {
