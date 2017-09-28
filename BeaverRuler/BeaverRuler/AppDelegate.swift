@@ -13,6 +13,7 @@ import Crashlytics
 import FacebookCore
 import StoreKit
 import Firebase
+import OneSignal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObserver {
@@ -25,10 +26,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
         FirebaseApp.configure()
         let adTypes: AppodealAdType = [.nativeAd]
         Appodeal.initialize(withApiKey: "982a00948cdaa99b8e99b8f83a35d8afaa5fbb697ed398a7", types: adTypes)
-        appRater = APAppRater.sharedInstance
+        
 
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-
+        
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: "2b24c120-7fa4-4582-b2c9-50a7a9196175",
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        
+        appRater = APAppRater.sharedInstance
         return true
     }
 

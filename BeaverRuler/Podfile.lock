@@ -73,6 +73,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - OneSignal (2.5.4)
   - Realm (2.10.0):
     - Realm/Headers (= 2.10.0)
   - Realm/Headers (2.10.0)
@@ -86,6 +87,7 @@ DEPENDENCIES:
   - FacebookCore
   - FacebookLogin
   - Firebase/Core
+  - OneSignal (< 3.0, >= 2.5.2)
   - RealmSwift
 
 SPEC CHECKSUMS:
@@ -103,9 +105,10 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: c4c7fca62c7b7330caee5da04f19a37ea37bb1c1
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  OneSignal: da994bcf6a2efbdceaf71e389e1d05245c562899
   Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
   RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
 
-PODFILE CHECKSUM: a35cd2d36c1d3f98608bd67a253bb647d4f2f080
+PODFILE CHECKSUM: de22d193097e161181cb4a7cd6be1027d24f0a40
 
 COCOAPODS: 1.3.1

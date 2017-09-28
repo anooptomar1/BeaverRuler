@@ -6,13 +6,18 @@ target 'BeaverRuler' do
   use_frameworks!
 
   # Pods for BeaverRuler
+  pod 'RealmSwift'
+  pod 'Appodeal/Native', '~>2.0'
+  pod 'Fabric'
+  pod 'Crashlytics'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'Firebase/Core'
+  pod 'OneSignal', '>= 2.5.2', '< 3.0'
 
-pod 'RealmSwift'
-pod 'Appodeal/Native', '~>2.0'
-pod 'Fabric'
-pod 'Crashlytics'
-pod 'FacebookCore'
-pod 'FacebookLogin'
-pod 'Firebase/Core'
+end
 
+target 'OneSignalNotificationServiceExtension' do
+    use_frameworks!
+    pod 'OneSignal', '>= 2.5.2', '< 3.0'
 end
