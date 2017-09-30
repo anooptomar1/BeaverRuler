@@ -41,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
         
         appRater = APAppRater.sharedInstance
         pushNotificationHelper = PushNotificationHelper.sharedInstance
+        
+        SKPaymentQueue.default().add(self)
+        
         return true
     }
 

@@ -32,8 +32,10 @@
 		CE47D8451F65B56B00166345 /* RageProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47D8441F65B56B00166345 /* RageProducts.swift */; };
 		CE5BB5E41F60BDCE004A38C7 /* NativeAppInstallAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */; };
 		CE5BB5EA1F644CDA004A38C7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5BB5E91F644CDA004A38C7 /* StoreKit.framework */; };
+		CE6B80881F7EDAE700BD433D /* TutorialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B80871F7EDAE700BD433D /* TutorialHelper.swift */; };
 		CEB20FD61F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEB20FD71F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
+		CEB9CA521F800D1400EBCF88 /* RulerScreenNavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA511F800D1400EBCF88 /* RulerScreenNavigationHelper.swift */; };
 		CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */; };
 		CEEFD3A41F7D78E600378EE8 /* PushNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */; };
 		D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */; };
@@ -107,6 +109,7 @@
 		CE47D8441F65B56B00166345 /* RageProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RageProducts.swift; sourceTree = "<group>"; };
 		CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAppInstallAdCell.xib; sourceTree = "<group>"; };
 		CE5BB5E91F644CDA004A38C7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CE6B80871F7EDAE700BD433D /* TutorialHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialHelper.swift; sourceTree = "<group>"; };
 		CEB20FD81F77BEA600429FB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FDA1F77BEAD00429FB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FDB1F77BF5700429FB5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		CEB20FEE1F785A6100429FB5 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FEF1F785A7300429FB5 /* ga */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ga; path = ga.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FF01F785ABA00429FB5 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CEB9CA511F800D1400EBCF88 /* RulerScreenNavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerScreenNavigationHelper.swift; sourceTree = "<group>"; };
 		CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackHelper.swift; sourceTree = "<group>"; };
 		CEEFD3A21F7D743300378EE8 /* BeaverRuler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeaverRuler.entitlements; sourceTree = "<group>"; };
 		CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationHelper.swift; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 				406CBA091F73E679006C4BD0 /* AppAnalyticsHelper.swift */,
 				CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */,
 				CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */,
+				CE6B80871F7EDAE700BD433D /* TutorialHelper.swift */,
+				CEB9CA511F800D1400EBCF88 /* RulerScreenNavigationHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -649,6 +655,7 @@
 				CE47D8431F65B3F600166345 /* IAPHelper.swift in Sources */,
 				CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */,
 				404A94931F4D9EE800EE5B0A /* ObjectsFoldersViewController.swift in Sources */,
+				CE6B80881F7EDAE700BD433D /* TutorialHelper.swift in Sources */,
 				CEEFD3A41F7D78E600378EE8 /* PushNotificationHelper.swift in Sources */,
 				408F90CA1F4DC50A008E1961 /* GRDatabaseManager.swift in Sources */,
 				406CBA0A1F73E679006C4BD0 /* AppAnalyticsHelper.swift in Sources */,
@@ -662,6 +669,7 @@
 				403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */,
 				D9E919611F43B30D00C480ED /* ViewController.swift in Sources */,
 				408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */,
+				CEB9CA521F800D1400EBCF88 /* RulerScreenNavigationHelper.swift in Sources */,
 				D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

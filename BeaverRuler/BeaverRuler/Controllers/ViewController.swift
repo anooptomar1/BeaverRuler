@@ -43,13 +43,13 @@ class ViewController: UIViewController {
     fileprivate lazy var lines: [RulerLine] = []
     fileprivate var currentLine: RulerLine?
     fileprivate lazy var unit: DistanceUnit = .centimeter
+    
     fileprivate var alertController: UIAlertController?
     
     fileprivate var products = [SKProduct]()
     fileprivate var removeObjectsLimit = false
     
-    fileprivate var finishTutorial = false
-    fileprivate var tutorialStep = 0
+    fileprivate var tutorialHelper = TutorialHelper()
     
     private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
     var capacity : Int = 9
@@ -67,21 +67,11 @@ class ViewController: UIViewController {
             defaults.set(DistanceUnit.centimeter.rawValue, forKey: Setting.measureUnits.rawValue)
         }
         
-        finishTutorial = defaults.bool(forKey: finishTutorialKey)
-        
-        if finishTutorial {
-            tutorialStep1Image.isHidden = true
-            tutorialStep2Image.isHidden = true
-            tutorialStep3Image.isHidden = true
-            tutorialStep4Image.isHidden = true
-        } else {
-            tutorialStep1Image.isHidden = false
-            tutorialStep2Image.isHidden = true
-            tutorialStep3Image.isHidden = true
-            tutorialStep4Image.isHidden = true
-            tutorialStep = 1
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_tutorial")
-        }
+        tutorialHelper.tutorialStep1Image = tutorialStep1Image
+        tutorialHelper.tutorialStep2Image = tutorialStep2Image
+        tutorialHelper.tutorialStep3Image = tutorialStep3Image
+        tutorialHelper.tutorialStep4Image = tutorialStep4Image
+        tutorialHelper.setUpTutorialStep1()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handlePurchaseNotification(_:)),
                                                name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
@@ -113,13 +103,7 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if currentLine == nil {
             
-            if finishTutorial == false && tutorialStep == 2 {
-                tutorialStep2Image.isHidden = true
-                tutorialStep3Image.isHidden = false
-                tutorialStep = 3
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_2")
-            }
-            
+            tutorialHelper.setUpTutorialStep3()
             resetValues()
             isMeasuring = true
             targetImageView.image = UIImage(named: "targetGreen")
@@ -203,14 +187,8 @@ class ViewController: UIViewController {
 
     @IBAction func galleryButtonPressed(_ sender: Any) {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_user_gallery_pressed")
-        if finishTutorial == false && tutorialStep == 4 {
-            tutorialStep4Image.isHidden = true
-            finishTutorial = true
-            
-            let defaults = UserDefaults.standard
-            defaults.set(finishTutorial, forKey: finishTutorialKey)
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial")
-        }
+        
+        tutorialHelper.finishTutorial()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "ObjectsFoldersViewController") as? ObjectsFoldersViewController else {
@@ -248,12 +226,7 @@ class ViewController: UIViewController {
 
     @IBAction func takeScreenshot() {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Take_screenshot_pressed")
-        if finishTutorial == false && tutorialStep == 3 {
-            tutorialStep3Image.isHidden = true
-            tutorialStep4Image.isHidden = false
-            tutorialStep = 4
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_3")
-        }
+        tutorialHelper.setUpTutorialStep4()
         
         if checkUserLimit() == true {
             return
@@ -537,11 +510,7 @@ extension ViewController {
         
         guard let worldPosition = sceneView.realWorldVector(screenPosition: view.center) else { return }
         
-        if finishTutorial == false && tutorialStep == 1 {
-            tutorialStep1Image.isHidden = true
-            tutorialStep2Image.isHidden = false
-            tutorialStep = 2
-        }
+        tutorialHelper.setUpTutorialStep2()
         
         targetImageView.isHidden = false
         if lines.isEmpty {
