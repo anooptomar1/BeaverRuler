@@ -42,24 +42,27 @@ class ViewController: UIViewController {
     fileprivate lazy var endValue = SCNVector3()
     fileprivate lazy var lines: [RulerLine] = []
     fileprivate var currentLine: RulerLine?
-    fileprivate lazy var unit: DistanceUnit = .centimeter
+    lazy var unit: DistanceUnit = .centimeter
     
     fileprivate var alertController: UIAlertController?
     
-    fileprivate var products = [SKProduct]()
+    var products = [SKProduct]()
     fileprivate var removeObjectsLimit = false
     
-    fileprivate var tutorialHelper = TutorialHelper()
+    var tutorialHelper = TutorialHelper()
     
-    private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
+    var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
     var capacity : Int = 9
     var type : APDNativeAdType = .auto
+    
+    var rulerScreenNavigationHelper = RulerScreenNavigationHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        rulerScreenNavigationHelper.rulerScreen = self
+        
         let defaults = UserDefaults.standard
-
         if let measureString = defaults.string(forKey: Setting.measureUnits.rawValue) {
             self.unit = DistanceUnit(rawValue: measureString)!
         } else {
@@ -152,32 +155,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showSettings(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_settings_pressed")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "SettingsController") as? SettingsController else {
-            return
-        }
-
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
-        settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
-        settingsViewController.title = NSLocalizedString("settingsScreenTitle", comment: "")
-        settingsViewController.products = products
-
-        let navigationController = UINavigationController(rootViewController: settingsViewController)
-        navigationController.modalPresentationStyle = .popover
-        navigationController.popoverPresentationController?.delegate = self
-        navigationController.preferredContentSize = CGSize(width: sceneView.bounds.size.width - 20, height: sceneView.bounds.size.height - 50)
-        self.present(navigationController, animated: true, completion: nil)
-
-        navigationController.popoverPresentationController?.sourceView = settingsButton
-        navigationController.popoverPresentationController?.sourceRect = settingsButton.bounds
-
-    }
-
-    @objc
-    func dismissSettings() {
-        self.dismiss(animated: true, completion: nil)
-        updateSettings()
+        rulerScreenNavigationHelper.showSettingsScreen()
     }
 
     private func updateSettings() {
@@ -186,29 +164,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func galleryButtonPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_user_gallery_pressed")
-        
-        tutorialHelper.finishTutorial()
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "ObjectsFoldersViewController") as? ObjectsFoldersViewController else {
-            return
-        }
-
-        settingsViewController.products = products
-        settingsViewController.apdAdQueue = apdAdQueue
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
-        settingsViewController.navigationItem.rightBarButtonItem = barButtonItem
-        settingsViewController.title = NSLocalizedString("userGalleryScreenTitle", comment: "")
-
-        let navigationController = UINavigationController(rootViewController: settingsViewController)
-        navigationController.modalPresentationStyle = .popover
-        navigationController.popoverPresentationController?.delegate = self
-        navigationController.preferredContentSize = CGSize(width: sceneView.bounds.size.width - 20, height: sceneView.bounds.size.height - 50)
-        self.present(navigationController, animated: true, completion: nil)
-
-        navigationController.popoverPresentationController?.sourceView = galleryButton
-        navigationController.popoverPresentationController?.sourceRect = galleryButton.bounds
+        rulerScreenNavigationHelper.showGalleryScreen()
     }
 
     @IBAction func resetButtonTapped(_ sender: Any) {

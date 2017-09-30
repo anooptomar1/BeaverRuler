@@ -14,7 +14,8 @@ import Firebase
 class AppAnalyticsHelper {
 
     static func sendAppAnalyticEvent(withName: String) {
-        Answers.logCustomEvent(withName: withName)
+        let newString = withName.replacingOccurrences(of: "_", with: " ", options: .literal, range: nil)
+        Answers.logCustomEvent(withName: newString)
         AppEventsLogger.log(withName)
         Analytics.logEvent(withName, parameters: ["name": withName as NSObject])
     }
