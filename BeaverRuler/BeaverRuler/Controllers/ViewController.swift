@@ -59,6 +59,8 @@ class ViewController: UIViewController {
     var rulerScreenshotHelper = RulerScreenshotHelper()
     var rulerPurchasesHelper: RulerPurchasesHelper!
     
+    var showCurrentLine = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -86,6 +88,14 @@ class ViewController: UIViewController {
 
         setupScene()
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Ruler_Screen")
+        
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.tapGesture))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+        
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.longTap))
+        self.view.addGestureRecognizer(longGesture)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,8 +111,9 @@ class ViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+    @objc func tapGesture(sender: UITapGestureRecognizer)
+    {
         if currentLine == nil {
             
             tutorialHelper.setUpTutorialStep3()
@@ -110,7 +121,7 @@ class ViewController: UIViewController {
             isMeasuring = true
             targetImageView.image = UIImage(named: "targetGreen")
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_start_point")
-
+            
         } else {
             if let line = currentLine {
                 lines.append(line)
@@ -118,6 +129,18 @@ class ViewController: UIViewController {
                 AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_next_point")
             }
         }
+    }
+    
+    @objc func longTap(_ sender: UIGestureRecognizer){
+        if sender.state == .ended {
+            showCurrentLine = true
+        } else if sender.state == .began {
+            showCurrentLine = false
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        showCurrentLine = true
     }
 
     // MARK: - Users Interactions
@@ -294,15 +317,23 @@ extension ViewController {
         loadingView.stopAnimating()
         loadingView.isHidden = true
         if isMeasuring {
-            if startValue == vectorZero {
-                startValue = worldPosition
-                currentLine = RulerLine(sceneView: sceneView, startVector: startValue, unit: unit)
+            if showCurrentLine {
+                if startValue == vectorZero {
+                    startValue = worldPosition
+                    currentLine = RulerLine(sceneView: sceneView, startVector: startValue, unit: unit)
+                }
+                
+                endValue = getEndValue(worldPosition: worldPosition)
+                currentLine?.unit = unit
+                currentLine?.update(to: endValue)
+                setUpMessageLabel()
+            } else {
+                if startValue != vectorZero {
+                    currentLine?.update(to: (currentLine?.startVector)!)
+                    currentLine?.text.string = ""
+                }
             }
-
-            endValue = getEndValue(worldPosition: worldPosition)
-            currentLine?.unit = unit
-            currentLine?.update(to: endValue)
-            setUpMessageLabel()
+            
         }
     }
     
@@ -336,7 +367,6 @@ extension ViewController {
                 if distance < 9 {
                     position = startPoint!
                 }
-
             }
         }
 

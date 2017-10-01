@@ -58,7 +58,7 @@ final class RulerLine {
     
     fileprivate var startNode: SCNNode!
     fileprivate var endNode: SCNNode!
-    fileprivate var text: SCNText!
+    var text: SCNText!
     fileprivate var textNode: SCNNode!
     fileprivate var lineNode: SCNNode?
     fileprivate var endVector: SCNVector3!
