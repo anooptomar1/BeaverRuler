@@ -40,14 +40,14 @@ class ViewController: UIViewController {
     fileprivate lazy var vectorZero = SCNVector3()
     fileprivate lazy var startValue = SCNVector3()
     fileprivate lazy var endValue = SCNVector3()
-    fileprivate lazy var lines: [RulerLine] = []
+    lazy var lines: [RulerLine] = []
     fileprivate var currentLine: RulerLine?
     lazy var unit: DistanceUnit = .centimeter
     
     fileprivate var alertController: UIAlertController?
     
     var products = [SKProduct]()
-    fileprivate var removeObjectsLimit = false
+    var removeObjectsLimit = false
     
     var tutorialHelper = TutorialHelper()
     
@@ -55,12 +55,14 @@ class ViewController: UIViewController {
     var capacity : Int = 9
     var type : APDNativeAdType = .auto
     
-    var rulerScreenNavigationHelper = RulerScreenNavigationHelper()
+    var rulerScreenNavigationHelper = RulerNavigationHelper()
+    var rulerScreenshotHelper = RulerScreenshotHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         rulerScreenNavigationHelper.rulerScreen = self
+        rulerScreenshotHelper.rulerScreen = self
         
         let defaults = UserDefaults.standard
         if let measureString = defaults.string(forKey: Setting.measureUnits.rawValue) {
@@ -181,148 +183,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func takeScreenshot() {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Take_screenshot_pressed")
-        tutorialHelper.setUpTutorialStep4()
-        
-        if checkUserLimit() == true {
-            return
-        }
-        
-        let takeScreenshotBlock = {
-            
-            let image = self.sceneView.snapshot()
-            
-            let date = Date()
-            let uuid = String(Int(date.timeIntervalSince1970))
-            
-            let userObjectRm = UserObjectRm()
-            userObjectRm.createdAt = date
-            userObjectRm.id = uuid
-            userObjectRm.sizeUnit = self.unit.rawValue
-            
-            DispatchQueue.main.async {
-                userObjectRm.name = self.getObjectName(id: uuid)
-            }
-            
-            var polygonLength: Float = 0.0
-            for line in self.lines {
-                polygonLength = polygonLength + line.lineLength()
-            }
-            userObjectRm.size = polygonLength
-            
-            if let data = UIImagePNGRepresentation(image) {
-                let filename = self.getDocumentsDirectory().appendingPathComponent(uuid + ".png")
-                try? data.write(to: filename)
-                userObjectRm.image = uuid + ".png"
-            }
-
-            DispatchQueue.main.async {
-                try! GRDatabaseManager.sharedDatabaseManager.grRealm.write({
-                    GRDatabaseManager.sharedDatabaseManager.grRealm.add(userObjectRm, update:true)
-                })
-                
-                let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_create_object_\(userObjects.count)")
-            }
-
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-            DispatchQueue.main.async {
-                // Briefly flash the screen.
-                let flashOverlay = UIView(frame: self.sceneView.frame)
-                flashOverlay.backgroundColor = UIColor.white
-                self.sceneView.addSubview(flashOverlay)
-                UIView.animate(withDuration: 0.25, animations: {
-                    flashOverlay.alpha = 0.0
-                }, completion: { _ in
-                    flashOverlay.removeFromSuperview()
-                })
-            }
-        }
-
-        switch PHPhotoLibrary.authorizationStatus() {
-        case .authorized:
-            takeScreenshotBlock()
-        case .restricted, .denied:
-            let title = NSLocalizedString("photosAccessDeniedTitle", comment: "")
-            let message = NSLocalizedString("photosAccessDeniedMessage", comment: "")
-            showAlert(title: title, message: message)
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({ (authorizationStatus) in
-                if authorizationStatus == .authorized {
-                    takeScreenshotBlock()
-                }
-            })
-        }
-    }
-    
-    func getObjectName(id: String) -> String {
-        
-        var objectName = "Object" + id
-        
-        if let currentFrame = sceneView.session.currentFrame {
-            do {
-                let model = try VNCoreMLModel(for: SqueezeNet().model)
-                let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
-                    // Jump onto the main thread
-                    
-                    guard let results = request.results as? [VNClassificationObservation], let result = results.first else {
-                        print ("No results?")
-                        return
-                    }
-                    
-                    objectName = result.identifier
-                })
-                
-                let handler = VNImageRequestHandler(cvPixelBuffer: currentFrame.capturedImage, options: [:])
-                try handler.perform([request])
-            } catch {}
-        }
-        
-        return objectName
-    }
-    
-    func checkUserLimit() -> Bool {
-        
-        let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self)
-        
-        if userObjects.count >= maxObjectsInUserGallery && removeObjectsLimit == false {
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_reach_objects_limit")
-            let objectsLimitTitle = NSLocalizedString("objectsLimit", comment: "")
-            let alertController = UIAlertController(title: "\(objectsLimitTitle) \(maxObjectsInUserGallery)", message: NSLocalizedString("doYouWhantToRemoveLimitMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
-                for (_, product) in self.products.enumerated() {
-                    if product.productIdentifier == SettingsController.removeUserGalleryProductId {
-                        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy_objects_limit_Ruler_Screen_pressed")
-                        RageProducts.store.buyProduct(product)
-                        break
-                    }
-                }
-            }))
-            self.present(alertController, animated: true, completion: nil)
-            
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
-    }
-
-    func showAlert(title: String, message: String, actions: [UIAlertAction]? = nil) {
-        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        if let actions = actions {
-            for action in actions {
-                alertController!.addAction(action)
-            }
-        } else {
-            alertController!.addAction(UIAlertAction(title: NSLocalizedString("okKey", comment: ""), style: .default, handler: nil))
-        }
-        self.present(alertController!, animated: true, completion: nil)
+        rulerScreenshotHelper.makeScreenshot()
     }
     
     // MARK: - In app purchases

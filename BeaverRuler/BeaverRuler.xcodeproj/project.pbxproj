@@ -35,7 +35,8 @@
 		CE6B80881F7EDAE700BD433D /* TutorialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B80871F7EDAE700BD433D /* TutorialHelper.swift */; };
 		CEB20FD61F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEB20FD71F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
-		CEB9CA521F800D1400EBCF88 /* RulerScreenNavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA511F800D1400EBCF88 /* RulerScreenNavigationHelper.swift */; };
+		CEB9CA521F800D1400EBCF88 /* RulerNavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA511F800D1400EBCF88 /* RulerNavigationHelper.swift */; };
+		CEB9CA541F804F8F00EBCF88 /* RulerScreenshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA531F804F8F00EBCF88 /* RulerScreenshotHelper.swift */; };
 		CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */; };
 		CEEFD3A41F7D78E600378EE8 /* PushNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */; };
 		D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */; };
@@ -134,7 +135,8 @@
 		CEB20FEE1F785A6100429FB5 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FEF1F785A7300429FB5 /* ga */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ga; path = ga.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FF01F785ABA00429FB5 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEB9CA511F800D1400EBCF88 /* RulerScreenNavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerScreenNavigationHelper.swift; sourceTree = "<group>"; };
+		CEB9CA511F800D1400EBCF88 /* RulerNavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerNavigationHelper.swift; sourceTree = "<group>"; };
+		CEB9CA531F804F8F00EBCF88 /* RulerScreenshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerScreenshotHelper.swift; sourceTree = "<group>"; };
 		CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackHelper.swift; sourceTree = "<group>"; };
 		CEEFD3A21F7D743300378EE8 /* BeaverRuler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeaverRuler.entitlements; sourceTree = "<group>"; };
 		CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationHelper.swift; sourceTree = "<group>"; };
@@ -221,7 +223,8 @@
 				CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */,
 				CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */,
 				CE6B80871F7EDAE700BD433D /* TutorialHelper.swift */,
-				CEB9CA511F800D1400EBCF88 /* RulerScreenNavigationHelper.swift */,
+				CEB9CA511F800D1400EBCF88 /* RulerNavigationHelper.swift */,
+				CEB9CA531F804F8F00EBCF88 /* RulerScreenshotHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -667,9 +670,10 @@
 				405F49781F5F206800F6143B /* NativeAppInstallAdCell.swift in Sources */,
 				CE05936C1F6EEFA2003FF700 /* RateAppHelper.swift in Sources */,
 				403D9F0C1F45B4120071C351 /* ARSCNView.swift in Sources */,
+				CEB9CA541F804F8F00EBCF88 /* RulerScreenshotHelper.swift in Sources */,
 				D9E919611F43B30D00C480ED /* ViewController.swift in Sources */,
 				408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */,
-				CEB9CA521F800D1400EBCF88 /* RulerScreenNavigationHelper.swift in Sources */,
+				CEB9CA521F800D1400EBCF88 /* RulerNavigationHelper.swift in Sources */,
 				D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Crashlytics
 
-class RulerScreenNavigationHelper {
+class RulerNavigationHelper {
     
     var rulerScreen: ViewController!
     
