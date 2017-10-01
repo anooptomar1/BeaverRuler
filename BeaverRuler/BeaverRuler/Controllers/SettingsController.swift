@@ -20,8 +20,8 @@ enum Setting: String {
 class SettingsController: UIViewController {
 
     static let removeAdProductId = "com.darkwind.gRuler.removeAd"
-    static let removeUserGalleryProductId = "com.darkwind.gRuler.removeAdPlusUserGalleryLimit"
-    static let removeAdsPlusLimitProductId = "com.darkwind.gRuler.removeUserGalleryLimit"
+    static let removeUserGalleryProductId = "com.darkwind.gRuler.removeUserGalleryLimit"
+    static let removeAdsPlusLimitProductId = "com.darkwind.gRuler.removeAdPlusUserGalleryLimit"
     
     @IBOutlet weak var removeAdsButton: UIButton!
     @IBOutlet weak var removeLimitsButton: UIButton!

@@ -57,12 +57,14 @@ class ViewController: UIViewController {
     
     var rulerScreenNavigationHelper = RulerNavigationHelper()
     var rulerScreenshotHelper = RulerScreenshotHelper()
+    var rulerPurchasesHelper: RulerPurchasesHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         rulerScreenNavigationHelper.rulerScreen = self
         rulerScreenshotHelper.rulerScreen = self
+        rulerPurchasesHelper = RulerPurchasesHelper(rulerScreen: self)
         
         let defaults = UserDefaults.standard
         if let measureString = defaults.string(forKey: Setting.measureUnits.rawValue) {
@@ -78,16 +80,11 @@ class ViewController: UIViewController {
         tutorialHelper.tutorialStep4Image = tutorialStep4Image
         tutorialHelper.setUpTutorialStep1()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handlePurchaseNotification(_:)),
-                                               name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
-                                               object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleStartARSessionNotification(_:)),
                                                name: Notification.Name(rawValue:AppFeedbackHelper.appFeedbackHelperNotificationKey),
                                                object: nil)
 
         setupScene()
-        loadInAppsPurchases()
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Ruler_Screen")
     }
     
@@ -184,45 +181,6 @@ class ViewController: UIViewController {
 
     @IBAction func takeScreenshot() {
         rulerScreenshotHelper.makeScreenshot()
-    }
-    
-    // MARK: - In app purchases
-    
-    func loadInAppsPurchases() {
-        
-        if RageProducts.store.isProductPurchased(SettingsController.removeUserGalleryProductId) || RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId) {
-            removeObjectsLimit = true
-        }
-        
-        if (RageProducts.store.isProductPurchased(SettingsController.removeAdProductId)) || (RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId)) {
-            
-        } else {
-            apdAdQueue.setMaxAdSize(capacity)
-            apdAdQueue.loadAd(of: type)
-        }
-        
-        products = []
-        RageProducts.store.requestProducts{success, products in
-            if success {
-                self.products = products!
-            }
-        }
-    }
-    
-    @objc func handlePurchaseNotification(_ notification: Notification) {
-        guard let productID = notification.object as? String else { return }
-        
-        if productID == SettingsController.removeUserGalleryProductId  {
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_objects_Ruler_screen_limit")
-            Answers.logPurchase(withPrice: 1.99,
-                                         currency: "USD",
-                                         success: true,
-                                         itemName: "Remove objects limit",
-                                         itemType: "In app",
-                                         itemId: productID,
-                                         customAttributes: [:])
-            removeObjectsLimit = true
-        }
     }
     
     @objc func handleStartARSessionNotification(_ notification: Notification) {

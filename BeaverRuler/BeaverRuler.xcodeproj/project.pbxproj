@@ -37,6 +37,7 @@
 		CEB20FD71F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEB9CA521F800D1400EBCF88 /* RulerNavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA511F800D1400EBCF88 /* RulerNavigationHelper.swift */; };
 		CEB9CA541F804F8F00EBCF88 /* RulerScreenshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA531F804F8F00EBCF88 /* RulerScreenshotHelper.swift */; };
+		CEB9CA561F80FA5800EBCF88 /* RulerPurchasesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA551F80FA5800EBCF88 /* RulerPurchasesHelper.swift */; };
 		CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */; };
 		CEEFD3A41F7D78E600378EE8 /* PushNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */; };
 		D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */; };
@@ -137,6 +138,7 @@
 		CEB20FF01F785ABA00429FB5 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB9CA511F800D1400EBCF88 /* RulerNavigationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerNavigationHelper.swift; sourceTree = "<group>"; };
 		CEB9CA531F804F8F00EBCF88 /* RulerScreenshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerScreenshotHelper.swift; sourceTree = "<group>"; };
+		CEB9CA551F80FA5800EBCF88 /* RulerPurchasesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerPurchasesHelper.swift; sourceTree = "<group>"; };
 		CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackHelper.swift; sourceTree = "<group>"; };
 		CEEFD3A21F7D743300378EE8 /* BeaverRuler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeaverRuler.entitlements; sourceTree = "<group>"; };
 		CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationHelper.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				CE6B80871F7EDAE700BD433D /* TutorialHelper.swift */,
 				CEB9CA511F800D1400EBCF88 /* RulerNavigationHelper.swift */,
 				CEB9CA531F804F8F00EBCF88 /* RulerScreenshotHelper.swift */,
+				CEB9CA551F80FA5800EBCF88 /* RulerPurchasesHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				CEB9CA541F804F8F00EBCF88 /* RulerScreenshotHelper.swift in Sources */,
 				D9E919611F43B30D00C480ED /* ViewController.swift in Sources */,
 				408F90CE1F4DCD9F008E1961 /* UserObjectViewCell.swift in Sources */,
+				CEB9CA561F80FA5800EBCF88 /* RulerPurchasesHelper.swift in Sources */,
 				CEB9CA521F800D1400EBCF88 /* RulerNavigationHelper.swift in Sources */,
 				D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */,
 			);
