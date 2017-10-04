@@ -50,7 +50,7 @@ enum DistanceUnit: String {
 
 final class RulerLine {
 
-    let startVector: SCNVector3!
+    var startVector: SCNVector3!
     var endVector: SCNVector3!
     
     var unit: DistanceUnit!
@@ -58,8 +58,8 @@ final class RulerLine {
     static fileprivate var color: UIColor = .white
     static fileprivate var selectedPointColor: UIColor = .blue
     
-    var startNode: RulerPointNode!
-    var endNode: RulerPointNode!
+    var startNode: SCNNode!
+    var endNode: SCNNode!
     var text: SCNText!
     fileprivate var textNode: SCNNode!
     fileprivate var lineNode: SCNNode?
@@ -75,7 +75,7 @@ final class RulerLine {
         startPointDot.firstMaterial?.diffuse.contents = RulerLine.color
         startPointDot.firstMaterial?.lightingModel = .constant
         startPointDot.firstMaterial?.isDoubleSided = true
-        startNode = RulerPointNode(geometry: startPointDot)
+        startNode = SCNNode(geometry: startPointDot)
         startNode.scale = SCNVector3(1/500.0, 1/500.0, 1/500.0)
         startNode.position = startVector
         sceneView.scene.rootNode.addChildNode(startNode)
@@ -85,7 +85,7 @@ final class RulerLine {
         endPointDot.firstMaterial?.lightingModel = .constant
         endPointDot.firstMaterial?.isDoubleSided = true
         
-        endNode = RulerPointNode(geometry: endPointDot)
+        endNode = SCNNode(geometry: endPointDot)
         endNode.scale = SCNVector3(1/500.0, 1/500.0, 1/500.0)
         
         text = SCNText(string: "", extrusionDepth: 0.1)
@@ -119,6 +119,21 @@ final class RulerLine {
         endNode.position = vector
         if endNode.parent == nil {
             sceneView?.scene.rootNode.addChildNode(endNode)
+        }
+    }
+    
+    func updateStartPoint(to vector: SCNVector3) {
+        startVector = vector
+        lineNode?.removeFromParentNode()
+        lineNode = startVector.line(to: endVector, color: RulerLine.color)
+        sceneView.scene.rootNode.addChildNode(lineNode!)
+        
+        text.string = distance(to: endVector)
+        textNode.position = SCNVector3((startVector.x+endVector.x)/2.0, (startVector.y+endVector.y)/2.0, (startVector.z+endVector.z)/2.0)
+        
+        startNode.position = vector
+        if startNode.parent == nil {
+            sceneView?.scene.rootNode.addChildNode(startNode)
         }
     }
     
@@ -165,8 +180,4 @@ final class RulerLine {
         endNode.removeFromParentNode()
         textNode.removeFromParentNode()
     }
-}
-
-class RulerPointNode: SCNNode {
-    weak var parentLine: RulerLine!
 }

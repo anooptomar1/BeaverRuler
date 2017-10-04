@@ -62,6 +62,9 @@ class ViewController: UIViewController {
     var showCurrentLine = true
     var startSelectedNode:SCNNode?
     var endSelectedNode:SCNNode?
+    var startNodeLine: RulerLine?
+    var endNodeLine: RulerLine?
+    var userDraggingPoint = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,14 +142,32 @@ class ViewController: UIViewController {
     
     @objc func longTap(_ sender: UIGestureRecognizer){
         
-        
-        
         if sender.state == .ended {
             
-            
+            userDraggingPoint = false
             
         } else if sender.state == .began {
             showCurrentLine = false
+            userDraggingPoint = true
+        }
+    }
+    
+    func updateSelectedLines() {
+        if (startSelectedNode != nil) || (endSelectedNode != nil) {
+            if let worldPosition = sceneView.realWorldVector(screenPosition: view.center) {
+                
+                if (startNodeLine != nil) {
+                    let startValue = getEndValue(worldPosition: worldPosition)
+                    startNodeLine?.updateStartPoint(to: startValue)
+                }
+                
+                if (endNodeLine != nil) {
+                    let endValue = getEndValue(worldPosition: worldPosition)
+                    endNodeLine?.update(to: endValue)
+                }
+                
+                setUpMessageLabel()
+            }
         }
     }
     
@@ -156,24 +177,27 @@ class ViewController: UIViewController {
         
         RulerLine.diselectNode(node: startSelectedNode)
         RulerLine.diselectNode(node: endSelectedNode)
+        startNodeLine = nil
+        endNodeLine = nil
         
         for (index, line) in lines.enumerated() {
             let distanceToStartPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(line.startVector!))
             let distanceToEndPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(line.endVector!))
             
-            if distanceToStartPoint < 9  {
+            if distanceToStartPoint < 20  {
                 print("selectStartPointForLine: \(index)")
                 RulerLine.selectNode(node: line.startNode)
                 startSelectedNode = line.startNode
+                startNodeLine = line
             }
             
-            if distanceToEndPoint < 9  {
+            if distanceToEndPoint < 20  {
                 print("selectEndPointForLine: \(index)")
                 RulerLine.selectNode(node: line.endNode)
                 endSelectedNode = line.endNode
+                endNodeLine = line
             }
         }
-        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -367,7 +391,12 @@ extension ViewController {
                 setUpMessageLabel()
             } else {
                 currentLine?.hideLine()
-                selectNearestPoint()
+                
+                if userDraggingPoint == false {
+                    selectNearestPoint()
+                } else {
+                    updateSelectedLines()
+                }
             }
             
         }
