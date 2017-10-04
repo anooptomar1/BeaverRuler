@@ -60,6 +60,8 @@ class ViewController: UIViewController {
     var rulerPurchasesHelper: RulerPurchasesHelper!
     
     var showCurrentLine = true
+    var startSelectedNode:SCNNode?
+    var endSelectedNode:SCNNode?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,29 +116,64 @@ class ViewController: UIViewController {
     
     @objc func tapGesture(sender: UITapGestureRecognizer)
     {
-        if currentLine == nil {
-            
-            tutorialHelper.setUpTutorialStep3()
-            resetValues()
-            isMeasuring = true
-            targetImageView.image = UIImage(named: "targetGreen")
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_start_point")
-            
-        } else {
-            if let line = currentLine {
-                lines.append(line)
-                currentLine = RulerLine(sceneView: sceneView, startVector: endValue, unit: unit)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_next_point")
+        if showCurrentLine {
+            if currentLine == nil {
+                
+                tutorialHelper.setUpTutorialStep3()
+                resetValues()
+                isMeasuring = true
+                targetImageView.image = UIImage(named: "targetGreen")
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_start_point")
+                
+            } else {
+                if let line = currentLine {
+                    lines.append(line)
+                    currentLine = RulerLine(sceneView: sceneView, startVector: endValue, unit: unit)
+                    AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_next_point")
+                }
             }
+        } else {
+            showCurrentLine = true
         }
     }
     
     @objc func longTap(_ sender: UIGestureRecognizer){
+        
+        
+        
         if sender.state == .ended {
-            showCurrentLine = true
+            
+            
+            
         } else if sender.state == .began {
             showCurrentLine = false
         }
+    }
+    
+    func selectNearestPoint() {
+        
+        guard let worldPosition = sceneView.realWorldVector(screenPosition: view.center) else { return }
+        
+        RulerLine.diselectNode(node: startSelectedNode)
+        RulerLine.diselectNode(node: endSelectedNode)
+        
+        for (index, line) in lines.enumerated() {
+            let distanceToStartPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(line.startVector!))
+            let distanceToEndPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(line.endVector!))
+            
+            if distanceToStartPoint < 9  {
+                print("selectStartPointForLine: \(index)")
+                RulerLine.selectNode(node: line.startNode)
+                startSelectedNode = line.startNode
+            }
+            
+            if distanceToEndPoint < 9  {
+                print("selectEndPointForLine: \(index)")
+                RulerLine.selectNode(node: line.endNode)
+                endSelectedNode = line.endNode
+            }
+        }
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -318,6 +355,7 @@ extension ViewController {
         loadingView.isHidden = true
         if isMeasuring {
             if showCurrentLine {
+                currentLine?.showLine()
                 if startValue == vectorZero {
                     startValue = worldPosition
                     currentLine = RulerLine(sceneView: sceneView, startVector: startValue, unit: unit)
@@ -328,10 +366,8 @@ extension ViewController {
                 currentLine?.update(to: endValue)
                 setUpMessageLabel()
             } else {
-                if startValue != vectorZero {
-                    currentLine?.update(to: (currentLine?.startVector)!)
-                    currentLine?.text.string = ""
-                }
+                currentLine?.hideLine()
+                selectNearestPoint()
             }
             
         }

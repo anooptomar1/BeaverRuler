@@ -40,6 +40,7 @@
 		CEB9CA561F80FA5800EBCF88 /* RulerPurchasesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA551F80FA5800EBCF88 /* RulerPurchasesHelper.swift */; };
 		CEC516F91F74559A009D9AC6 /* AppFeedbackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */; };
 		CEEFD3A41F7D78E600378EE8 /* PushNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */; };
+		CEF19B621F82D12A00074954 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF19B611F82D12A00074954 /* AdSupport.framework */; };
 		D9B76E681F518F9E00823AF8 /* EditObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */; };
 		D9E9195D1F43B30D00C480ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E9195C1F43B30D00C480ED /* AppDelegate.swift */; };
 		D9E9195F1F43B30D00C480ED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E9195E1F43B30D00C480ED /* art.scnassets */; };
@@ -142,6 +143,7 @@
 		CEC516F81F74559A009D9AC6 /* AppFeedbackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeedbackHelper.swift; sourceTree = "<group>"; };
 		CEEFD3A21F7D743300378EE8 /* BeaverRuler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeaverRuler.entitlements; sourceTree = "<group>"; };
 		CEEFD3A31F7D78E600378EE8 /* PushNotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationHelper.swift; sourceTree = "<group>"; };
+		CEF19B611F82D12A00074954 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		CF3D4BED94EDA6BE1FDE0D69 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		D9B76E671F518F9E00823AF8 /* EditObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditObjectViewController.swift; sourceTree = "<group>"; };
 		D9E919591F43B30D00C480ED /* BeaverRuler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaverRuler.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF19B621F82D12A00074954 /* AdSupport.framework in Frameworks */,
 				5F0A28FA4E972A6F894E9B57 /* Pods_BeaverRuler.framework in Frameworks */,
 				CE5BB5EA1F644CDA004A38C7 /* StoreKit.framework in Frameworks */,
 			);
@@ -257,6 +260,7 @@
 		C0ED6089D615ECBFB5A6977A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEF19B611F82D12A00074954 /* AdSupport.framework */,
 				CE5BB5E91F644CDA004A38C7 /* StoreKit.framework */,
 				22372F83198C26CFE1281F2C /* Pods_BeaverRuler.framework */,
 				1591E03929522A35B7D6AB55 /* Pods_OneSignalNotificationServiceExtension.framework */,

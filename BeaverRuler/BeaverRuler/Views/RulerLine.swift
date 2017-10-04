@@ -51,17 +51,18 @@ enum DistanceUnit: String {
 final class RulerLine {
 
     let startVector: SCNVector3!
+    var endVector: SCNVector3!
     
     var unit: DistanceUnit!
 
-    fileprivate var color: UIColor = .white
+    static fileprivate var color: UIColor = .white
+    static fileprivate var selectedPointColor: UIColor = .blue
     
-    fileprivate var startNode: SCNNode!
-    fileprivate var endNode: SCNNode!
+    var startNode: RulerPointNode!
+    var endNode: RulerPointNode!
     var text: SCNText!
     fileprivate var textNode: SCNNode!
     fileprivate var lineNode: SCNNode?
-    fileprivate var endVector: SCNVector3!
     
     fileprivate let sceneView: ARSCNView!
     
@@ -70,21 +71,26 @@ final class RulerLine {
         self.startVector = startVector
         self.unit = unit
         
-        let dot = SCNSphere(radius: 0.5)
-        dot.firstMaterial?.diffuse.contents = color
-        dot.firstMaterial?.lightingModel = .constant
-        dot.firstMaterial?.isDoubleSided = true
-        startNode = SCNNode(geometry: dot)
+        let startPointDot = SCNSphere(radius: 0.5)
+        startPointDot.firstMaterial?.diffuse.contents = RulerLine.color
+        startPointDot.firstMaterial?.lightingModel = .constant
+        startPointDot.firstMaterial?.isDoubleSided = true
+        startNode = RulerPointNode(geometry: startPointDot)
         startNode.scale = SCNVector3(1/500.0, 1/500.0, 1/500.0)
         startNode.position = startVector
         sceneView.scene.rootNode.addChildNode(startNode)
         
-        endNode = SCNNode(geometry: dot)
+        let endPointDot = SCNSphere(radius: 0.5)
+        endPointDot.firstMaterial?.diffuse.contents = RulerLine.color
+        endPointDot.firstMaterial?.lightingModel = .constant
+        endPointDot.firstMaterial?.isDoubleSided = true
+        
+        endNode = RulerPointNode(geometry: endPointDot)
         endNode.scale = SCNVector3(1/500.0, 1/500.0, 1/500.0)
         
         text = SCNText(string: "", extrusionDepth: 0.1)
         text.font = .systemFont(ofSize: 5)
-        text.firstMaterial?.diffuse.contents = color
+        text.firstMaterial?.diffuse.contents = RulerLine.color
         text.alignmentMode  = kCAAlignmentCenter
         text.truncationMode = kCATruncationMiddle
         text.firstMaterial?.isDoubleSided = true
@@ -104,7 +110,7 @@ final class RulerLine {
     func update(to vector: SCNVector3) {
         endVector = vector
         lineNode?.removeFromParentNode()
-        lineNode = startVector.line(to: vector, color: color)
+        lineNode = startVector.line(to: vector, color: RulerLine.color)
         sceneView.scene.rootNode.addChildNode(lineNode!)
         
         text.string = distance(to: vector)
@@ -131,10 +137,36 @@ final class RulerLine {
         return String(format: "%.2f%@", startVector.distance(from: vector) * unit.fator, unit.unit)
     }
     
+    func hideLine() {
+        startNode.isHidden = true
+        endNode.isHidden = true
+        textNode.isHidden = true
+        lineNode?.isHidden = true
+    }
+    
+    func showLine() {
+        startNode.isHidden = false
+        endNode.isHidden = false
+        textNode.isHidden = false
+        lineNode?.isHidden = false
+    }
+    
+    static func selectNode(node: SCNNode) {
+        node.geometry?.firstMaterial?.diffuse.contents = selectedPointColor
+    }
+    
+    static func diselectNode(node: SCNNode?) {
+        node?.geometry?.firstMaterial?.diffuse.contents = color
+    }
+    
     func removeFromParentNode() {
         startNode.removeFromParentNode()
         lineNode?.removeFromParentNode()
         endNode.removeFromParentNode()
         textNode.removeFromParentNode()
     }
+}
+
+class RulerPointNode: SCNNode {
+    weak var parentLine: RulerLine!
 }
