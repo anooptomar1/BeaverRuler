@@ -137,6 +137,10 @@ class ViewController: UIViewController {
             }
         } else {
             showCurrentLine = true
+            if (currentLine != nil) && lines.count > 0 {
+                let lastLine = lines.last
+                currentLine?.updateStartPoint(to: (lastLine?.endVector)!)
+            }
         }
     }
     

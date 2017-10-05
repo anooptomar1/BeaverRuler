@@ -56,7 +56,8 @@ final class RulerLine {
     var unit: DistanceUnit!
 
     static fileprivate var color: UIColor = .white
-    static fileprivate var selectedPointColor: UIColor = .blue
+    static fileprivate var selectedPointColor: UIColor = .orange
+    static fileprivate var diselectedPointColor: UIColor = .blue
     
     var startNode: SCNNode!
     var endNode: SCNNode!
@@ -72,21 +73,21 @@ final class RulerLine {
         self.unit = unit
         
         let startPointDot = SCNSphere(radius: 0.5)
-        startPointDot.firstMaterial?.diffuse.contents = RulerLine.color
+        startPointDot.firstMaterial?.diffuse.contents = RulerLine.diselectedPointColor
         startPointDot.firstMaterial?.lightingModel = .constant
         startPointDot.firstMaterial?.isDoubleSided = true
         startNode = SCNNode(geometry: startPointDot)
-        startNode.scale = SCNVector3(1/500.0, 1/500.0, 1/500.0)
+        startNode.scale = SCNVector3(5/500.0, 5/500.0, 5/500.0)
         startNode.position = startVector
         sceneView.scene.rootNode.addChildNode(startNode)
         
         let endPointDot = SCNSphere(radius: 0.5)
-        endPointDot.firstMaterial?.diffuse.contents = RulerLine.color
+        endPointDot.firstMaterial?.diffuse.contents = RulerLine.diselectedPointColor
         endPointDot.firstMaterial?.lightingModel = .constant
         endPointDot.firstMaterial?.isDoubleSided = true
         
         endNode = SCNNode(geometry: endPointDot)
-        endNode.scale = SCNVector3(1/500.0, 1/500.0, 1/500.0)
+        endNode.scale = SCNVector3(5/500.0, 5/500.0, 5/500.0)
         
         text = SCNText(string: "", extrusionDepth: 0.1)
         text.font = .systemFont(ofSize: 5)
@@ -171,7 +172,7 @@ final class RulerLine {
     }
     
     static func diselectNode(node: SCNNode?) {
-        node?.geometry?.firstMaterial?.diffuse.contents = color
+        node?.geometry?.firstMaterial?.diffuse.contents = diselectedPointColor
     }
     
     func removeFromParentNode() {
