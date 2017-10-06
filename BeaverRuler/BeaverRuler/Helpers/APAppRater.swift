@@ -18,7 +18,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
 @objc public class APAppRater: NSObject, UIAlertViewDelegate, MFMailComposeViewControllerDelegate {
     var application: UIApplication!
     var userdefaults = UserDefaults()
-    let requiredLaunchesBeforeRating = 1
+    let requiredLaunchesBeforeRating = 2
     public var appId: String!
     let appFeedbackHelper = AppFeedbackHelper()
     

@@ -18,7 +18,7 @@ import Appodeal
 class ViewController: UIViewController {
     
     let finishTutorialKey = "finishTutorialKey"
-    let maxObjectsInUserGallery = 5
+    let maxObjectsInUserGallery = 3
     
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var targetImageView: UIImageView!

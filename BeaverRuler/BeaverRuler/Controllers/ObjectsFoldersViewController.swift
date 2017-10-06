@@ -23,7 +23,7 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
     let adDivisor = 2
     var blockAd = false
     
-    let maxShowAdsCountBeforeProposal = 5
+    let maxShowAdsCountBeforeProposal = 3
     var showAdsCount = 0
     var showRemoveAdsProposal = false
     var userdefaults = UserDefaults()
