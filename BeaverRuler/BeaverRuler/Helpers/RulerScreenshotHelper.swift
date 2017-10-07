@@ -127,7 +127,6 @@ class RulerScreenshotHelper {
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_reach_objects_limit")
             let objectsLimitTitle = NSLocalizedString("objectsLimit", comment: "")
             let alertController = UIAlertController(title: "\(objectsLimitTitle) \(rulerScreen.maxObjectsInUserGallery)", message: NSLocalizedString("doYouWhantToRemoveLimitMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
             alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
                 for (_, product) in self.rulerScreen.products.enumerated() {
                     if product.productIdentifier == SettingsController.removeUserGalleryProductId {
@@ -137,12 +136,55 @@ class RulerScreenshotHelper {
                     }
                 }
             }))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("makeJustScreenshot", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
+                self.takeJustScreenshot()
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Make_just_screenshot_pressed")
+            }))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
+            
             rulerScreen.present(alertController, animated: true, completion: nil)
             
             return true
         } else {
             return false
         }
+    }
+    
+    func takeJustScreenshot() {
+        
+        let takeScreenshotBlock = {
+            
+            let image = self.rulerScreen.sceneView.snapshot()
+            
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            DispatchQueue.main.async {
+                // Briefly flash the screen.
+                let flashOverlay = UIView(frame: self.rulerScreen.sceneView.frame)
+                flashOverlay.backgroundColor = UIColor.white
+                self.rulerScreen.sceneView.addSubview(flashOverlay)
+                UIView.animate(withDuration: 0.25, animations: {
+                    flashOverlay.alpha = 0.0
+                }, completion: { _ in
+                    flashOverlay.removeFromSuperview()
+                })
+            }
+        }
+        
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .authorized:
+            takeScreenshotBlock()
+        case .restricted, .denied:
+            let title = NSLocalizedString("photosAccessDeniedTitle", comment: "")
+            let message = NSLocalizedString("photosAccessDeniedMessage", comment: "")
+            showAlert(title: title, message: message)
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({ (authorizationStatus) in
+                if authorizationStatus == .authorized {
+                    takeScreenshotBlock()
+                }
+            })
+        }
+        
     }
     
     func getDocumentsDirectory() -> URL {
