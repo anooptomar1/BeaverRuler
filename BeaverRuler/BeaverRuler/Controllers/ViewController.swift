@@ -150,6 +150,10 @@ class ViewController: UIViewController {
             
             userDraggingPoint = false
             
+            if isMeasuring == false {
+                showCurrentLine = true
+            }
+            
         } else if sender.state == .began {
             showCurrentLine = false
             userDraggingPoint = true
@@ -217,6 +221,7 @@ class ViewController: UIViewController {
             targetImageView.image = UIImage(named: "targetWhite")
             currentLine?.removeFromParentNode()
             currentLine = nil
+            showCurrentLine = true
             setUpMessageLabel()
         }
     }
@@ -403,6 +408,12 @@ extension ViewController {
                 }
             }
             
+        } else {
+            if userDraggingPoint == false {
+                selectNearestPoint()
+            } else {
+                updateSelectedLines()
+            }
         }
     }
     
