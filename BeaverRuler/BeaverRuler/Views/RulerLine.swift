@@ -52,6 +52,7 @@ final class RulerLine {
 
     var startVector: SCNVector3!
     var endVector: SCNVector3!
+    var lastLineStartVector: SCNVector3?
     
     var unit: DistanceUnit!
 
@@ -138,6 +139,12 @@ final class RulerLine {
         }
     }
     
+    func updateAngleBetweenLastLine() {
+        
+        
+        
+    }
+    
     func lineLength() -> Float {
         
         var length = Float(0.0)
@@ -173,6 +180,11 @@ final class RulerLine {
     
     static func diselectNode(node: SCNNode?) {
         node?.geometry?.firstMaterial?.diffuse.contents = diselectedPointColor
+    }
+    
+    func getAngleBetween3Vectors() -> String {
+        let angle = CGFloat((lastLineStartVector?.SCNVector3Angle(start: lastLineStartVector!, mid: startVector, end: endVector))!)
+        return String(format: "%.2f°", angle)
     }
     
     func removeFromParentNode() {

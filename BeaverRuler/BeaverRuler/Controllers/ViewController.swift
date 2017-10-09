@@ -24,10 +24,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var targetImageView: UIImageView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var angleLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var galleryButton: UIButton!
-    
     
     @IBOutlet weak var tutorialStep1Image: UIImageView!
     @IBOutlet weak var tutorialStep2Image: UIImageView!
@@ -132,6 +132,7 @@ class ViewController: UIViewController {
                 if let line = currentLine {
                     lines.append(line)
                     currentLine = RulerLine(sceneView: sceneView, startVector: endValue, unit: unit)
+                    currentLine?.lastLineStartVector = lines.last?.startVector
                     AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_next_point")
                 }
             }
@@ -222,6 +223,7 @@ class ViewController: UIViewController {
             currentLine?.removeFromParentNode()
             currentLine = nil
             showCurrentLine = true
+            angleLabel.text = ""
             setUpMessageLabel()
         }
     }
@@ -428,8 +430,14 @@ extension ViewController {
             }
                 
             messageLabel.text = String(format: "%.2f %@", polygonLength, unit.unit)
+            
+            if ((currentLine?.lastLineStartVector) != nil) {
+                angleLabel.text = (currentLine?.getAngleBetween3Vectors())!
+            }
+            
         } else {
             messageLabel.text = currentLine?.distance(to: endValue) ?? NSLocalizedString("сalculating", comment: "")
+            angleLabel.text = ""
         }
     }
 
