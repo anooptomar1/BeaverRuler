@@ -31,8 +31,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tutorialStep1Image: UIImageView!
     @IBOutlet weak var tutorialStep2Image: UIImageView!
-    @IBOutlet weak var tutorialStep3Image: UIImageView!
     @IBOutlet weak var tutorialStep4Image: UIImageView!
+    @IBOutlet weak var tutorialStep5Image: UIImageView!
+    @IBOutlet weak var tutorialStep6Image: UIImageView!
+    @IBOutlet weak var tutorialStep7Image: UIImageView!
+    @IBOutlet weak var tutorialStep8Image: UIImageView!
     
     fileprivate lazy var session = ARSession()
     fileprivate lazy var sessionConfiguration = ARWorldTrackingConfiguration()
@@ -83,8 +86,11 @@ class ViewController: UIViewController {
         
         tutorialHelper.tutorialStep1Image = tutorialStep1Image
         tutorialHelper.tutorialStep2Image = tutorialStep2Image
-        tutorialHelper.tutorialStep3Image = tutorialStep3Image
         tutorialHelper.tutorialStep4Image = tutorialStep4Image
+        tutorialHelper.tutorialStep5Image = tutorialStep5Image
+        tutorialHelper.tutorialStep6Image = tutorialStep6Image
+        tutorialHelper.tutorialStep7Image = tutorialStep7Image
+        tutorialHelper.tutorialStep8Image = tutorialStep8Image
         tutorialHelper.setUpTutorialStep1()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleStartARSessionNotification(_:)),
@@ -123,6 +129,7 @@ class ViewController: UIViewController {
             if currentLine == nil {
                 
                 tutorialHelper.setUpTutorialStep3()
+                
                 resetValues()
                 isMeasuring = true
                 targetImageView.image = UIImage(named: "targetGreen")
@@ -130,6 +137,12 @@ class ViewController: UIViewController {
                 
             } else {
                 if let line = currentLine {
+                    
+                    if tutorialHelper.showSecondPointTutorial {
+                        tutorialHelper.setUpTutorialStep4()
+                        tutorialHelper.showSecondPointTutorial = false
+                    }
+                    
                     lines.append(line)
                     currentLine = RulerLine(sceneView: sceneView, startVector: endValue, unit: unit)
                     currentLine?.lastLineStartVector = lines.last?.startVector
@@ -156,6 +169,7 @@ class ViewController: UIViewController {
             }
             
         } else if sender.state == .began {
+            tutorialHelper.setUpTutorialStep7()
             showCurrentLine = false
             userDraggingPoint = true
         }
@@ -168,6 +182,9 @@ class ViewController: UIViewController {
                 if (startNodeLine != nil) {
                     let startValue = getEndValue(worldPosition: worldPosition)
                     startNodeLine?.updateStartPoint(to: startValue)
+                    if ((startNodeLine?.lastLineStartVector) != nil) {
+                        angleLabel.text = (startNodeLine?.getAngleBetween3Vectors())!
+                    }
                 }
                 
                 if (endNodeLine != nil) {
@@ -206,6 +223,10 @@ class ViewController: UIViewController {
                 endSelectedNode = line.endNode
                 endNodeLine = line
             }
+            
+            if startSelectedNode != nil || endSelectedNode != nil {
+                tutorialHelper.setUpTutorialStep6()
+            }
         }
     }
     
@@ -218,6 +239,7 @@ class ViewController: UIViewController {
     @IBAction func finishPolygonPressed(_ sender: Any) {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Finish_polygon_pressed")
         if currentLine != nil {
+            tutorialHelper.setUpTutorialStep5()
             isMeasuring = false
             targetImageView.image = UIImage(named: "targetWhite")
             currentLine?.removeFromParentNode()
@@ -243,6 +265,7 @@ class ViewController: UIViewController {
 
                 currentLine = RulerLine(sceneView: sceneView, startVector: (previouseLine?.startVector)!, unit: unit)
                 currentLine?.update(to: endValue)
+                currentLine?.lastLineStartVector = lines.last?.startVector
                 isMeasuring = true
             }
         }

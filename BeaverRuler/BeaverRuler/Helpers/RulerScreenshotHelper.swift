@@ -20,7 +20,7 @@ class RulerScreenshotHelper {
     func makeScreenshot() {
         
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Take_screenshot_pressed")
-        rulerScreen.tutorialHelper.setUpTutorialStep4()
+        rulerScreen.tutorialHelper.setUpTutorialStep8()
         
         if checkUserLimit() == true {
             return

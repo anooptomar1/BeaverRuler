@@ -124,14 +124,14 @@
                                     <constraint firstAttribute="width" constant="151" id="xha-Yy-oAW"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fingerUp" translatesAutoresizingMaskIntoConstraints="NO" id="uzF-dL-HAp">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fingerUp" translatesAutoresizingMaskIntoConstraints="NO" id="uzF-dL-HAp" userLabel="Tutorial Step8 Image">
                                 <rect key="frame" x="27" y="43" width="151" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="6xy-pS-Pkl"/>
                                     <constraint firstAttribute="width" constant="151" id="tD7-Te-WJR"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fingerDown" translatesAutoresizingMaskIntoConstraints="NO" id="Y8V-EA-o4V">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fingerDown" translatesAutoresizingMaskIntoConstraints="NO" id="Y8V-EA-o4V" userLabel="Tutorial Step7 Image">
                                 <rect key="frame" x="13" y="476" width="100" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="NVo-U8-HrC"/>
@@ -147,6 +147,27 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="secondPointTutorial" translatesAutoresizingMaskIntoConstraints="NO" id="7LJ-69-UcN">
+                                <rect key="frame" x="61" y="504" width="130" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="g9V-OH-sMl"/>
+                                    <constraint firstAttribute="height" constant="128" id="xaB-rM-bI3"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="longTouchTutorial" translatesAutoresizingMaskIntoConstraints="NO" id="U6F-Ia-roj" userLabel="Tutorial Step6 Image">
+                                <rect key="frame" x="16" y="264" width="113" height="156"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="113" id="WH8-0J-U3F"/>
+                                    <constraint firstAttribute="height" constant="156" id="lZP-Pn-FgI"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goToPointTutorial" translatesAutoresizingMaskIntoConstraints="NO" id="1uK-Js-T6o" userLabel="Tutorial Step5 Image">
+                                <rect key="frame" x="241" y="186" width="118" height="174"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="118" id="ZCf-Zr-lkk"/>
+                                    <constraint firstAttribute="height" constant="174" id="jXU-3B-rUj"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -154,10 +175,13 @@
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="leading" secondItem="Ftl-2f-hAb" secondAttribute="trailing" constant="8" id="1VN-ag-1HX"/>
                             <constraint firstItem="gow-ZP-lGN" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="38h-kA-f5l"/>
                             <constraint firstItem="gow-ZP-lGN" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" id="3G2-Fg-cIR"/>
+                            <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="7LJ-69-UcN" secondAttribute="bottom" constant="35" id="7Ca-Bh-xym"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" id="8lZ-5L-w5s"/>
                             <constraint firstItem="uzF-dL-HAp" firstAttribute="top" secondItem="KZo-jQ-gdA" secondAttribute="bottom" constant="-44" id="9Oh-HF-SIf"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="fvh-xL-3HH" secondAttribute="trailing" constant="15" id="9dr-Qj-uZK"/>
+                            <constraint firstItem="6wk-JO-dxZ" firstAttribute="top" secondItem="1uK-Js-T6o" secondAttribute="bottom" constant="8" id="A3v-AL-KRB"/>
                             <constraint firstItem="F05-cT-k3T" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="AV8-fF-wEJ"/>
+                            <constraint firstItem="7LJ-69-UcN" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="61" id="AXN-Fr-WWS"/>
                             <constraint firstItem="fvh-xL-3HH" firstAttribute="leading" secondItem="itF-Hf-JQD" secondAttribute="trailing" constant="3" id="Avh-qn-lbU"/>
                             <constraint firstItem="KZo-jQ-gdA" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="15" id="JTI-dl-pl2"/>
                             <constraint firstItem="Ftl-2f-hAb" firstAttribute="leading" secondItem="KZo-jQ-gdA" secondAttribute="trailing" constant="10" id="JhQ-p2-dEw"/>
@@ -166,12 +190,15 @@
                             <constraint firstItem="F05-cT-k3T" firstAttribute="top" secondItem="7gH-Ib-BkH" secondAttribute="bottom" constant="21" id="Ncs-oR-ZNP"/>
                             <constraint firstItem="KZo-jQ-gdA" firstAttribute="top" secondItem="5wb-vL-tSD" secondAttribute="top" constant="10" id="OGV-u1-6nR"/>
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="leading" secondItem="Ftl-2f-hAb" secondAttribute="trailing" constant="8" id="QXa-Gh-7Wd"/>
+                            <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="1uK-Js-T6o" secondAttribute="trailing" constant="16" id="RGq-DC-8ZL"/>
                             <constraint firstItem="itF-Hf-JQD" firstAttribute="leading" secondItem="Ftl-2f-hAb" secondAttribute="trailing" constant="8" id="Rdm-Hh-6xK"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="zLX-kg-2bt" secondAttribute="trailing" constant="75" id="Xcg-aG-YsT"/>
                             <constraint firstItem="Y8V-EA-o4V" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="13" id="YCE-2P-j5r"/>
+                            <constraint firstItem="Y8V-EA-o4V" firstAttribute="top" secondItem="U6F-Ia-roj" secondAttribute="bottom" constant="56" id="YFw-I2-K6z"/>
                             <constraint firstItem="rXZ-Q6-zHL" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" constant="-5" id="Ycv-Jh-JDo"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="trailing" secondItem="5wb-vL-tSD" secondAttribute="trailing" id="b9F-zI-MXZ"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="centerY" secondItem="87f-mc-WB1" secondAttribute="centerY" id="eA4-0K-9PG"/>
+                            <constraint firstItem="U6F-Ia-roj" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="16" id="eFb-Nr-Hgb"/>
                             <constraint firstItem="efT-qd-CDk" firstAttribute="leading" secondItem="7gH-Ib-BkH" secondAttribute="trailing" constant="25.5" id="f0H-MU-PfM"/>
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="top" secondItem="5wb-vL-tSD" secondAttribute="top" constant="20" id="feO-pl-TKJ"/>
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="top" secondItem="87f-mc-WB1" secondAttribute="top" id="gJw-pt-OmL"/>
@@ -201,8 +228,11 @@
                         <outlet property="targetImageView" destination="gow-ZP-lGN" id="iPn-SA-Cbl"/>
                         <outlet property="tutorialStep1Image" destination="rXZ-Q6-zHL" id="6R2-mC-Avs"/>
                         <outlet property="tutorialStep2Image" destination="6wk-JO-dxZ" id="YDR-f6-BiI"/>
-                        <outlet property="tutorialStep3Image" destination="Y8V-EA-o4V" id="Za3-4p-Ay5"/>
-                        <outlet property="tutorialStep4Image" destination="uzF-dL-HAp" id="ipC-IJ-5wu"/>
+                        <outlet property="tutorialStep4Image" destination="7LJ-69-UcN" id="O5n-gZ-cb9"/>
+                        <outlet property="tutorialStep5Image" destination="1uK-Js-T6o" id="W9H-NZ-WAA"/>
+                        <outlet property="tutorialStep6Image" destination="U6F-Ia-roj" id="C7c-6I-1fI"/>
+                        <outlet property="tutorialStep7Image" destination="Y8V-EA-o4V" id="baU-L0-lOy"/>
+                        <outlet property="tutorialStep8Image" destination="uzF-dL-HAp" id="7AN-hl-tOi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -629,7 +659,10 @@
         <image name="fingerDown" width="266" height="541"/>
         <image name="fingerUp" width="154" height="145"/>
         <image name="galleryButton" width="55" height="55"/>
+        <image name="goToPointTutorial" width="382" height="581"/>
+        <image name="longTouchTutorial" width="352" height="541"/>
         <image name="makePhotoButton" width="63" height="56"/>
+        <image name="secondPointTutorial" width="462" height="437"/>
         <image name="settingsButton" width="55" height="55"/>
         <image name="shakeHand" width="164" height="196"/>
         <image name="shareButton" width="36" height="35"/>
