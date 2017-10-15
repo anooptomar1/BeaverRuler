@@ -46,3 +46,5 @@
 "GRulerWouldLikeToAccessNotifications" = "GRuler Would Like To Access Notifications";
 "pleaseGrantPermissionToUseNotifications" = "Please grant permission to use notifications.";
 "makeJustScreenshot" = "Make only photo";
+"purchasesPopUpTitle" = "Purchases";
+"purchasesPopUpMessage" = "Buy features";

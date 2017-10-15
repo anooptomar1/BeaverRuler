@@ -23,14 +23,8 @@ class SettingsController: UIViewController {
     static let removeUserGalleryProductId = "com.darkwind.gRuler.removeUserGalleryLimit"
     static let removeAdsPlusLimitProductId = "com.darkwind.gRuler.removeAdPlusUserGalleryLimit"
     
-    @IBOutlet weak var removeAdsButton: UIButton!
-    @IBOutlet weak var removeLimitsButton: UIButton!
-    @IBOutlet weak var removeAdsPlusLimitButton: UIButton!
     @IBOutlet weak var facebookButtonView: UIView!
     @IBOutlet weak var measureUnitsButton: UIButton!
-    @IBOutlet weak var restorePurchasesButton: UIButton!
-    @IBOutlet weak var rateAppButton: UIButton!
-    @IBOutlet weak var sendFeedbackButton: UIButton!
     @IBOutlet weak var subscribeToNewsButton: UIButton!
     
     var products = [SKProduct]()
@@ -38,23 +32,6 @@ class SettingsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(SettingsController.handlePurchaseNotification(_:)),
-                                               name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
-                                               object: nil)
-        
-        if RageProducts.store.isProductPurchased(SettingsController.removeAdProductId) {
-             removeAdsButton.isHidden = true
-        }
-        
-        if RageProducts.store.isProductPurchased(SettingsController.removeUserGalleryProductId) {
-             removeLimitsButton.isHidden = true
-        }
-        
-        if RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId) {
-            removeAdsButton.isHidden = true
-            removeLimitsButton.isHidden = true
-        }
 
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Settings_Screen")
 
@@ -65,22 +42,10 @@ class SettingsController: UIViewController {
     }
     
     func setUpButtons() {
-        setupButtonStyle(button: removeAdsButton)
-        setupButtonStyle(button: removeLimitsButton)
-        setupButtonStyle(button: removeAdsPlusLimitButton)
         setupButtonStyle(button: measureUnitsButton)
-        setupButtonStyle(button: restorePurchasesButton)
-        setupButtonStyle(button: rateAppButton)
-        setupButtonStyle(button: sendFeedbackButton)
         setupButtonStyle(button: subscribeToNewsButton)
         
-        removeAdsButton.setTitle(NSLocalizedString("removeAdsButtonTitle", comment: ""), for: [])
-        removeLimitsButton.setTitle(NSLocalizedString("removeLimitButtonTitle", comment: ""), for: [])
-        removeAdsPlusLimitButton.setTitle(NSLocalizedString("removeAdsPlusLimitButtonTitle", comment: ""), for: [])
         measureUnitsButton.setTitle(NSLocalizedString("measureUnitsButtonTitle", comment: ""), for: [])
-        restorePurchasesButton.setTitle(NSLocalizedString("restorePurchasesButtonTitle", comment: ""), for: [])
-        rateAppButton.setTitle(NSLocalizedString("rateGRulerButtonTitle", comment: ""), for: [])
-        sendFeedbackButton.setTitle(NSLocalizedString("sendFeedbackButtonTitle", comment: ""), for: [])
         subscribeToNewsButton.setTitle(NSLocalizedString("subscribeToNews", comment: ""), for: [])
         
     }
@@ -88,7 +53,7 @@ class SettingsController: UIViewController {
     func setupButtonStyle(button: UIButton) {
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
-        button.layer.borderColor = rateAppButton.backgroundColor?.cgColor
+        button.layer.borderColor = measureUnitsButton.backgroundColor?.cgColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -151,11 +116,6 @@ class SettingsController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-    
-    @IBAction func restoreTapped(_ sender: Any) {
-        RageProducts.store.restorePurchases()
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Restore_purchases_pressed")
-    }
 
     @IBAction func measureUnitPressed(_ sender: Any) {
         
@@ -177,69 +137,6 @@ class SettingsController: UIViewController {
         alertVC.addAction(UIAlertAction(title: NSLocalizedString("cancelKey", comment: ""), style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
 
-    }
-
-    @IBAction func removeAdsPressed(_ sender: Any) {
-        for (_, product) in products.enumerated() {
-            if product.productIdentifier == SettingsController.removeAdProductId {
-                RageProducts.store.buyProduct(product)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove_ad_pressed")
-                break
-            }
-        }
-    }
-    
-    @IBAction func removeLimitsPressed(_ sender: Any) {
-        for (index, product) in products.enumerated() {
-            if product.productIdentifier == SettingsController.removeUserGalleryProductId {
-                RageProducts.store.buyProduct(product)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove_objects_limit_pressed_Settings_screen")
-                break
-            }
-        }
-    }
-    
-    @IBAction func removeAdsPlusLimitPressed(_ sender: Any) {
-        for (index, product) in products.enumerated() {
-            if product.productIdentifier == SettingsController.removeAdsPlusLimitProductId {
-                RageProducts.store.buyProduct(product)
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove_ad_objects_limit_pressed")
-                break
-            }
-        }
-    }
-
-    @objc func handlePurchaseNotification(_ notification: Notification) {
-        guard let productID = notification.object as? String else { return }
-        
-        if productID == SettingsController.removeAdProductId {
-            removeAdsButton.isHidden = true
-            self.logPurchase(name: "Remove ad", id: productID, price: 1.99)
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_remove_ad")
-        }
-        
-        if productID == SettingsController.removeUserGalleryProductId {
-            removeLimitsButton.isHidden = true
-            self.logPurchase(name: "Remove object limit", id: productID, price: 1.99)
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_remove_objects_limits_Settinds_screen")
-        }
-        
-        if productID == SettingsController.removeAdsPlusLimitProductId {
-            removeAdsButton.isHidden = true
-            removeLimitsButton.isHidden = true
-            self.logPurchase(name: "Remove ad and objects limit", id: productID, price: 2.99)
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_buy_remove_ad_and_objects_limit")
-        }
-    }
-    
-    func logPurchase(name: String, id: String, price: NSDecimalNumber) {
-        Answers.logPurchase(withPrice: price,
-                            currency: "USD",
-                            success: true,
-                            itemName: name,
-                            itemType: "In app",
-                            itemId: id,
-                            customAttributes: [:])
     }
 
 }

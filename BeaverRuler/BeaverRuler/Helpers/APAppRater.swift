@@ -106,7 +106,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
     func rateTheApp(){
         
         let message = NSLocalizedString("rateAppProposal", comment: "")
-        let rateAlert = UIAlertController(title: NSLocalizedString("rateUsKey", comment: ""), message: message, preferredStyle: .alert)
+        let rateAlert = UIAlertController(title: NSLocalizedString("rateUsKey", comment: "") + "\u{1F44D}", message: message, preferredStyle: .alert)
         let goToItunesAction = UIAlertAction(title: NSLocalizedString("rateUsKey", comment: ""), style: .default, handler: { (action) -> Void in
             RateAppHelper.rateApp()
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_pressed_Ruler_screen")

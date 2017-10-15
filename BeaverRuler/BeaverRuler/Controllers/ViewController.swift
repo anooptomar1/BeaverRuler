@@ -280,6 +280,11 @@ class ViewController: UIViewController {
             print("Torch is not available")
         }
     }
+    
+    @IBAction func buyButtonPressed(_ sender: Any) {
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Purchases_popUp_pressed")
+        rulerPurchasesHelper.showPurchasesPopUp()
+    }
 
     @IBAction func undoPressed(_ sender: Any) {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Undo_pressed")
