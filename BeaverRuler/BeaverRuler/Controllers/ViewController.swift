@@ -229,7 +229,6 @@ class ViewController: UIViewController {
             
             if startSelectedNode != nil || endSelectedNode != nil {
                 tutorialHelper.setUpTutorialStep6()
-                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_highlight_point")
             }
         }
     }
