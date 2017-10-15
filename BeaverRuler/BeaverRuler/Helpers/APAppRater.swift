@@ -92,6 +92,7 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
         
         if hasShownAppRating() == false {
             if appLaunchCount >= self.requiredLaunchesBeforeRating {
+                self.setAppRatingShown()
                 AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_show_Ruler_screen")
                 rateTheApp()
             }
@@ -102,9 +103,8 @@ let AP_APP_RATING_SHOWN = "com.gittielabs.app_rating_shown"
     }
     
     @available(iOS 8.0, *)
-    private func rateTheApp(){
+    func rateTheApp(){
         
-        self.setAppRatingShown()
         let message = NSLocalizedString("rateAppProposal", comment: "")
         let rateAlert = UIAlertController(title: NSLocalizedString("rateUsKey", comment: ""), message: message, preferredStyle: .alert)
         let goToItunesAction = UIAlertAction(title: NSLocalizedString("rateUsKey", comment: ""), style: .default, handler: { (action) -> Void in

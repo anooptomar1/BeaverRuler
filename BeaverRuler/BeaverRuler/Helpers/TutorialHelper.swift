@@ -25,7 +25,7 @@ class TutorialHelper {
     var tutorialStep7Image: UIImageView!
     var tutorialStep8Image: UIImageView!
     
-    let makeSecondPointTutorialTime = Double(3)
+    let makeSecondPointTutorialTime = Double(4)
     var timer = Timer()
     var showSecondPointTutorial = false
     

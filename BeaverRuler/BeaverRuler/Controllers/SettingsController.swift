@@ -152,16 +152,6 @@ class SettingsController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func sendFeedbackPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Send_feedback_pressed")
-        appFeedbackHelper.showFeedback()
-    }
-    
-    @IBAction func rateAppPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_pressed_Settings_screen")
-        RateAppHelper.rateApp()
-    }
-    
     @IBAction func restoreTapped(_ sender: Any) {
         RageProducts.store.restorePurchases()
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Restore_purchases_pressed")

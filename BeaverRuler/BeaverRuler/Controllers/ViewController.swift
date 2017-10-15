@@ -249,6 +249,11 @@ class ViewController: UIViewController {
             setUpMessageLabel()
         }
     }
+    
+    @IBAction func rateGamePressed(_ sender: Any) {
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_pressed_Ruler_screen")
+        APAppRater.sharedInstance.rateTheApp()
+    }
 
     @IBAction func undoPressed(_ sender: Any) {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Undo_pressed")

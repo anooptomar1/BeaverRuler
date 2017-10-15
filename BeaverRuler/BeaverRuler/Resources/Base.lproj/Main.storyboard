@@ -168,6 +168,17 @@
                                     <constraint firstAttribute="height" constant="174" id="jXU-3B-rUj"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGF-zF-i97" userLabel="RateButton">
+                                <rect key="frame" x="15" y="97" width="57" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="57" id="9bp-7g-rt5"/>
+                                    <constraint firstAttribute="height" constant="57" id="PYC-ca-BaY"/>
+                                </constraints>
+                                <state key="normal" image="rateGameButton"/>
+                                <connections>
+                                    <action selector="rateGamePressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="I5u-Bz-IMR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -191,6 +202,7 @@
                             <constraint firstItem="KZo-jQ-gdA" firstAttribute="top" secondItem="5wb-vL-tSD" secondAttribute="top" constant="10" id="OGV-u1-6nR"/>
                             <constraint firstItem="zLX-kg-2bt" firstAttribute="leading" secondItem="Ftl-2f-hAb" secondAttribute="trailing" constant="8" id="QXa-Gh-7Wd"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="1uK-Js-T6o" secondAttribute="trailing" constant="16" id="RGq-DC-8ZL"/>
+                            <constraint firstItem="AGF-zF-i97" firstAttribute="top" secondItem="KZo-jQ-gdA" secondAttribute="bottom" constant="10" id="RUu-mB-RmU"/>
                             <constraint firstItem="itF-Hf-JQD" firstAttribute="leading" secondItem="Ftl-2f-hAb" secondAttribute="trailing" constant="8" id="Rdm-Hh-6xK"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="zLX-kg-2bt" secondAttribute="trailing" constant="75" id="Xcg-aG-YsT"/>
                             <constraint firstItem="Y8V-EA-o4V" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="13" id="YCE-2P-j5r"/>
@@ -212,6 +224,7 @@
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="F05-cT-k3T" secondAttribute="bottom" constant="20" id="pfK-7G-Xpw"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="6wk-JO-dxZ" secondAttribute="trailing" constant="16" id="psd-rH-eri"/>
                             <constraint firstItem="7gH-Ib-BkH" firstAttribute="centerX" secondItem="87f-mc-WB1" secondAttribute="centerX" id="rEk-Tq-bsi"/>
+                            <constraint firstItem="AGF-zF-i97" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="15" id="rcu-2Z-Peq"/>
                             <constraint firstItem="7gH-Ib-BkH" firstAttribute="top" secondItem="6wk-JO-dxZ" secondAttribute="bottom" constant="16" id="vO8-tC-t2J"/>
                             <constraint firstItem="itF-Hf-JQD" firstAttribute="top" secondItem="zLX-kg-2bt" secondAttribute="bottom" id="y7s-If-RiR"/>
                         </constraints>
@@ -548,19 +561,6 @@
                                     <action selector="restoreTapped:" destination="wOF-np-z4Y" eventType="touchUpInside" id="uZk-mp-ghB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WI7-yj-toa">
-                                <rect key="frame" x="16" y="316" width="343" height="30"/>
-                                <color key="backgroundColor" red="0.72097843890000002" green="0.71373695140000004" blue="0.72215801479999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="V1b-77-rv4"/>
-                                </constraints>
-                                <state key="normal" title="Rate GRuler!">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="rateAppPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="JeO-GQ-k4S"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nGO-SD-dUO">
                                 <rect key="frame" x="16" y="40" width="324" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -568,21 +568,8 @@
                                     <constraint firstAttribute="height" constant="30" id="2hC-DQ-RMM"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHZ-JN-sua">
-                                <rect key="frame" x="16" y="362" width="343" height="30"/>
-                                <color key="backgroundColor" red="0.72097843890000002" green="0.71373695140000004" blue="0.72215801479999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="pHy-Nj-Zo5"/>
-                                </constraints>
-                                <state key="normal" title="Send feedback">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendFeedbackPressed:" destination="wOF-np-z4Y" eventType="touchUpInside" id="eEg-WW-RSP"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-DA-GSC">
-                                <rect key="frame" x="16" y="408" width="343" height="30"/>
+                                <rect key="frame" x="16" y="316" width="343" height="30"/>
                                 <color key="backgroundColor" red="0.72097843890000002" green="0.71373695140000004" blue="0.72215801479999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="4nT-KC-Xjq"/>
@@ -599,31 +586,25 @@
                         <constraints>
                             <constraint firstItem="eff-4F-ZD7" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" id="2mL-IC-z65"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="ImD-sf-mCF" secondAttribute="trailing" constant="16" id="4A6-AT-JrG"/>
-                            <constraint firstItem="bHZ-JN-sua" firstAttribute="top" secondItem="WI7-yj-toa" secondAttribute="bottom" constant="16" id="6CS-K4-sVQ"/>
                             <constraint firstItem="g5c-EH-cuo" firstAttribute="top" secondItem="ImD-sf-mCF" secondAttribute="bottom" constant="16" id="6uW-WC-NnS"/>
                             <constraint firstItem="ImD-sf-mCF" firstAttribute="top" secondItem="OfO-pa-iGW" secondAttribute="bottom" constant="16" id="8q1-zN-jDq"/>
-                            <constraint firstItem="WI7-yj-toa" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="9RW-tc-N2c"/>
                             <constraint firstItem="ihE-Un-OtH" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="9pm-5u-SDs"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="w8m-JL-v7f" secondAttribute="trailing" constant="16" id="B3e-7g-jFF"/>
+                            <constraint firstItem="VPY-DA-GSC" firstAttribute="top" secondItem="ihE-Un-OtH" secondAttribute="bottom" constant="16" id="Bpg-Hi-qp5"/>
                             <constraint firstItem="w8m-JL-v7f" firstAttribute="top" secondItem="W8d-2w-692" secondAttribute="top" constant="20" id="Djp-5T-0oa"/>
                             <constraint firstItem="nGO-SD-dUO" firstAttribute="top" secondItem="W8d-2w-692" secondAttribute="top" constant="20" id="ER7-m4-spW"/>
                             <constraint firstItem="ihE-Un-OtH" firstAttribute="top" secondItem="yNL-4E-LlT" secondAttribute="bottom" constant="16" id="HGW-TI-i45"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="yNL-4E-LlT" secondAttribute="trailing" constant="16" id="ImN-2t-apG"/>
                             <constraint firstItem="w8m-JL-v7f" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="Mgz-Ln-Sqe"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="nGO-SD-dUO" secondAttribute="trailing" constant="35" id="QW7-S5-fcZ"/>
-                            <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="bHZ-JN-sua" secondAttribute="trailing" constant="16" id="Tat-sM-MzH"/>
                             <constraint firstItem="eff-4F-ZD7" firstAttribute="top" secondItem="kLQ-O7-D5b" secondAttribute="topMargin" id="U69-nD-d2a"/>
-                            <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="WI7-yj-toa" secondAttribute="trailing" constant="16" id="UWL-XR-KnW"/>
-                            <constraint firstItem="VPY-DA-GSC" firstAttribute="top" secondItem="bHZ-JN-sua" secondAttribute="bottom" constant="16" id="Ubq-TH-iuo"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="eff-4F-ZD7" secondAttribute="trailing" id="UyB-5o-azG"/>
-                            <constraint firstItem="WI7-yj-toa" firstAttribute="top" secondItem="ihE-Un-OtH" secondAttribute="bottom" constant="16" id="XES-PO-CP8"/>
                             <constraint firstItem="yNL-4E-LlT" firstAttribute="top" secondItem="g5c-EH-cuo" secondAttribute="bottom" constant="16" id="XK1-hv-wjg"/>
                             <constraint firstItem="OfO-pa-iGW" firstAttribute="top" secondItem="w8m-JL-v7f" secondAttribute="bottom" constant="16" id="YdT-ZZ-Tk3"/>
                             <constraint firstItem="VPY-DA-GSC" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="aX0-DJ-Xdw"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="OfO-pa-iGW" secondAttribute="trailing" constant="16" id="cAo-G6-7o3"/>
                             <constraint firstItem="W8d-2w-692" firstAttribute="trailing" secondItem="g5c-EH-cuo" secondAttribute="trailing" constant="16" id="e8v-xh-IIe"/>
                             <constraint firstAttribute="bottomMargin" secondItem="eff-4F-ZD7" secondAttribute="bottom" id="eIR-jX-UMm"/>
-                            <constraint firstItem="bHZ-JN-sua" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="hwT-qx-ZrQ"/>
                             <constraint firstItem="ImD-sf-mCF" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="ipP-LF-NVt"/>
                             <constraint firstItem="nGO-SD-dUO" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="j8w-bP-3As"/>
                             <constraint firstItem="OfO-pa-iGW" firstAttribute="leading" secondItem="W8d-2w-692" secondAttribute="leading" constant="16" id="nyN-cx-ZPK"/>
@@ -637,12 +618,10 @@
                     <connections>
                         <outlet property="facebookButtonView" destination="nGO-SD-dUO" id="Mp9-cp-SGS"/>
                         <outlet property="measureUnitsButton" destination="OfO-pa-iGW" id="DQZ-ft-qx2"/>
-                        <outlet property="rateAppButton" destination="WI7-yj-toa" id="Wz7-C1-T1O"/>
                         <outlet property="removeAdsButton" destination="ImD-sf-mCF" id="6Sv-RI-1Iv"/>
                         <outlet property="removeAdsPlusLimitButton" destination="yNL-4E-LlT" id="ZsX-ec-OQV"/>
                         <outlet property="removeLimitsButton" destination="g5c-EH-cuo" id="3va-xA-NM4"/>
                         <outlet property="restorePurchasesButton" destination="ihE-Un-OtH" id="4k6-2u-h4B"/>
-                        <outlet property="sendFeedbackButton" destination="bHZ-JN-sua" id="ttf-T8-mCv"/>
                         <outlet property="subscribeToNewsButton" destination="VPY-DA-GSC" id="odN-18-2ez"/>
                     </connections>
                 </viewController>
@@ -656,13 +635,14 @@
         <image name="cleanButton" width="56" height="56"/>
         <image name="deleteButton" width="25" height="34"/>
         <image name="doneButton" width="56" height="56"/>
-        <image name="fingerDown" width="266" height="541"/>
+        <image name="fingerDown" width="88" height="180"/>
         <image name="fingerUp" width="154" height="145"/>
         <image name="galleryButton" width="55" height="55"/>
-        <image name="goToPointTutorial" width="382" height="581"/>
-        <image name="longTouchTutorial" width="352" height="541"/>
+        <image name="goToPointTutorial" width="127" height="193"/>
+        <image name="longTouchTutorial" width="117" height="180"/>
         <image name="makePhotoButton" width="63" height="56"/>
-        <image name="secondPointTutorial" width="462" height="437"/>
+        <image name="rateGameButton" width="56" height="56"/>
+        <image name="secondPointTutorial" width="154" height="145"/>
         <image name="settingsButton" width="55" height="55"/>
         <image name="shakeHand" width="164" height="196"/>
         <image name="shareButton" width="36" height="35"/>
