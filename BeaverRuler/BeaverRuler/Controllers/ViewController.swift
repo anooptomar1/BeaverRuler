@@ -14,6 +14,7 @@ import StoreKit
 import Crashlytics
 import Vision
 import Appodeal
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -253,6 +254,31 @@ class ViewController: UIViewController {
     @IBAction func rateGamePressed(_ sender: Any) {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Rate_app_pressed_Ruler_screen")
         APAppRater.sharedInstance.rateTheApp()
+    }
+    
+    @IBAction func turnLightPressed(_ sender: Any) {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video)
+            else {return}
+        
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if device.torchMode == .off {
+                    device.torchMode = .on
+                    AppAnalyticsHelper.sendAppAnalyticEvent(withName: "TurnOn_torch")
+                } else {
+                    device.torchMode = .off
+                    AppAnalyticsHelper.sendAppAnalyticEvent(withName: "TurnOff_torch")
+                }
+                
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch could not be used")
+            }
+        } else {
+            print("Torch is not available")
+        }
     }
 
     @IBAction func undoPressed(_ sender: Any) {
