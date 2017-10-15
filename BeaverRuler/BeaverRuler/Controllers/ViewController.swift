@@ -163,6 +163,7 @@ class ViewController: UIViewController {
         
         if sender.state == .ended {
             
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_end_dragging_point")
             userDraggingPoint = false
             
             if isMeasuring == false {
@@ -170,6 +171,7 @@ class ViewController: UIViewController {
             }
             
         } else if sender.state == .began {
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_dragging_point")
             tutorialHelper.setUpTutorialStep7()
             showCurrentLine = false
             userDraggingPoint = true
@@ -227,6 +229,7 @@ class ViewController: UIViewController {
             
             if startSelectedNode != nil || endSelectedNode != nil {
                 tutorialHelper.setUpTutorialStep6()
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_highlight_point")
             }
         }
     }
