@@ -161,8 +161,18 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_remove_ads_proposal_Gallery_screen")
         
         let alertController = UIAlertController(title: NSLocalizedString("removeAdsButtonTitle", comment: ""), message: NSLocalizedString("doYouWhantToRemoveAdsMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("removeAdsPlusLimitButtonTitle", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
+            for (_, product) in self.products.enumerated() {
+                if product.productIdentifier == SettingsController.removeAdsPlusLimitProductId {
+                    AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove_ad_objects_limit_Gallery_Screen_pressed")
+                    RageProducts.store.buyProduct(product)
+                    break
+                }
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("removeAdsButtonTitle", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
             for (_, product) in self.products.enumerated() {
                 if product.productIdentifier == SettingsController.removeAdProductId {
                     AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy_remove_ads_Gallery_Screen_pressed")
@@ -171,6 +181,9 @@ class ObjectsFoldersViewController: UIViewController, UITableViewDelegate, UITab
                 }
             }
         }))
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
+        
         self.present(alertController, animated: true, completion: nil)
     }
     

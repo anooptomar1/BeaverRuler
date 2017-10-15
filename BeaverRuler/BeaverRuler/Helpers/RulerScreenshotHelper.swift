@@ -127,7 +127,18 @@ class RulerScreenshotHelper {
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_reach_objects_limit")
             let objectsLimitTitle = NSLocalizedString("objectsLimit", comment: "")
             let alertController = UIAlertController(title: "\(objectsLimitTitle) \(rulerScreen.maxObjectsInUserGallery)", message: NSLocalizedString("doYouWhantToRemoveLimitMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("buyKey", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
+            
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("removeAdsPlusLimitButtonTitle", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
+                for (_, product) in self.rulerScreen.products.enumerated() {
+                    if product.productIdentifier == SettingsController.removeAdsPlusLimitProductId {
+                        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Remove_ad_objects_limit_Ruler_Screen_pressed")
+                        RageProducts.store.buyProduct(product)
+                        break
+                    }
+                }
+            }))
+            
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("removeLimitButtonTitle", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
                 for (_, product) in self.rulerScreen.products.enumerated() {
                     if product.productIdentifier == SettingsController.removeUserGalleryProductId {
                         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Buy_objects_limit_Ruler_Screen_pressed")
@@ -136,10 +147,12 @@ class RulerScreenshotHelper {
                     }
                 }
             }))
+            
             alertController.addAction(UIAlertAction(title: NSLocalizedString("makeJustScreenshot", comment: ""), style: UIAlertActionStyle.default, handler: { UIAlertAction in
                 self.takeJustScreenshot()
                 AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Make_just_screenshot_pressed")
             }))
+            
             alertController.addAction(UIAlertAction(title: NSLocalizedString("noKey", comment: ""), style: UIAlertActionStyle.default, handler: nil))
             
             rulerScreen.present(alertController, animated: true, completion: nil)
