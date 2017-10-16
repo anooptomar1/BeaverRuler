@@ -533,7 +533,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BeaverRuler/Pods-BeaverRuler-resources.sh",
 				"${PODS_ROOT}/Appodeal/Appodeal.bundle",
+				"${PODS_ROOT}/Appodeal/APDIronSourceAdapter.embeddedframework/Resources/button-close-default.png",
+				"${PODS_ROOT}/Appodeal/APDIronSourceAdapter.embeddedframework/Resources/button-close-highlighted.png",
 				"${PODS_ROOT}/Appodeal/APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle",
+				"${PODS_ROOT}/Appodeal/APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle",
 				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPAdBrowserController.xib",
 				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn.png",
 				"${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@2x.png",

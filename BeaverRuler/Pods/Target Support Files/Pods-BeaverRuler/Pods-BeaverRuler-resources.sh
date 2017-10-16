@@ -85,7 +85,10 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/Appodeal/Appodeal.bundle"
+  install_resource "${PODS_ROOT}/Appodeal/APDIronSourceAdapter.embeddedframework/Resources/button-close-default.png"
+  install_resource "${PODS_ROOT}/Appodeal/APDIronSourceAdapter.embeddedframework/Resources/button-close-highlighted.png"
   install_resource "${PODS_ROOT}/Appodeal/APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle"
+  install_resource "${PODS_ROOT}/Appodeal/APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle"
   install_resource "${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPAdBrowserController.xib"
   install_resource "${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn.png"
   install_resource "${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@2x.png"
@@ -109,7 +112,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/Appodeal/Appodeal.bundle"
+  install_resource "${PODS_ROOT}/Appodeal/APDIronSourceAdapter.embeddedframework/Resources/button-close-default.png"
+  install_resource "${PODS_ROOT}/Appodeal/APDIronSourceAdapter.embeddedframework/Resources/button-close-highlighted.png"
   install_resource "${PODS_ROOT}/Appodeal/APDStartAppAdapter.embeddedframework/Resources/StartApp.bundle"
+  install_resource "${PODS_ROOT}/Appodeal/APDTapjoyAdapter.embeddedframework/Resources/TapjoyResources.bundle"
   install_resource "${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPAdBrowserController.xib"
   install_resource "${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn.png"
   install_resource "${PODS_ROOT}/Appodeal/APDTwitterMoPubAdapter.embeddedframework/Resources/MPCloseBtn@2x.png"

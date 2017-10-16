@@ -8,6 +8,7 @@ target 'BeaverRuler' do
   # Pods for BeaverRuler
   pod 'RealmSwift'
   pod 'Appodeal/Native', '~>2.0'
+  pod 'Appodeal/Interstitial', '~>2.0'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'FacebookCore'
