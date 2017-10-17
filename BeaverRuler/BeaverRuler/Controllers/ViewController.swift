@@ -70,9 +70,13 @@ class ViewController: UIViewController {
     var endNodeLine: RulerLine?
     var userDraggingPoint = false
     
+    var showUserInterstitial = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        Appodeal.setInterstitialDelegate(self)
+        
         rulerScreenNavigationHelper.rulerScreen = self
         rulerScreenshotHelper.rulerScreen = self
         rulerPurchasesHelper = RulerPurchasesHelper(rulerScreen: self)
@@ -310,7 +314,19 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showSettings(_ sender: Any) {
-        rulerScreenNavigationHelper.showSettingsScreen()
+        
+        var blockAd = false
+        
+        if RageProducts.store.isProductPurchased(SettingsController.removeAdProductId) || RageProducts.store.isProductPurchased(SettingsController.removeAdsPlusLimitProductId) {
+            blockAd = true
+        }
+        
+        if showUserInterstitial == false && Appodeal.isReadyForShow(with: AppodealShowStyle.interstitial) && blockAd == false {
+            Appodeal.showAd(AppodealShowStyle.interstitial, rootViewController: self)
+            showUserInterstitial = true
+        } else {
+            rulerScreenNavigationHelper.showSettingsScreen()
+        }
     }
 
     private func updateSettings() {
@@ -415,6 +431,21 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
 
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         updateSettings()
+    }
+}
+
+// MARK: - AppodealInterstitialDelegate
+
+extension ViewController: AppodealInterstitialDelegate {
+    func interstitialWillPresent(){
+        NSLog("Полноэкранная реклама сейчас будет показана")
+    }
+    func interstitialDidDismiss(){
+        rulerScreenNavigationHelper.showSettingsScreen()
+        session.run(sessionConfiguration)
+    }
+    func interstitialDidClick(){
+        NSLog("По полноэкранной рекламе кликнули")
     }
 }
 

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
         FirebaseApp.configure()
-        let adTypes: AppodealAdType = [.nativeAd]
+        let adTypes: AppodealAdType = [.nativeAd, .interstitial]
         Appodeal.initialize(withApiKey: "982a00948cdaa99b8e99b8f83a35d8afaa5fbb697ed398a7", types: adTypes)
         
 
