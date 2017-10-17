@@ -438,14 +438,14 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
 
 extension ViewController: AppodealInterstitialDelegate {
     func interstitialWillPresent(){
-        NSLog("Полноэкранная реклама сейчас будет показана")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_interstitial")
     }
     func interstitialDidDismiss(){
         rulerScreenNavigationHelper.showSettingsScreen()
         session.run(sessionConfiguration)
     }
     func interstitialDidClick(){
-        NSLog("По полноэкранной рекламе кликнули")
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_click_interstitial")
     }
 }
 
