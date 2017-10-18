@@ -35,8 +35,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tutorialStep4Image: UIImageView!
     @IBOutlet weak var tutorialStep5Image: UIImageView!
     @IBOutlet weak var tutorialStep6Image: UIImageView!
-    @IBOutlet weak var tutorialStep7Image: UIImageView!
-    @IBOutlet weak var tutorialStep8Image: UIImageView!
+    @IBOutlet weak var draggingTutorialImage: UIImageView!
     
     fileprivate lazy var session = ARSession()
     fileprivate lazy var sessionConfiguration = ARWorldTrackingConfiguration()
@@ -94,8 +93,8 @@ class ViewController: UIViewController {
         tutorialHelper.tutorialStep4Image = tutorialStep4Image
         tutorialHelper.tutorialStep5Image = tutorialStep5Image
         tutorialHelper.tutorialStep6Image = tutorialStep6Image
-        tutorialHelper.tutorialStep7Image = tutorialStep7Image
-        tutorialHelper.tutorialStep8Image = tutorialStep8Image
+        tutorialHelper.draggingTutorialImage = draggingTutorialImage
+        
         tutorialHelper.setUpTutorialStep1()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleStartARSessionNotification(_:)),
@@ -176,7 +175,6 @@ class ViewController: UIViewController {
             
         } else if sender.state == .began {
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_dragging_point")
-            tutorialHelper.setUpTutorialStep7()
             showCurrentLine = false
             userDraggingPoint = true
         }
@@ -206,6 +204,8 @@ class ViewController: UIViewController {
     
     func selectNearestPoint() {
         
+        tutorialHelper.hideDraggingTutorial()
+        
         guard let worldPosition = sceneView.realWorldVector(screenPosition: view.center) else { return }
         
         RulerLine.diselectNode(node: startSelectedNode)
@@ -231,8 +231,8 @@ class ViewController: UIViewController {
                 endNodeLine = line
             }
             
-            if startSelectedNode != nil || endSelectedNode != nil {
-                tutorialHelper.setUpTutorialStep6()
+            if startNodeLine != nil || endNodeLine != nil {
+                tutorialHelper.showDraggingTutorial()
             }
         }
     }
@@ -506,6 +506,7 @@ extension ViewController {
             if userDraggingPoint == false {
                 selectNearestPoint()
             } else {
+                tutorialHelper.finishDraggingTutorial()
                 updateSelectedLines()
             }
         }

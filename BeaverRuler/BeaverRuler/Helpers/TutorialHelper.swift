@@ -13,7 +13,9 @@ import Crashlytics
 class TutorialHelper {
     
     let finishTutorialKey = "finishTutorialKey"
+    let finishDraggingTutorialKey = "finishDraggingTutorialTutorialKey"
     fileprivate var isFinishTutorial = false
+    fileprivate var isFinishDraggingTutorial = false
     fileprivate var tutorialStep = 0
     
     var tutorialStep1Image: UIImageView!
@@ -22,8 +24,9 @@ class TutorialHelper {
     var tutorialStep4Image: UIImageView!
     var tutorialStep5Image: UIImageView!
     var tutorialStep6Image: UIImageView!
-    var tutorialStep7Image: UIImageView!
-    var tutorialStep8Image: UIImageView!
+    var draggingTutorialImage: UIImageView!
+//    var tutorialStep7Image: UIImageView!
+//    var tutorialStep8Image: UIImageView!
     
     let makeSecondPointTutorialTime = Double(4)
     var timer = Timer()
@@ -32,6 +35,7 @@ class TutorialHelper {
     init() {
         let defaults = UserDefaults.standard
         isFinishTutorial = defaults.bool(forKey: finishTutorialKey)
+        isFinishDraggingTutorial = defaults.bool(forKey: finishDraggingTutorialKey)
     }
     
     func setUpTutorialStep1() {
@@ -41,16 +45,18 @@ class TutorialHelper {
             tutorialStep4Image.isHidden = true
             tutorialStep5Image.isHidden = true
             tutorialStep6Image.isHidden = true
-            tutorialStep7Image.isHidden = true
-            tutorialStep8Image.isHidden = true
+            draggingTutorialImage.isHidden = true
+//            tutorialStep7Image.isHidden = true
+//            tutorialStep8Image.isHidden = true
         } else {
             tutorialStep1Image.isHidden = false
             tutorialStep2Image.isHidden = true
             tutorialStep4Image.isHidden = true
             tutorialStep5Image.isHidden = true
             tutorialStep6Image.isHidden = true
-            tutorialStep7Image.isHidden = true
-            tutorialStep8Image.isHidden = true
+            draggingTutorialImage.isHidden = true
+//            tutorialStep7Image.isHidden = true
+//            tutorialStep8Image.isHidden = true
             tutorialStep = 1
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_tutorial")
         }
@@ -106,27 +112,9 @@ class TutorialHelper {
         }
     }
     
-    func setUpTutorialStep7() {
+    func finishBaseTutorial() {
         if isFinishTutorial == false && tutorialStep == 6 {
             tutorialStep6Image.isHidden = true
-            tutorialStep7Image.isHidden = false
-            tutorialStep = 7
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_6")
-        }
-    }
-    
-    func setUpTutorialStep8() {
-        if isFinishTutorial == false && tutorialStep == 7 {
-            tutorialStep7Image.isHidden = true
-            tutorialStep8Image.isHidden = false
-            tutorialStep = 8
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_7")
-        }
-    }
-    
-    func finishTutorial() {
-        if isFinishTutorial == false && tutorialStep == 8 {
-            tutorialStep8Image.isHidden = true
             isFinishTutorial = true
             
             let defaults = UserDefaults.standard
@@ -134,4 +122,57 @@ class TutorialHelper {
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial")
         }
     }
+    
+    func showDraggingTutorial() {
+        if isFinishDraggingTutorial == false {
+            draggingTutorialImage.isHidden = false
+        }
+    }
+    
+    func hideDraggingTutorial() {
+        draggingTutorialImage.isHidden = true
+    }
+    
+    func finishDraggingTutorial() {
+        if isFinishDraggingTutorial == false {
+            hideDraggingTutorial()
+            isFinishDraggingTutorial = true
+            let defaults = UserDefaults.standard
+            defaults.set(isFinishDraggingTutorial, forKey: finishDraggingTutorialKey)
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_dragging_tutorial")
+        }
+    }
+    
+    
+    
+    
+    
+//    func setUpTutorialStep6() {
+//        if isFinishTutorial == false && tutorialStep == 5 {
+//            tutorialStep5Image.isHidden = true
+//            tutorialStep6Image.isHidden = false
+//            tutorialStep = 6
+//            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_5")
+//        }
+//    }
+//
+//    func setUpTutorialStep7() {
+//        if isFinishTutorial == false && tutorialStep == 6 {
+//            tutorialStep6Image.isHidden = true
+//            tutorialStep7Image.isHidden = false
+//            tutorialStep = 7
+//            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_6")
+//        }
+//    }
+//
+//    func setUpTutorialStep8() {
+//        if isFinishTutorial == false && tutorialStep == 7 {
+//            tutorialStep7Image.isHidden = true
+//            tutorialStep8Image.isHidden = false
+//            tutorialStep = 8
+//            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_7")
+//        }
+//    }
+    
+    
 }

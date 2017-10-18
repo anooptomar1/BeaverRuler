@@ -41,7 +41,7 @@ class RulerNavigationHelper {
     func showGalleryScreen() {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Show_user_gallery_pressed")
         
-        rulerScreen.tutorialHelper.finishTutorial()
+        rulerScreen.tutorialHelper.finishBaseTutorial()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let settingsViewController = storyboard.instantiateViewController(withIdentifier: "ObjectsFoldersViewController") as? ObjectsFoldersViewController else {
