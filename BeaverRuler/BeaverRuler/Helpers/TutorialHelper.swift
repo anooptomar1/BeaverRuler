@@ -25,8 +25,6 @@ class TutorialHelper {
     var tutorialStep5Image: UIImageView!
     var tutorialStep6Image: UIImageView!
     var draggingTutorialImage: UIImageView!
-//    var tutorialStep7Image: UIImageView!
-//    var tutorialStep8Image: UIImageView!
     
     let makeSecondPointTutorialTime = Double(4)
     var timer = Timer()
@@ -46,8 +44,6 @@ class TutorialHelper {
             tutorialStep5Image.isHidden = true
             tutorialStep6Image.isHidden = true
             draggingTutorialImage.isHidden = true
-//            tutorialStep7Image.isHidden = true
-//            tutorialStep8Image.isHidden = true
         } else {
             tutorialStep1Image.isHidden = false
             tutorialStep2Image.isHidden = true
@@ -55,8 +51,6 @@ class TutorialHelper {
             tutorialStep5Image.isHidden = true
             tutorialStep6Image.isHidden = true
             draggingTutorialImage.isHidden = true
-//            tutorialStep7Image.isHidden = true
-//            tutorialStep8Image.isHidden = true
             tutorialStep = 1
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_tutorial")
         }
@@ -142,37 +136,5 @@ class TutorialHelper {
             AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_dragging_tutorial")
         }
     }
-    
-    
-    
-    
-    
-//    func setUpTutorialStep6() {
-//        if isFinishTutorial == false && tutorialStep == 5 {
-//            tutorialStep5Image.isHidden = true
-//            tutorialStep6Image.isHidden = false
-//            tutorialStep = 6
-//            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_5")
-//        }
-//    }
-//
-//    func setUpTutorialStep7() {
-//        if isFinishTutorial == false && tutorialStep == 6 {
-//            tutorialStep6Image.isHidden = true
-//            tutorialStep7Image.isHidden = false
-//            tutorialStep = 7
-//            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_6")
-//        }
-//    }
-//
-//    func setUpTutorialStep8() {
-//        if isFinishTutorial == false && tutorialStep == 7 {
-//            tutorialStep7Image.isHidden = true
-//            tutorialStep8Image.isHidden = false
-//            tutorialStep = 8
-//            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_finish_tutorial_step_7")
-//        }
-//    }
-    
     
 }

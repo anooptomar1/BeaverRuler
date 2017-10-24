@@ -128,7 +128,10 @@ final class RulerLine {
         startVector = vector
         lineNode?.removeFromParentNode()
         lineNode = startVector.line(to: endVector, color: RulerLine.color)
-        sceneView.scene.rootNode.addChildNode(lineNode!)
+        
+        if let newLineNode = lineNode {
+            sceneView.scene.rootNode.addChildNode(newLineNode)
+        }
         
         text.string = distance(to: endVector)
         textNode.position = SCNVector3((startVector.x+endVector.x)/2.0, (startVector.y+endVector.y)/2.0, (startVector.z+endVector.z)/2.0)

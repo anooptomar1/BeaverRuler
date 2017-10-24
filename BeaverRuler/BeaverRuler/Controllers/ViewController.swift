@@ -157,7 +157,10 @@ class ViewController: UIViewController {
             showCurrentLine = true
             if (currentLine != nil) && lines.count > 0 {
                 let lastLine = lines.last
-                currentLine?.updateStartPoint(to: (lastLine?.endVector)!)
+                
+                if let endVector = lastLine?.endVector {
+                    currentLine?.updateStartPoint(to: endVector)
+                }
             }
         }
     }
@@ -212,23 +215,32 @@ class ViewController: UIViewController {
         RulerLine.diselectNode(node: endSelectedNode)
         startNodeLine = nil
         endNodeLine = nil
+        endSelectedNode = nil
+        startSelectedNode = nil
+        
         
         for (index, line) in lines.enumerated() {
-            let distanceToStartPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(line.startVector!))
-            let distanceToEndPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(line.endVector!))
             
-            if distanceToStartPoint < 20  {
-                print("selectStartPointForLine: \(index)")
-                RulerLine.selectNode(node: line.startNode)
-                startSelectedNode = line.startNode
-                startNodeLine = line
+            if let startVector = line.startVector {
+                let distanceToStartPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(startVector))
+                
+                if distanceToStartPoint < 20  {
+                    print("selectStartPointForLine: \(index)")
+                    RulerLine.selectNode(node: line.startNode)
+                    startSelectedNode = line.startNode
+                    startNodeLine = line
+                }
             }
             
-            if distanceToEndPoint < 20  {
-                print("selectEndPointForLine: \(index)")
-                RulerLine.selectNode(node: line.endNode)
-                endSelectedNode = line.endNode
-                endNodeLine = line
+            if let endVector = line.endVector {
+                let distanceToEndPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(endVector))
+                
+                if distanceToEndPoint < 20  {
+                    print("selectEndPointForLine: \(index)")
+                    RulerLine.selectNode(node: line.endNode)
+                    endSelectedNode = line.endNode
+                    endNodeLine = line
+                }
             }
             
             if startNodeLine != nil || endNodeLine != nil {
@@ -537,17 +549,51 @@ extension ViewController {
     fileprivate func getEndValue(worldPosition: SCNVector3) -> SCNVector3{
 
         var position = worldPosition
-
-        if currentLine != nil {
-
-            if lines.count > 0 {
-                let startLine = lines.first
-                let startPoint = startLine?.startVector
-
-                let distance = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(startPoint!))
-                if distance < 9 {
-                    position = startPoint!
+        
+        if lines.count > 0 {
+            let centerTargerVectorInWorld = sceneView.projectPoint(worldPosition)
+            for line in lines {
+                
+                if endSelectedNode == nil {
+                    if let endPoint = line.endVector {
+                        let distance = distanceBetweenPoints(firtsPoint: centerTargerVectorInWorld, secondPoint: sceneView.projectPoint(endPoint))
+                        if distance < 9 {
+                            position = endPoint
+                            break
+                        }
+                    }
+                } else {
+                    if endSelectedNode != line.endNode  {
+                        if let endPoint = line.endVector {
+                            let distance = distanceBetweenPoints(firtsPoint: centerTargerVectorInWorld, secondPoint: sceneView.projectPoint(endPoint))
+                            if distance < 9 {
+                                position = endPoint
+                                break
+                            }
+                        }
+                    }
                 }
+                
+                if startSelectedNode == nil {
+                    if let startPoint = line.startVector {
+                        let distance = distanceBetweenPoints(firtsPoint: centerTargerVectorInWorld, secondPoint: sceneView.projectPoint(startPoint))
+                        if distance < 9 {
+                            position = startPoint
+                            break
+                        }
+                    }
+                } else {
+                    if startSelectedNode != line.startNode  {
+                        if let startPoint = line.startVector {
+                            let distance = distanceBetweenPoints(firtsPoint: centerTargerVectorInWorld, secondPoint: sceneView.projectPoint(startPoint))
+                            if distance < 9 {
+                                position = startPoint
+                                break
+                            }
+                        }
+                    }
+                }
+                
             }
         }
 
