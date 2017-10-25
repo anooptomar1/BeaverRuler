@@ -10,6 +10,7 @@ import Foundation
 import Crashlytics
 import FacebookCore
 import Firebase
+import YandexMobileMetrica
 
 class AppAnalyticsHelper {
 
@@ -18,6 +19,10 @@ class AppAnalyticsHelper {
         Answers.logCustomEvent(withName: newString)
         AppEventsLogger.log(withName)
         Analytics.logEvent(withName, parameters: ["name": withName as NSObject])
+        YMMYandexMetrica.reportEvent(withName) { (error) in
+            print("DID FAIL REPORT EVENT: %@", withName)
+            print("REPORT ERROR: %@", error.localizedDescription)
+        }
     }
 
 }

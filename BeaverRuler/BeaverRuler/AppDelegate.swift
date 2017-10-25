@@ -14,6 +14,7 @@ import FacebookCore
 import StoreKit
 import Firebase
 import OneSignal
+import YandexMobileMetrica
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObserver {
@@ -43,8 +44,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
         pushNotificationHelper = PushNotificationHelper.sharedInstance
         
         SKPaymentQueue.default().add(self)
+        initializeAppmetrica()
         
         return true
+    }
+    
+     func initializeAppmetrica()
+    {
+        let configuration = YMMYandexMetricaConfiguration.init(apiKey: "20c6566e-e9b1-4a2c-96b1-ac1c0810c093")
+        let isFirstApplicationLaunch = APAppRater.sharedInstance.getAppLaunchCount() < 2
+        configuration?.handleFirstActivationAsUpdateEnabled = isFirstApplicationLaunch == false
+        YMMYandexMetrica.activate(with: configuration!)
+        YMMYandexMetrica.setLoggingEnabled(true)
+        YMMYandexMetrica.setTrackLocationEnabled(true)
     }
 
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {

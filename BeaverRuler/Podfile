@@ -15,6 +15,7 @@ target 'BeaverRuler' do
   pod 'FacebookLogin'
   pod 'Firebase/Core'
   pod 'OneSignal', '>= 2.5.2', '< 3.0'
+#  pod 'YandexMobileMetrica', '2.9.1'
 
 end
 
