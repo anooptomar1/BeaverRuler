@@ -33,6 +33,15 @@
 		CE5BB5E41F60BDCE004A38C7 /* NativeAppInstallAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */; };
 		CE5BB5EA1F644CDA004A38C7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5BB5E91F644CDA004A38C7 /* StoreKit.framework */; };
 		CE6B80881F7EDAE700BD433D /* TutorialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B80871F7EDAE700BD433D /* TutorialHelper.swift */; };
+		CE96C1451FA4C78D003AEF52 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE96C1431FA4C78D003AEF52 /* Interface.storyboard */; };
+		CE96C1471FA4C78D003AEF52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE96C1461FA4C78D003AEF52 /* Assets.xcassets */; };
+		CE96C14E1FA4C78D003AEF52 /* GRulerAppleWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE96C14D1FA4C78D003AEF52 /* GRulerAppleWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE96C1531FA4C78D003AEF52 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96C1521FA4C78D003AEF52 /* InterfaceController.swift */; };
+		CE96C1551FA4C78D003AEF52 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96C1541FA4C78D003AEF52 /* ExtensionDelegate.swift */; };
+		CE96C1571FA4C78D003AEF52 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96C1561FA4C78D003AEF52 /* NotificationController.swift */; };
+		CE96C1591FA4C78D003AEF52 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96C1581FA4C78D003AEF52 /* ComplicationController.swift */; };
+		CE96C15B1FA4C78D003AEF52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE96C15A1FA4C78D003AEF52 /* Assets.xcassets */; };
+		CE96C1601FA4C78D003AEF52 /* GRulerAppleWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CE96C1411FA4C78D003AEF52 /* GRulerAppleWatch.app */; };
 		CEB20FD61F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEB20FD71F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEB9CA521F800D1400EBCF88 /* RulerNavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA511F800D1400EBCF88 /* RulerNavigationHelper.swift */; };
@@ -65,6 +74,20 @@
 			remoteGlobalIDString = CE0593701F718CA3003FF700;
 			remoteInfo = GRulerStickers;
 		};
+		CE96C14F1FA4C78D003AEF52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9E919511F43B30C00C480ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE96C14C1FA4C78D003AEF52;
+			remoteInfo = "GRulerAppleWatch Extension";
+		};
+		CE96C15E1FA4C78D003AEF52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9E919511F43B30C00C480ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE96C1401FA4C78D003AEF52;
+			remoteInfo = GRulerAppleWatch;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +101,28 @@
 				CE0593781F718CA4003FF700 /* GRulerStickers.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE96C1661FA4C78D003AEF52 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CE96C14E1FA4C78D003AEF52 /* GRulerAppleWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE96C1681FA4C78D003AEF52 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				CE96C1601FA4C78D003AEF52 /* GRulerAppleWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -113,6 +158,18 @@
 		CE5BB5E31F60BB79004A38C7 /* NativeAppInstallAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAppInstallAdCell.xib; sourceTree = "<group>"; };
 		CE5BB5E91F644CDA004A38C7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CE6B80871F7EDAE700BD433D /* TutorialHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialHelper.swift; sourceTree = "<group>"; };
+		CE96C1411FA4C78D003AEF52 /* GRulerAppleWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GRulerAppleWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE96C1441FA4C78D003AEF52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		CE96C1461FA4C78D003AEF52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE96C1481FA4C78D003AEF52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE96C14D1FA4C78D003AEF52 /* GRulerAppleWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GRulerAppleWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE96C1521FA4C78D003AEF52 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		CE96C1541FA4C78D003AEF52 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		CE96C1561FA4C78D003AEF52 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		CE96C1581FA4C78D003AEF52 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		CE96C15A1FA4C78D003AEF52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE96C15C1FA4C78D003AEF52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE96C15D1FA4C78D003AEF52 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		CEB20FD81F77BEA600429FB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FDA1F77BEAD00429FB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FDB1F77BF5700429FB5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -170,6 +227,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				96811D9CABCEEFB1DC2575AF /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE96C14A1FA4C78D003AEF52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,12 +363,38 @@
 			path = GRulerStickers;
 			sourceTree = "<group>";
 		};
+		CE96C1421FA4C78D003AEF52 /* GRulerAppleWatch */ = {
+			isa = PBXGroup;
+			children = (
+				CE96C1431FA4C78D003AEF52 /* Interface.storyboard */,
+				CE96C1461FA4C78D003AEF52 /* Assets.xcassets */,
+				CE96C1481FA4C78D003AEF52 /* Info.plist */,
+			);
+			path = GRulerAppleWatch;
+			sourceTree = "<group>";
+		};
+		CE96C1511FA4C78D003AEF52 /* GRulerAppleWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE96C1521FA4C78D003AEF52 /* InterfaceController.swift */,
+				CE96C1541FA4C78D003AEF52 /* ExtensionDelegate.swift */,
+				CE96C1561FA4C78D003AEF52 /* NotificationController.swift */,
+				CE96C1581FA4C78D003AEF52 /* ComplicationController.swift */,
+				CE96C15A1FA4C78D003AEF52 /* Assets.xcassets */,
+				CE96C15C1FA4C78D003AEF52 /* Info.plist */,
+				CE96C15D1FA4C78D003AEF52 /* PushNotificationPayload.apns */,
+			);
+			path = "GRulerAppleWatch Extension";
+			sourceTree = "<group>";
+		};
 		D9E919501F43B30C00C480ED = {
 			isa = PBXGroup;
 			children = (
 				D9E9195B1F43B30D00C480ED /* BeaverRuler */,
 				CE0593721F718CA3003FF700 /* GRulerStickers */,
 				CE0248571F7D7243008FC42A /* OneSignalNotificationServiceExtension */,
+				CE96C1421FA4C78D003AEF52 /* GRulerAppleWatch */,
+				CE96C1511FA4C78D003AEF52 /* GRulerAppleWatch Extension */,
 				D9E9195A1F43B30D00C480ED /* Products */,
 				9E8BA1A8B8290BF24E3578EE /* Pods */,
 				C0ED6089D615ECBFB5A6977A /* Frameworks */,
@@ -317,6 +407,8 @@
 				D9E919591F43B30D00C480ED /* BeaverRuler.app */,
 				CE0593711F718CA3003FF700 /* GRulerStickers.appex */,
 				CE0248561F7D7243008FC42A /* OneSignalNotificationServiceExtension.appex */,
+				CE96C1411FA4C78D003AEF52 /* GRulerAppleWatch.app */,
+				CE96C14D1FA4C78D003AEF52 /* GRulerAppleWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,6 +467,40 @@
 			productReference = CE0593711F718CA3003FF700 /* GRulerStickers.appex */;
 			productType = "com.apple.product-type.app-extension.messages-sticker-pack";
 		};
+		CE96C1401FA4C78D003AEF52 /* GRulerAppleWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE96C1671FA4C78D003AEF52 /* Build configuration list for PBXNativeTarget "GRulerAppleWatch" */;
+			buildPhases = (
+				CE96C13F1FA4C78D003AEF52 /* Resources */,
+				CE96C1661FA4C78D003AEF52 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE96C1501FA4C78D003AEF52 /* PBXTargetDependency */,
+			);
+			name = GRulerAppleWatch;
+			productName = GRulerAppleWatch;
+			productReference = CE96C1411FA4C78D003AEF52 /* GRulerAppleWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		CE96C14C1FA4C78D003AEF52 /* GRulerAppleWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE96C1651FA4C78D003AEF52 /* Build configuration list for PBXNativeTarget "GRulerAppleWatch Extension" */;
+			buildPhases = (
+				CE96C1491FA4C78D003AEF52 /* Sources */,
+				CE96C14A1FA4C78D003AEF52 /* Frameworks */,
+				CE96C14B1FA4C78D003AEF52 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GRulerAppleWatch Extension";
+			productName = "GRulerAppleWatch Extension";
+			productReference = CE96C14D1FA4C78D003AEF52 /* GRulerAppleWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		D9E919581F43B30C00C480ED /* BeaverRuler */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9E9196D1F43B30D00C480ED /* Build configuration list for PBXNativeTarget "BeaverRuler" */;
@@ -387,12 +513,14 @@
 				A801F8F31597A6F4DFD0BCF2 /* [CP] Copy Pods Resources */,
 				CE2E86AD1F69C513004212E9 /* ShellScript */,
 				CE05937C1F718CA4003FF700 /* Embed App Extensions */,
+				CE96C1681FA4C78D003AEF52 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				CE0593771F718CA4003FF700 /* PBXTargetDependency */,
 				CE02485C1F7D7243008FC42A /* PBXTargetDependency */,
+				CE96C15F1FA4C78D003AEF52 /* PBXTargetDependency */,
 			);
 			name = BeaverRuler;
 			productName = BeaverRuler;
@@ -414,6 +542,14 @@
 						ProvisioningStyle = Automatic;
 					};
 					CE0593701F718CA3003FF700 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					CE96C1401FA4C78D003AEF52 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					CE96C14C1FA4C78D003AEF52 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
@@ -468,6 +604,8 @@
 				D9E919581F43B30C00C480ED /* BeaverRuler */,
 				CE0593701F718CA3003FF700 /* GRulerStickers */,
 				CE0248551F7D7243008FC42A /* OneSignalNotificationServiceExtension */,
+				CE96C1401FA4C78D003AEF52 /* GRulerAppleWatch */,
+				CE96C14C1FA4C78D003AEF52 /* GRulerAppleWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -486,6 +624,23 @@
 			files = (
 				CE0593741F718CA4003FF700 /* Stickers.xcassets in Resources */,
 				CEB20FD71F77BEA600429FB5 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE96C13F1FA4C78D003AEF52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE96C1471FA4C78D003AEF52 /* Assets.xcassets in Resources */,
+				CE96C1451FA4C78D003AEF52 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE96C14B1FA4C78D003AEF52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE96C15B1FA4C78D003AEF52 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +813,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE96C1491FA4C78D003AEF52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE96C1571FA4C78D003AEF52 /* NotificationController.swift in Sources */,
+				CE96C1591FA4C78D003AEF52 /* ComplicationController.swift in Sources */,
+				CE96C1551FA4C78D003AEF52 /* ExtensionDelegate.swift in Sources */,
+				CE96C1531FA4C78D003AEF52 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9E919551F43B30C00C480ED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -702,9 +868,27 @@
 			target = CE0593701F718CA3003FF700 /* GRulerStickers */;
 			targetProxy = CE0593761F718CA4003FF700 /* PBXContainerItemProxy */;
 		};
+		CE96C1501FA4C78D003AEF52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE96C14C1FA4C78D003AEF52 /* GRulerAppleWatch Extension */;
+			targetProxy = CE96C14F1FA4C78D003AEF52 /* PBXContainerItemProxy */;
+		};
+		CE96C15F1FA4C78D003AEF52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE96C1401FA4C78D003AEF52 /* GRulerAppleWatch */;
+			targetProxy = CE96C15E1FA4C78D003AEF52 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		CE96C1431FA4C78D003AEF52 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE96C1441FA4C78D003AEF52 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		CEB20FD91F77BEA600429FB5 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -814,6 +998,80 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CE96C1611FA4C78D003AEF52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYJEFU8C25;
+				IBSC_MODULE = GRulerAppleWatch_Extension;
+				INFOPLIST_FILE = GRulerAppleWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = comDarkWind.GRuler.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		CE96C1621FA4C78D003AEF52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYJEFU8C25;
+				IBSC_MODULE = GRulerAppleWatch_Extension;
+				INFOPLIST_FILE = GRulerAppleWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = comDarkWind.GRuler.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
+		CE96C1631FA4C78D003AEF52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYJEFU8C25;
+				INFOPLIST_FILE = "GRulerAppleWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = comDarkWind.GRuler.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		CE96C1641FA4C78D003AEF52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NYJEFU8C25;
+				INFOPLIST_FILE = "GRulerAppleWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = comDarkWind.GRuler.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
@@ -1011,6 +1269,24 @@
 			buildConfigurations = (
 				CE0593791F718CA4003FF700 /* Debug */,
 				CE05937A1F718CA4003FF700 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE96C1651FA4C78D003AEF52 /* Build configuration list for PBXNativeTarget "GRulerAppleWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE96C1631FA4C78D003AEF52 /* Debug */,
+				CE96C1641FA4C78D003AEF52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE96C1671FA4C78D003AEF52 /* Build configuration list for PBXNativeTarget "GRulerAppleWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE96C1611FA4C78D003AEF52 /* Debug */,
+				CE96C1621FA4C78D003AEF52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
