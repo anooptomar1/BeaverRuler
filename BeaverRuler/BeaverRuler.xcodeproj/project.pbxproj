@@ -42,6 +42,7 @@
 		CE96C1591FA4C78D003AEF52 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96C1581FA4C78D003AEF52 /* ComplicationController.swift */; };
 		CE96C15B1FA4C78D003AEF52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE96C15A1FA4C78D003AEF52 /* Assets.xcassets */; };
 		CE96C1601FA4C78D003AEF52 /* GRulerAppleWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CE96C1411FA4C78D003AEF52 /* GRulerAppleWatch.app */; };
+		CE96C16A1FA66E11003AEF52 /* MeasuresListInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96C1691FA66E11003AEF52 /* MeasuresListInterfaceController.swift */; };
 		CEB20FD61F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEB20FD71F77BEA600429FB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEB20FD91F77BEA600429FB5 /* Localizable.strings */; };
 		CEB9CA521F800D1400EBCF88 /* RulerNavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9CA511F800D1400EBCF88 /* RulerNavigationHelper.swift */; };
@@ -170,6 +171,7 @@
 		CE96C15A1FA4C78D003AEF52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE96C15C1FA4C78D003AEF52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE96C15D1FA4C78D003AEF52 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		CE96C1691FA66E11003AEF52 /* MeasuresListInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasuresListInterfaceController.swift; sourceTree = "<group>"; };
 		CEB20FD81F77BEA600429FB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FDA1F77BEAD00429FB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEB20FDB1F77BF5700429FB5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				CE96C1521FA4C78D003AEF52 /* InterfaceController.swift */,
+				CE96C1691FA66E11003AEF52 /* MeasuresListInterfaceController.swift */,
 				CE96C1541FA4C78D003AEF52 /* ExtensionDelegate.swift */,
 				CE96C1561FA4C78D003AEF52 /* NotificationController.swift */,
 				CE96C1581FA4C78D003AEF52 /* ComplicationController.swift */,
@@ -818,6 +821,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE96C1571FA4C78D003AEF52 /* NotificationController.swift in Sources */,
+				CE96C16A1FA66E11003AEF52 /* MeasuresListInterfaceController.swift in Sources */,
 				CE96C1591FA4C78D003AEF52 /* ComplicationController.swift in Sources */,
 				CE96C1551FA4C78D003AEF52 /* ExtensionDelegate.swift in Sources */,
 				CE96C1531FA4C78D003AEF52 /* InterfaceController.swift in Sources */,

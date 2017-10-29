@@ -1,16 +1,72 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11055"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13051"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GRulerAppleWatch" customModuleProvider="target">
+                    <items>
+                        <label width="131" height="42" alignment="left" text="Label" textAlignment="center" id="Hvu-fg-CQp"/>
+                        <group width="1" alignment="center" id="AjR-VI-3ts">
+                            <items>
+                                <button width="45" height="46" alignment="left" backgroundImage="makePointButton" id="JN4-cb-O2S">
+                                    <connections>
+                                        <action selector="makePoint" destination="AgC-eL-Hgc" id="36a-mP-sSt"/>
+                                    </connections>
+                                </button>
+                                <button width="51" height="45" alignment="right" verticalAlignment="center" backgroundImage="undoButton" id="Qkb-pV-X1U" userLabel="undoButton">
+                                    <connections>
+                                        <action selector="undoPressed" destination="AgC-eL-Hgc" id="LLB-Wt-ulG"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="u9u-Ny-YnC">
+                            <items>
+                                <button width="49" height="47" alignment="left" backgroundImage="makePhotoButton" id="rvJ-6T-VbN" userLabel="makeScreenshotButton">
+                                    <connections>
+                                        <action selector="makeScreenshot" destination="AgC-eL-Hgc" id="XdB-zK-6Kj"/>
+                                    </connections>
+                                </button>
+                                <button width="47" height="47" alignment="right" backgroundImage="galleryButton" id="dF2-lO-6Zn">
+                                    <connections>
+                                        <segue destination="dEx-TR-f3l" kind="modal" id="EE8-gJ-djx"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="measurePointsLabel" destination="Hvu-fg-CQp" id="twc-Fp-6XR"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="320"/>
+        </scene>
+        <!--Measures List Interface Controller-->
+        <scene sceneID="jna-eO-VGh">
+            <objects>
+                <controller id="dEx-TR-f3l" customClass="MeasuresListInterfaceController" customModule="GRulerAppleWatch_Extension">
+                    <items>
+                        <table alignment="left" id="nWL-7W-NmU">
+                            <items>
+                                <tableRow id="XL1-SU-nQk">
+                                    <group key="rootItem" width="1" alignment="left" id="o0l-G7-png"/>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="468" y="320"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -31,7 +87,7 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="GRulerAppleWatch" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="468" y="643"/>
         </scene>
