@@ -15,6 +15,7 @@ import Crashlytics
 import Vision
 import Appodeal
 import AVFoundation
+import WatchConnectivity
 
 class ViewController: UIViewController {
     
@@ -71,6 +72,17 @@ class ViewController: UIViewController {
     
     var showUserInterstitial = false
     
+    var appleWatchSession: WCSession? {
+        didSet {
+            if let session = appleWatchSession {
+                session.delegate = self
+                session.activate()
+            }
+        }
+    }
+    
+    var lastMessage: CFAbsoluteTime = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -110,6 +122,10 @@ class ViewController: UIViewController {
         
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.longTap))
         self.view.addGestureRecognizer(longGesture)
+        
+        if WCSession.isSupported() {
+            appleWatchSession = WCSession.default
+        }
         
     }
     
@@ -446,6 +462,43 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
     }
 }
 
+// MARK: - WCSessionDelegate
+
+extension ViewController: WCSessionDelegate {
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+//    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+//        if let reference = message["reference"] as? String {
+//            replyHandler(["boardingPassData": 111 as AnyObject])
+//        }
+//    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    }
+    
+    func sendMeasureToWatch(measure: String) {
+        let currentTime = CFAbsoluteTimeGetCurrent()
+        
+        if lastMessage + 0.25 > currentTime {
+            return
+        }
+        
+        if (WCSession.default.isReachable) {
+            let message = ["Message": measure]
+            WCSession.default.sendMessage(message, replyHandler: nil)
+        }
+        
+        lastMessage = CFAbsoluteTimeGetCurrent()
+    }
+    
+}
+
 // MARK: - AppodealInterstitialDelegate
 
 extension ViewController: AppodealInterstitialDelegate {
@@ -533,8 +586,10 @@ extension ViewController {
             if currentLine != nil {
                 polygonLength += (currentLine?.lineLength())!
             }
-                
-            messageLabel.text = String(format: "%.2f %@", polygonLength, unit.unit)
+            
+            let measureText = String(format: "%.2f %@", polygonLength, unit.unit)
+            messageLabel.text = measureText
+            sendMeasureToWatch(measure: measureText)
             
             if ((currentLine?.lastLineStartVector) != nil) {
                 angleLabel.text = (currentLine?.getAngleBetween3Vectors())!

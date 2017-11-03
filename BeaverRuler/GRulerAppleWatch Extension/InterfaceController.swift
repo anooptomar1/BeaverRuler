@@ -46,17 +46,9 @@ class InterfaceController: WKInterfaceController {
     override func didAppear() {
         super.didAppear()
         
-        session = WCSession.default
-//        session!.sendMessage(["reference": flight.reference], replyHandler: { (response) -> Void in
-//            if let boardingPassData = response["boardingPassData"] as? NSData, boardingPass = UIImage(data: boardingPassData) {
-//                flight.boardingPass = boardingPass
-//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                    self.showBoardingPass()
-//                })
-//            }
-//        }, errorHandler: { (error) -> Void in
-//            print(error)
-//        })
+        if WCSession.isSupported() {
+            session = WCSession.default
+        }
     }
     
     @IBAction func makeScreenshot() {
@@ -73,13 +65,25 @@ class InterfaceController: WKInterfaceController {
 }
 
 extension InterfaceController: WCSessionDelegate {
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: @escaping ([String : AnyObject]) -> Void) {
-
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        
+        if let measure = message["Message"] as? String {
+            measurePointsLabel.setText(measure)
+        }
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
-        
-        
+//        session.sendMessage(["reference": "test"], replyHandler: { (response) -> Void in
+//            if let boardingPassData = response["testData"] as? Int {
+//                
+//                DispatchQueue.main.async {
+//                    self.measure = String(boardingPassData)
+//                    //self.showBoardingPass()
+//                }
+//            }
+//        }, errorHandler: { (error) -> Void in
+//            print(error)
+//        })
     }
 }

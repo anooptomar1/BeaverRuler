@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="watchOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13051"/>
     </dependencies>
@@ -14,10 +13,12 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GRulerAppleWatch" customModuleProvider="target">
                     <items>
-                        <label width="131" height="42" alignment="left" text="Label" textAlignment="center" id="Hvu-fg-CQp"/>
-                        <group width="1" alignment="center" id="AjR-VI-3ts">
+                        <label width="136" height="42" alignment="center" text="Label" textAlignment="center" id="Hvu-fg-CQp">
+                            <color key="textColor" red="0.99062508344650269" green="0.81605178117752075" blue="0.098058722913265228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </label>
+                        <group width="123" height="51" alignment="center" id="AjR-VI-3ts">
                             <items>
-                                <button width="45" height="46" alignment="left" backgroundImage="makePointButton" id="JN4-cb-O2S">
+                                <button width="45" height="46" alignment="left" verticalAlignment="center" backgroundImage="targetWhite" id="JN4-cb-O2S">
                                     <connections>
                                         <action selector="makePoint" destination="AgC-eL-Hgc" id="36a-mP-sSt"/>
                                     </connections>
@@ -29,14 +30,14 @@
                                 </button>
                             </items>
                         </group>
-                        <group width="1" alignment="left" id="u9u-Ny-YnC">
+                        <group width="124" height="48" alignment="center" spacing="0.0" id="NYS-kP-P8M">
                             <items>
-                                <button width="49" height="47" alignment="left" backgroundImage="makePhotoButton" id="rvJ-6T-VbN" userLabel="makeScreenshotButton">
+                                <button width="49" height="47" alignment="left" verticalAlignment="center" backgroundImage="makePhotoButton" id="rvJ-6T-VbN" userLabel="makeScreenshotButton">
                                     <connections>
                                         <action selector="makeScreenshot" destination="AgC-eL-Hgc" id="XdB-zK-6Kj"/>
                                     </connections>
                                 </button>
-                                <button width="47" height="47" alignment="right" backgroundImage="galleryButton" id="dF2-lO-6Zn">
+                                <button width="47" height="47" alignment="right" verticalAlignment="center" backgroundImage="galleryButton" id="dF2-lO-6Zn">
                                     <connections>
                                         <segue destination="dEx-TR-f3l" kind="modal" id="EE8-gJ-djx"/>
                                     </connections>
