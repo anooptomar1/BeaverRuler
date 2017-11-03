@@ -13,7 +13,7 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="GRulerAppleWatch" customModuleProvider="target">
                     <items>
-                        <label width="136" height="42" alignment="center" text="Label" textAlignment="center" id="Hvu-fg-CQp">
+                        <label width="136" height="42" alignment="center" text="cm" textAlignment="center" id="Hvu-fg-CQp">
                             <color key="textColor" red="0.99062508344650269" green="0.81605178117752075" blue="0.098058722913265228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </label>
                         <group width="123" height="51" alignment="center" id="AjR-VI-3ts">

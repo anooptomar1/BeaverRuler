@@ -145,6 +145,29 @@ class ViewController: UIViewController {
     
     @objc func tapGesture(sender: UITapGestureRecognizer)
     {
+        nextPointTap()
+    }
+    
+    @objc func longTap(_ sender: UIGestureRecognizer){
+        
+        if sender.state == .ended {
+            
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_end_dragging_point")
+            userDraggingPoint = false
+            
+            if isMeasuring == false {
+                showCurrentLine = true
+            }
+            
+        } else if sender.state == .began {
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_dragging_point")
+            showCurrentLine = false
+            userDraggingPoint = true
+        }
+    }
+    
+    func nextPointTap() {
+        
         if showCurrentLine {
             if currentLine == nil {
                 
@@ -178,24 +201,6 @@ class ViewController: UIViewController {
                     currentLine?.updateStartPoint(to: endVector)
                 }
             }
-        }
-    }
-    
-    @objc func longTap(_ sender: UIGestureRecognizer){
-        
-        if sender.state == .ended {
-            
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_end_dragging_point")
-            userDraggingPoint = false
-            
-            if isMeasuring == false {
-                showCurrentLine = true
-            }
-            
-        } else if sender.state == .began {
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_dragging_point")
-            showCurrentLine = false
-            userDraggingPoint = true
         }
     }
     
@@ -363,7 +368,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func galleryButtonPressed(_ sender: Any) {
-        rulerScreenNavigationHelper.showGalleryScreen()
+        self.rulerScreenNavigationHelper.showGalleryScreen()
     }
 
     @IBAction func resetButtonTapped(_ sender: Any) {
@@ -380,7 +385,10 @@ class ViewController: UIViewController {
     }
 
     @IBAction func takeScreenshot() {
-        rulerScreenshotHelper.makeScreenshot()
+        self.rulerScreenshotHelper.makeScreenshot()
+//        DispatchQueue.main.async {
+//            
+//        }
     }
     
     @objc func handleStartARSessionNotification(_ notification: Notification) {
@@ -473,11 +481,30 @@ extension ViewController: WCSessionDelegate {
         
     }
     
-//    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-//        if let reference = message["reference"] as? String {
-//            replyHandler(["boardingPassData": 111 as AnyObject])
-//        }
-//    }
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        if let reference = message["Message"] as? String {
+            if reference == "makeScreenshot" {
+                DispatchQueue.main.async {
+                    self.takeScreenshot()
+                }
+                return
+            }
+            
+            if reference == "makePoint" {
+                DispatchQueue.main.async {
+                    self.nextPointTap()
+                }
+                return
+            }
+            
+            if reference == "undoPressed" {
+                DispatchQueue.main.async {
+                    self.undoPressed("")
+                }
+                return
+            }
+        }
+    }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }

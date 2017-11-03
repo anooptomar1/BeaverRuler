@@ -52,15 +52,24 @@ class InterfaceController: WKInterfaceController {
     }
     
     @IBAction func makeScreenshot() {
-        
+        if (WCSession.default.isReachable) {
+            let message = ["Message": "makeScreenshot"]
+            WCSession.default.sendMessage(message, replyHandler: nil)
+        }
     }
     
     @IBAction func makePoint() {
-        
+        if (WCSession.default.isReachable) {
+            let message = ["Message": "makePoint"]
+            WCSession.default.sendMessage(message, replyHandler: nil)
+        }
     }
     
     @IBAction func undoPressed() {
-        
+        if (WCSession.default.isReachable) {
+            let message = ["Message": "undoPressed"]
+            WCSession.default.sendMessage(message, replyHandler: nil)
+        }
     }
 }
 
