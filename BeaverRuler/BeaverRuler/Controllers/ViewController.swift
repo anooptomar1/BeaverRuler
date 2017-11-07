@@ -287,6 +287,7 @@ class ViewController: UIViewController {
             showCurrentLine = true
             angleLabel.text = ""
             setUpMessageLabel()
+            sendFinishPolygonMeasureToWatch()
         }
     }
     
@@ -386,8 +387,6 @@ class ViewController: UIViewController {
 
     @IBAction func takeScreenshot() {
         self.rulerScreenshotHelper.makeScreenshot()
-//        DispatchQueue.main.async {
-//            
 //        }
     }
     
@@ -497,9 +496,22 @@ extension ViewController: WCSessionDelegate {
                 return
             }
             
-            if reference == "undoPressed" {
+            if reference == "donePressed" {
                 DispatchQueue.main.async {
-                    self.undoPressed("")
+                    self.finishPolygonPressed("")
+                }
+                return
+            }
+        }
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        if let reference = message["Message"] as? String {
+            
+            if reference == "userMeasures" {
+                DispatchQueue.main.async {
+                    let measuresList = self.sendAllMeasuresToWatch()
+                    replyHandler(["userMeasures": measuresList])
                 }
                 return
             }
@@ -522,6 +534,35 @@ extension ViewController: WCSessionDelegate {
         }
         
         lastMessage = CFAbsoluteTimeGetCurrent()
+    }
+    
+    func sendFinishPolygonMeasureToWatch() {
+        
+        if (WCSession.default.isReachable) {
+            
+            if let text = messageLabel.text {
+                let message = ["Message": text]
+                WCSession.default.sendMessage(message, replyHandler: nil)
+            }
+        }
+    }
+    
+    func sendAllMeasuresToWatch() ->[String] {
+        
+        var measuresList = [String]()
+        
+        if (WCSession.default.isReachable) {
+            let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
+            
+            for measure in userObjects {
+                let name = measure.name?.characters.prefix(6)
+                let objectUnit = DistanceUnit(rawValue: measure.sizeUnit!)
+                let measureDescription = name! + " " + String(format: "%.2f", measure.size) + " " + (objectUnit?.unit)!
+                measuresList.append(measureDescription)
+            }
+        }
+        
+        return measuresList
     }
     
 }
@@ -624,6 +665,11 @@ extension ViewController {
             
         } else {
             messageLabel.text = currentLine?.distance(to: endValue) ?? NSLocalizedString("сalculating", comment: "")
+            
+            if let text = messageLabel.text {
+                sendMeasureToWatch(measure: text)
+            }
+            
             angleLabel.text = ""
         }
     }

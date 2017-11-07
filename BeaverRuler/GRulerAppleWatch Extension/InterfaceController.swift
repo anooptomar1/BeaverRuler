@@ -65,9 +65,9 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
-    @IBAction func undoPressed() {
+    @IBAction func doneButtonPressed() {
         if (WCSession.default.isReachable) {
-            let message = ["Message": "undoPressed"]
+            let message = ["Message": "donePressed"]
             WCSession.default.sendMessage(message, replyHandler: nil)
         }
     }
@@ -83,16 +83,5 @@ extension InterfaceController: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-//        session.sendMessage(["reference": "test"], replyHandler: { (response) -> Void in
-//            if let boardingPassData = response["testData"] as? Int {
-//                
-//                DispatchQueue.main.async {
-//                    self.measure = String(boardingPassData)
-//                    //self.showBoardingPass()
-//                }
-//            }
-//        }, errorHandler: { (error) -> Void in
-//            print(error)
-//        })
     }
 }

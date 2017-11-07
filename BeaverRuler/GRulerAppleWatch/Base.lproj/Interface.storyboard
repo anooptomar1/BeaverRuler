@@ -23,9 +23,9 @@
                                         <action selector="makePoint" destination="AgC-eL-Hgc" id="36a-mP-sSt"/>
                                     </connections>
                                 </button>
-                                <button width="51" height="45" alignment="right" verticalAlignment="center" backgroundImage="undoButton" id="Qkb-pV-X1U" userLabel="undoButton">
+                                <button width="46" height="45" alignment="right" verticalAlignment="center" backgroundImage="doneButton" id="Qkb-pV-X1U" userLabel="undoButton">
                                     <connections>
-                                        <action selector="undoPressed" destination="AgC-eL-Hgc" id="LLB-Wt-ulG"/>
+                                        <action selector="doneButtonPressed" destination="AgC-eL-Hgc" id="nGz-7g-NIa"/>
                                     </connections>
                                 </button>
                             </items>
@@ -59,12 +59,25 @@
                     <items>
                         <table alignment="left" id="nWL-7W-NmU">
                             <items>
-                                <tableRow id="XL1-SU-nQk">
-                                    <group key="rootItem" width="1" alignment="left" id="o0l-G7-png"/>
+                                <tableRow identifier="RecordRow" id="XL1-SU-nQk" customClass="UserMeasureRowController" customModule="GRulerAppleWatch_Extension">
+                                    <group key="rootItem" width="1" height="19" alignment="left" id="o0l-G7-png">
+                                        <items>
+                                            <separator alignment="left" id="yJL-jY-SFh">
+                                                <color key="color" red="0.99062508339999999" green="0.81605178119999999" blue="0.098058722910000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </separator>
+                                            <label alignment="left" text="Label" id="ury-Bb-5jH"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="userMeasure" destination="ury-Bb-5jH" id="Syl-ks-lQh"/>
+                                    </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
+                    <connections>
+                        <outlet property="tableView" destination="nWL-7W-NmU" id="XnE-zn-4AD"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="468" y="320"/>
