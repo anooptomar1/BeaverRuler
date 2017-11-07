@@ -387,7 +387,6 @@ class ViewController: UIViewController {
 
     @IBAction func takeScreenshot() {
         self.rulerScreenshotHelper.makeScreenshot()
-//        }
     }
     
     @objc func handleStartARSessionNotification(_ notification: Notification) {
