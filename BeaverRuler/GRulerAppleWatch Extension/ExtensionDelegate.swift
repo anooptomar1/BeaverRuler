@@ -10,6 +10,8 @@ import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
+    var currentMeasure = ""
+    
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
     }

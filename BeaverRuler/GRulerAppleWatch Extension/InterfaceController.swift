@@ -14,6 +14,8 @@ import WatchConnectivity
 class InterfaceController: WKInterfaceController {
     @IBOutlet var measurePointsLabel: WKInterfaceLabel!
     
+    var lastMessage: CFAbsoluteTime = 0
+    
     var measure: String? {
         didSet {
             if let measure = measure {
@@ -79,6 +81,25 @@ extension InterfaceController: WCSessionDelegate {
         
         if let measure = message["Message"] as? String {
             measurePointsLabel.setText(measure)
+            
+            let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+            myDelegate.currentMeasure = measure
+            
+            let currentTime = CFAbsoluteTimeGetCurrent()
+
+            if lastMessage + 1 > currentTime {
+                return
+            }
+            
+            let complicationServer = CLKComplicationServer.sharedInstance()
+
+            if let activeComplications = complicationServer.activeComplications {
+                for complication in activeComplications {
+                    complicationServer.reloadTimeline(for: complication)
+                }
+            }
+            
+            lastMessage = CFAbsoluteTimeGetCurrent()
         }
     }
     
