@@ -40,12 +40,12 @@ class ViewController: UIViewController {
     
     fileprivate lazy var session = ARSession()
     fileprivate lazy var sessionConfiguration = ARWorldTrackingConfiguration()
-    fileprivate lazy var isMeasuring = false;
-    fileprivate lazy var vectorZero = SCNVector3()
-    fileprivate lazy var startValue = SCNVector3()
-    fileprivate lazy var endValue = SCNVector3()
+    lazy var isMeasuring = false;
+    lazy var vectorZero = SCNVector3()
+    lazy var startValue = SCNVector3()
+    lazy var endValue = SCNVector3()
     lazy var lines: [RulerLine] = []
-    fileprivate var currentLine: RulerLine?
+    var currentLine: RulerLine?
     lazy var unit: DistanceUnit = .centimeter
     
     fileprivate var alertController: UIAlertController?
@@ -62,6 +62,9 @@ class ViewController: UIViewController {
     var rulerScreenNavigationHelper = RulerNavigationHelper()
     var rulerScreenshotHelper = RulerScreenshotHelper()
     var rulerPurchasesHelper: RulerPurchasesHelper!
+    var rulerMeasurementsHelper = RulerMeasurementsHelper()
+    var rulerAppleWatchHelper = RulerAppleWatchHelper()
+    var rulerARHelper = RulerARHelper()
     
     var showCurrentLine = true
     var startSelectedNode:SCNNode?
@@ -75,7 +78,7 @@ class ViewController: UIViewController {
     var appleWatchSession: WCSession? {
         didSet {
             if let session = appleWatchSession {
-                session.delegate = self
+                session.delegate = rulerAppleWatchHelper
                 session.activate()
             }
         }
@@ -91,6 +94,9 @@ class ViewController: UIViewController {
         rulerScreenNavigationHelper.rulerScreen = self
         rulerScreenshotHelper.rulerScreen = self
         rulerPurchasesHelper = RulerPurchasesHelper(rulerScreen: self)
+        rulerMeasurementsHelper.rulerScreen = self
+        rulerAppleWatchHelper.rulerScreen = self
+        rulerARHelper.rulerScreen = self
         
         let defaults = UserDefaults.standard
         if let measureString = defaults.string(forKey: Setting.measureUnits.rawValue) {
@@ -209,7 +215,7 @@ class ViewController: UIViewController {
             if let worldPosition = sceneView.realWorldVector(screenPosition: view.center) {
                 
                 if (startNodeLine != nil) {
-                    let startValue = getEndValue(worldPosition: worldPosition)
+                    let startValue = rulerMeasurementsHelper.getEndValue(worldPosition: worldPosition)
                     startNodeLine?.updateStartPoint(to: startValue)
                     if ((startNodeLine?.lastLineStartVector) != nil) {
                         angleLabel.text = (startNodeLine?.getAngleBetween3Vectors())!
@@ -217,55 +223,11 @@ class ViewController: UIViewController {
                 }
                 
                 if (endNodeLine != nil) {
-                    let endValue = getEndValue(worldPosition: worldPosition)
+                    let endValue = rulerMeasurementsHelper.getEndValue(worldPosition: worldPosition)
                     endNodeLine?.update(to: endValue)
                 }
                 
                 setUpMessageLabel()
-            }
-        }
-    }
-    
-    func selectNearestPoint() {
-        
-        tutorialHelper.hideDraggingTutorial()
-        
-        guard let worldPosition = sceneView.realWorldVector(screenPosition: view.center) else { return }
-        
-        RulerLine.diselectNode(node: startSelectedNode)
-        RulerLine.diselectNode(node: endSelectedNode)
-        startNodeLine = nil
-        endNodeLine = nil
-        endSelectedNode = nil
-        startSelectedNode = nil
-        
-        
-        for (index, line) in lines.enumerated() {
-            
-            if let startVector = line.startVector {
-                let distanceToStartPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(startVector))
-                
-                if distanceToStartPoint < 20  {
-                    print("selectStartPointForLine: \(index)")
-                    RulerLine.selectNode(node: line.startNode)
-                    startSelectedNode = line.startNode
-                    startNodeLine = line
-                }
-            }
-            
-            if let endVector = line.endVector {
-                let distanceToEndPoint = distanceBetweenPoints(firtsPoint: sceneView.projectPoint(worldPosition), secondPoint: sceneView.projectPoint(endVector))
-                
-                if distanceToEndPoint < 20  {
-                    print("selectEndPointForLine: \(index)")
-                    RulerLine.selectNode(node: line.endNode)
-                    endSelectedNode = line.endNode
-                    endNodeLine = line
-                }
-            }
-            
-            if startNodeLine != nil || endNodeLine != nil {
-                tutorialHelper.showDraggingTutorial()
             }
         }
     }
@@ -287,7 +249,7 @@ class ViewController: UIViewController {
             showCurrentLine = true
             angleLabel.text = ""
             setUpMessageLabel()
-            sendFinishPolygonMeasureToWatch()
+            rulerAppleWatchHelper.sendFinishPolygonMeasureToWatch()
         }
     }
     
@@ -400,10 +362,10 @@ class ViewController: UIViewController {
 extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         DispatchQueue.main.async { [weak self] in
-            self?.detectObjects()
+            self?.rulerARHelper.detectObjects()
         }
     }
-
+    
     func session(_ session: ARSession, didFailWithError error: Error) {
         
         let errorCode = (error as NSError).code
@@ -435,24 +397,7 @@ extension ViewController: ARSCNViewDelegate {
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-//        switch camera.trackingState {
-//        case .notAvailable:
-//            trackingStateLabel.text = "Tracking not available"
-//            trackingStateLabel.textColor = .red
-//        case .normal:
-//            trackingStateLabel.text = "Tracking normal"
-//            trackingStateLabel.textColor = .green
-//        case .limited(let reason):
-//            switch reason {
-//            case .excessiveMotion:
-//                trackingStateLabel.text = "Tracking limited: excessive motion"
-//            case .insufficientFeatures:
-//                trackingStateLabel.text = "Tracking limited: insufficient features"
-//            case .initializing:
-//                trackingStateLabel.text = "Tracking limited: initializing"
-//            }
-//            trackingStateLabel.textColor = .yellow
-//        }
+        
     }
 }
 
@@ -466,104 +411,6 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         updateSettings()
     }
-}
-
-// MARK: - WCSessionDelegate
-
-extension ViewController: WCSessionDelegate {
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        if let reference = message["Message"] as? String {
-            if reference == "makeScreenshot" {
-                DispatchQueue.main.async {
-                    self.takeScreenshot()
-                }
-                return
-            }
-            
-            if reference == "makePoint" {
-                DispatchQueue.main.async {
-                    self.nextPointTap()
-                }
-                return
-            }
-            
-            if reference == "donePressed" {
-                DispatchQueue.main.async {
-                    self.finishPolygonPressed("")
-                }
-                return
-            }
-        }
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-        if let reference = message["Message"] as? String {
-            
-            if reference == "userMeasures" {
-                DispatchQueue.main.async {
-                    let measuresList = self.sendAllMeasuresToWatch()
-                    replyHandler(["userMeasures": measuresList])
-                }
-                return
-            }
-        }
-    }
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-    }
-    
-    func sendMeasureToWatch(measure: String) {
-        let currentTime = CFAbsoluteTimeGetCurrent()
-        
-        if lastMessage + 0.25 > currentTime {
-            return
-        }
-        
-        if (WCSession.default.isReachable) {
-            let message = ["Message": measure]
-            WCSession.default.sendMessage(message, replyHandler: nil)
-        }
-        
-        lastMessage = CFAbsoluteTimeGetCurrent()
-    }
-    
-    func sendFinishPolygonMeasureToWatch() {
-        
-        if (WCSession.default.isReachable) {
-            
-            if let text = messageLabel.text {
-                let message = ["Message": text]
-                WCSession.default.sendMessage(message, replyHandler: nil)
-            }
-        }
-    }
-    
-    func sendAllMeasuresToWatch() ->[String] {
-        
-        var measuresList = [String]()
-        
-        if (WCSession.default.isReachable) {
-            let userObjects = GRDatabaseManager.sharedDatabaseManager.grRealm.objects(UserObjectRm.self).sorted(byKeyPath: "createdAt", ascending: false)
-            
-            for measure in userObjects {
-                let name = measure.name?.characters.prefix(6)
-                let objectUnit = DistanceUnit(rawValue: measure.sizeUnit!)
-                let measureDescription = name! + " " + String(format: "%.2f", measure.size) + " " + (objectUnit?.unit)!
-                measuresList.append(measureDescription)
-            }
-        }
-        
-        return measuresList
-    }
-    
 }
 
 // MARK: - AppodealInterstitialDelegate
@@ -599,50 +446,6 @@ extension ViewController {
         startValue = SCNVector3()
         endValue =  SCNVector3()
     }
-
-    fileprivate func detectObjects() {
-        
-        guard let worldPosition = sceneView.realWorldVector(screenPosition: view.center) else { return }
-        
-        tutorialHelper.setUpTutorialStep2()
-        
-        targetImageView.isHidden = false
-        if lines.isEmpty {
-            messageLabel.text = NSLocalizedString("touchYourPhoneScreen", comment: "")
-        }
-        loadingView.stopAnimating()
-        loadingView.isHidden = true
-        if isMeasuring {
-            if showCurrentLine {
-                currentLine?.showLine()
-                if startValue == vectorZero {
-                    startValue = worldPosition
-                    currentLine = RulerLine(sceneView: sceneView, startVector: startValue, unit: unit)
-                }
-                
-                endValue = getEndValue(worldPosition: worldPosition)
-                currentLine?.unit = unit
-                currentLine?.update(to: endValue)
-                setUpMessageLabel()
-            } else {
-                currentLine?.hideLine()
-                
-                if userDraggingPoint == false {
-                    selectNearestPoint()
-                } else {
-                    updateSelectedLines()
-                }
-            }
-            
-        } else {
-            if userDraggingPoint == false {
-                selectNearestPoint()
-            } else {
-                tutorialHelper.finishDraggingTutorial()
-                updateSelectedLines()
-            }
-        }
-    }
     
     func setUpMessageLabel() {
         if lines.count > 0 {
@@ -656,7 +459,7 @@ extension ViewController {
             
             let measureText = String(format: "%.2f %@", polygonLength, unit.unit)
             messageLabel.text = measureText
-            sendMeasureToWatch(measure: measureText)
+            rulerAppleWatchHelper.sendMeasureToWatch(measure: measureText)
             
             if ((currentLine?.lastLineStartVector) != nil) {
                 angleLabel.text = (currentLine?.getAngleBetween3Vectors())!
@@ -666,77 +469,10 @@ extension ViewController {
             messageLabel.text = currentLine?.distance(to: endValue) ?? NSLocalizedString("сalculating", comment: "")
             
             if let text = messageLabel.text {
-                sendMeasureToWatch(measure: text)
+                rulerAppleWatchHelper.sendMeasureToWatch(measure: text)
             }
             
             angleLabel.text = ""
-        }
-    }
-
-    fileprivate func getEndValue(worldPosition: SCNVector3) -> SCNVector3{
-
-        var position = worldPosition
-        
-        if lines.count > 0 {
-            let centerTargerVectorInWorld = sceneView.projectPoint(worldPosition)
-            for line in lines {
-                
-                if endSelectedNode == nil {
-                    if let endPoint = line.endVector {
-                        let distance = distanceBetweenPoints(firtsPoint: centerTargerVectorInWorld, secondPoint: sceneView.projectPoint(endPoint))
-                        if distance < 9 {
-                            position = endPoint
-                            break
-                        }
-                    }
-                } else {
-                    if endSelectedNode != line.endNode  {
-                        if let endPoint = line.endVector {
-                            let distance = distanceBetweenPoints(firtsPoint: centerTargerVectorInWorld, secondPoint: sceneView.projectPoint(endPoint))
-                            if distance < 9 {
-                                position = endPoint
-                                break
-                            }
-                        }
-                    }
-                }
-                
-                if startSelectedNode == nil {
-                    if let startPoint = line.startVector {
-                        let distance = distanceBetweenPoints(firtsPoint: centerTargerVectorInWorld, secondPoint: sceneView.projectPoint(startPoint))
-                        if distance < 9 {
-                            position = startPoint
-                            break
-                        }
-                    }
-                } else {
-                    if startSelectedNode != line.startNode  {
-                        if let startPoint = line.startVector {
-                            let distance = distanceBetweenPoints(firtsPoint: centerTargerVectorInWorld, secondPoint: sceneView.projectPoint(startPoint))
-                            if distance < 9 {
-                                position = startPoint
-                                break
-                            }
-                        }
-                    }
-                }
-                
-            }
-        }
-
-        return position
-    }
-
-    fileprivate func distanceBetweenPoints(firtsPoint:SCNVector3, secondPoint:SCNVector3) -> Float{
-        let xd = firtsPoint.x - secondPoint.x
-        let yd = firtsPoint.y - secondPoint.y
-        let zd = firtsPoint.z - secondPoint.z
-        let distance = Float(sqrt(xd * xd + yd * yd + zd * zd))
-
-        if (distance < 0){
-            return (distance * -1)
-        } else {
-            return (distance)
         }
     }
 }
