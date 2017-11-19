@@ -7,12 +7,24 @@
 //
 
 import Foundation
+import SceneKit
 
 class RulerARHelper {
     
     var rulerScreen: ViewController!
     
     func detectObjects() {
+        
+        if rulerScreen.currentRulerType == RulerType.UsualRuler {
+            detectObjectsForUsualRuler()
+        }
+        
+        if rulerScreen.currentRulerType == RulerType.СurveRuler {
+            detectObjectsForСurveRuler()
+        }
+    }
+    
+    func detectObjectsForUsualRuler() {
         
         guard let worldPosition = rulerScreen.sceneView.realWorldVector(screenPosition: rulerScreen.view.center) else { return }
         
@@ -69,7 +81,6 @@ class RulerARHelper {
         rulerScreen.endSelectedNode = nil
         rulerScreen.startSelectedNode = nil
         
-        
         for (index, line) in rulerScreen.lines.enumerated() {
             
             if let startVector = line.startVector {
@@ -98,5 +109,48 @@ class RulerARHelper {
                 rulerScreen.tutorialHelper.showDraggingTutorial()
             }
         }
+    }
+    
+    func detectObjectsForСurveRuler() {
+        guard let pointOfView = rulerScreen.sceneView.pointOfView else { return }
+        
+        rulerScreen.tutorialHelper.setUpTutorialStep2()
+        rulerScreen.targetImageView.isHidden = false
+        
+        if rulerScreen.currentCurveLine.isEmpty {
+            rulerScreen.messageLabel.text = NSLocalizedString("longTouchYourPhoneScreen", comment: "")
+        }
+        
+        rulerScreen.loadingView.stopAnimating()
+        rulerScreen.loadingView.isHidden = true
+        
+        let mat = pointOfView.transform
+        let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33)
+        let currentPosition = pointOfView.position + (dir * 0.1)
+        
+        if rulerScreen.startCurveMeasure {
+            let line = lineFrom(vector: rulerScreen.startValue, toVector: currentPosition)
+            let lineNode = SCNNode(geometry: line)
+            lineNode.geometry?.firstMaterial?.diffuse.contents = RulerLine.color
+            rulerScreen.sceneView.scene.rootNode.addChildNode(lineNode)
+            rulerScreen.currentCurveLine.append(lineNode)
+            
+            let length = (rulerScreen.startValue.distance(from: currentPosition) * rulerScreen.unit.fator)
+            rulerScreen.currentCurveLength += length
+            rulerScreen.setUpMessageLabel()
+        }
+        
+        rulerScreen.startValue = currentPosition
+        glLineWidth(20)
+    }
+    
+    func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3) -> SCNGeometry {
+        
+        let indices: [Int32] = [0, 1]
+        
+        let source = SCNGeometrySource(vertices: [vector1, vector2])
+        let element = SCNGeometryElement(indices: indices, primitiveType: .line)
+        
+        return SCNGeometry(sources: [source], elements: [element])
     }
 }

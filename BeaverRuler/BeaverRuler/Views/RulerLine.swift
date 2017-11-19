@@ -56,7 +56,7 @@ final class RulerLine {
     
     var unit: DistanceUnit!
 
-    static fileprivate var color: UIColor = .white
+    static var color: UIColor = .white
     static fileprivate var selectedPointColor: UIColor = .orange
     static fileprivate var diselectedPointColor: UIColor = .blue
     

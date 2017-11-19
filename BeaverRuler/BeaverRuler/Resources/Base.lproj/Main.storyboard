@@ -39,17 +39,17 @@
                                     <action selector="resetButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="6vV-EP-1lY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLX-kg-2bt" userLabel="Message Label">
-                                <rect key="frame" x="110" y="40" width="190" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold…" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLX-kg-2bt" userLabel="Message Label">
+                                <rect key="frame" x="110" y="40" width="190" height="47"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="qZQ-xG-7nw"/>
+                                    <constraint firstAttribute="height" constant="47" id="qZQ-xG-7nw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-2f-hAb">
-                                <rect key="frame" x="82" y="43" width="20" height="20"/>
+                                <rect key="frame" x="82" y="54" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="Z2y-02-k22"/>
                                     <constraint firstAttribute="height" constant="20" id="zWM-5q-E08"/>
@@ -143,7 +143,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="649-iH-TAv"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -232,7 +232,7 @@
                             <constraint firstItem="PN0-Vm-BEe" firstAttribute="top" secondItem="87f-mc-WB1" secondAttribute="top" id="gJw-pt-OmL"/>
                             <constraint firstItem="uzF-dL-HAp" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="27" id="hSH-3H-tqx"/>
                             <constraint firstItem="gow-ZP-lGN" firstAttribute="top" secondItem="rXZ-Q6-zHL" secondAttribute="bottom" constant="24" id="hiB-nv-9GE"/>
-                            <constraint firstItem="Ftl-2f-hAb" firstAttribute="top" secondItem="5wb-vL-tSD" secondAttribute="top" constant="23" id="j4d-NR-G9h"/>
+                            <constraint firstItem="Ftl-2f-hAb" firstAttribute="top" secondItem="5wb-vL-tSD" secondAttribute="top" constant="34" id="j4d-NR-G9h"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="RE3-wq-GAf" secondAttribute="bottom" constant="20" id="kCy-uz-afy"/>
                             <constraint firstItem="RE3-wq-GAf" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="13" id="mrc-eO-5VG"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="bottom" secondItem="efT-qd-CDk" secondAttribute="bottom" constant="20" id="nK6-xw-izw"/>
@@ -243,13 +243,14 @@
                             <constraint firstItem="AGF-zF-i97" firstAttribute="leading" secondItem="5wb-vL-tSD" secondAttribute="leading" constant="15" id="rcu-2Z-Peq"/>
                             <constraint firstItem="7gH-Ib-BkH" firstAttribute="top" secondItem="6wk-JO-dxZ" secondAttribute="bottom" constant="16" id="vO8-tC-t2J"/>
                             <constraint firstItem="5wb-vL-tSD" firstAttribute="trailing" secondItem="bv5-rP-sSW" secondAttribute="trailing" constant="15" id="vSO-td-9Fn"/>
-                            <constraint firstItem="itF-Hf-JQD" firstAttribute="top" secondItem="zLX-kg-2bt" secondAttribute="bottom" id="y7s-If-RiR"/>
+                            <constraint firstItem="itF-Hf-JQD" firstAttribute="top" secondItem="zLX-kg-2bt" secondAttribute="bottom" constant="-21" id="y7s-If-RiR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5wb-vL-tSD"/>
                     </view>
                     <connections>
                         <outlet property="angleLabel" destination="itF-Hf-JQD" id="gYj-HA-l1e"/>
                         <outlet property="draggingTutorialImage" destination="U6F-Ia-roj" id="Cn1-EP-o6E"/>
+                        <outlet property="finishPolygonButton" destination="F05-cT-k3T" id="GGF-vJ-63L"/>
                         <outlet property="galleryButton" destination="KZo-jQ-gdA" id="DzQ-vR-FoM"/>
                         <outlet property="loadingView" destination="Ftl-2f-hAb" id="rbf-9P-HNU"/>
                         <outlet property="messageLabel" destination="zLX-kg-2bt" id="NCf-Fj-T04"/>
@@ -582,13 +583,13 @@
         <image name="background" width="360" height="640"/>
         <image name="cleanButton" width="56" height="56"/>
         <image name="deleteButton" width="25" height="34"/>
-        <image name="doneButton" width="56" height="56"/>
+        <image name="doneButton" width="168" height="168"/>
         <image name="fingerDown" width="88" height="180"/>
         <image name="fingerUp" width="154" height="145"/>
-        <image name="galleryButton" width="55" height="55"/>
+        <image name="galleryButton" width="165" height="167"/>
         <image name="lightButton" width="56" height="56"/>
         <image name="longTouchTutorial" width="117" height="180"/>
-        <image name="makePhotoButton" width="63" height="56"/>
+        <image name="makePhotoButton" width="190" height="169"/>
         <image name="purchasesButton" width="61" height="61"/>
         <image name="rateGameButton" width="56" height="56"/>
         <image name="secondPointTutorial" width="154" height="145"/>
@@ -596,6 +597,6 @@
         <image name="shakeHand" width="164" height="196"/>
         <image name="shareButton" width="36" height="35"/>
         <image name="targetWhite" width="60" height="60"/>
-        <image name="undoButton" width="65" height="55"/>
+        <image name="undoButton" width="196" height="167"/>
     </resources>
 </document>

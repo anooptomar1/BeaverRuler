@@ -17,6 +17,11 @@ import Appodeal
 import AVFoundation
 import WatchConnectivity
 
+enum RulerType {
+    case UsualRuler
+    case СurveRuler
+}
+
 class ViewController: UIViewController {
     
     let finishTutorialKey = "finishTutorialKey"
@@ -29,8 +34,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var angleLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var finishPolygonButton: UIButton!
     @IBOutlet weak var galleryButton: UIButton!
-    
     @IBOutlet weak var tutorialStep1Image: UIImageView!
     @IBOutlet weak var tutorialStep2Image: UIImageView!
     @IBOutlet weak var tutorialStep4Image: UIImageView!
@@ -74,6 +79,7 @@ class ViewController: UIViewController {
     var userDraggingPoint = false
     
     var showUserInterstitial = false
+    var currentRulerType = RulerType.СurveRuler
     
     var appleWatchSession: WCSession? {
         didSet {
@@ -84,10 +90,13 @@ class ViewController: UIViewController {
         }
     }
     
-    var lastMessage: CFAbsoluteTime = 0
+    var startCurveMeasure = false
+    var currentCurveLength = Float(0.0)
+    var currentCurveLine = [SCNNode]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRulerType()
 
         Appodeal.setInterstitialDelegate(self)
         
@@ -151,24 +160,43 @@ class ViewController: UIViewController {
     
     @objc func tapGesture(sender: UITapGestureRecognizer)
     {
-        nextPointTap()
+        if currentRulerType == RulerType.UsualRuler {
+            nextPointTap()
+        }
+        
+        if currentRulerType == RulerType.СurveRuler {
+            
+        }
     }
     
     @objc func longTap(_ sender: UIGestureRecognizer){
         
         if sender.state == .ended {
             
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_end_dragging_point")
-            userDraggingPoint = false
+            if currentRulerType == RulerType.UsualRuler {
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_end_dragging_point")
+                userDraggingPoint = false
+                
+                if isMeasuring == false {
+                    showCurrentLine = true
+                }
+            }
             
-            if isMeasuring == false {
-                showCurrentLine = true
+            if currentRulerType == RulerType.СurveRuler {
+                startCurveMeasure = false
             }
             
         } else if sender.state == .began {
-            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_dragging_point")
-            showCurrentLine = false
-            userDraggingPoint = true
+            
+            if currentRulerType == RulerType.UsualRuler {
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_start_dragging_point")
+                showCurrentLine = false
+                userDraggingPoint = true
+            }
+            
+            if currentRulerType == RulerType.СurveRuler {
+                startCurveMeasure = true
+            }
         }
     }
     
@@ -239,17 +267,24 @@ class ViewController: UIViewController {
     // MARK: - Users Interactions
 
     @IBAction func finishPolygonPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Finish_polygon_pressed")
-        if currentLine != nil {
-            tutorialHelper.setUpTutorialStep5()
-            isMeasuring = false
-            targetImageView.image = UIImage(named: "targetWhite")
-            currentLine?.removeFromParentNode()
-            currentLine = nil
-            showCurrentLine = true
-            angleLabel.text = ""
-            setUpMessageLabel()
-            rulerAppleWatchHelper.sendFinishPolygonMeasureToWatch()
+        
+        if currentRulerType == RulerType.UsualRuler {
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Finish_polygon_pressed")
+            if currentLine != nil {
+                tutorialHelper.setUpTutorialStep5()
+                isMeasuring = false
+                targetImageView.image = UIImage(named: "targetWhite")
+                currentLine?.removeFromParentNode()
+                currentLine = nil
+                showCurrentLine = true
+                angleLabel.text = ""
+                setUpMessageLabel()
+                rulerAppleWatchHelper.sendFinishPolygonMeasureToWatch()
+            }
+        }
+        
+        if currentRulerType == RulerType.СurveRuler {
+            
         }
     }
     
@@ -289,24 +324,32 @@ class ViewController: UIViewController {
     }
 
     @IBAction func undoPressed(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Undo_pressed")
-        if let line = currentLine {
-            line.removeFromParentNode()
-            currentLine = nil
-
-        } else {
-            if lines.count > 0 {
-
-                let previouseLine = lines.last
-                previouseLine?.removeFromParentNode()
-                lines.removeLast()
-
-                currentLine = RulerLine(sceneView: sceneView, startVector: (previouseLine?.startVector)!, unit: unit)
-                currentLine?.update(to: endValue)
-                currentLine?.lastLineStartVector = lines.last?.startVector
-                isMeasuring = true
+        
+        if currentRulerType == RulerType.UsualRuler {
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Undo_pressed")
+            if let line = currentLine {
+                line.removeFromParentNode()
+                currentLine = nil
+                
+            } else {
+                if lines.count > 0 {
+                    
+                    let previouseLine = lines.last
+                    previouseLine?.removeFromParentNode()
+                    lines.removeLast()
+                    
+                    currentLine = RulerLine(sceneView: sceneView, startVector: (previouseLine?.startVector)!, unit: unit)
+                    currentLine?.update(to: endValue)
+                    currentLine?.lastLineStartVector = lines.last?.startVector
+                    isMeasuring = true
+                }
             }
         }
+        
+        if currentRulerType == RulerType.СurveRuler {
+            
+        }
+        
     }
 
     @IBAction func showSettings(_ sender: Any) {
@@ -335,15 +378,22 @@ class ViewController: UIViewController {
     }
 
     @IBAction func resetButtonTapped(_ sender: Any) {
-        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Clean_pressed")
-        for line in lines {
-            line.removeFromParentNode()
+        
+        if currentRulerType == RulerType.UsualRuler {
+            AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Clean_pressed")
+            for line in lines {
+                line.removeFromParentNode()
+            }
+            lines.removeAll()
+            
+            if let line = currentLine {
+                line.removeFromParentNode()
+                currentLine = nil
+            }
         }
-        lines.removeAll()
-
-        if let line = currentLine {
-            line.removeFromParentNode()
-            currentLine = nil
+        
+        if currentRulerType == RulerType.СurveRuler {
+            
         }
     }
 
@@ -447,7 +497,28 @@ extension ViewController {
         endValue =  SCNVector3()
     }
     
+    func setupRulerType() {
+        if currentRulerType == RulerType.UsualRuler {
+            finishPolygonButton.isHidden = false
+        }
+        
+        if currentRulerType == RulerType.СurveRuler {
+            finishPolygonButton.isHidden = true
+        }
+    }
+    
     func setUpMessageLabel() {
+        
+        if currentRulerType == RulerType.UsualRuler {
+            showMessageLabelForUsualRuler()
+        }
+        
+        if currentRulerType == RulerType.СurveRuler {
+            showMessageLabelForСurveRuler()
+        }
+    }
+    
+    func showMessageLabelForUsualRuler() {
         if lines.count > 0 {
             var polygonLength: Float = 0.0
             for line in self.lines {
@@ -474,5 +545,10 @@ extension ViewController {
             
             angleLabel.text = ""
         }
+    }
+    
+    func showMessageLabelForСurveRuler() {
+        let measureText = String(format: "%.2f %@", currentCurveLength, unit.unit)
+        messageLabel.text = measureText
     }
 }

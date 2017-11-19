@@ -19,6 +19,16 @@ class RulerScreenshotHelper {
     
     func makeScreenshot() {
         
+        if rulerScreen.currentRulerType == RulerType.UsualRuler {
+            makeScreenshotForUsualRuler()
+        }
+        
+        if rulerScreen.currentRulerType == RulerType.СurveRuler {
+            
+        }
+    }
+    
+    func makeScreenshotForUsualRuler() {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Take_screenshot_pressed")
         rulerScreen.tutorialHelper.setUpTutorialStep6()
         
