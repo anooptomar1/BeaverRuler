@@ -58,7 +58,7 @@ final class RulerLine {
 
     static var color: UIColor = .white
     static fileprivate var selectedPointColor: UIColor = .orange
-    static fileprivate var diselectedPointColor: UIColor = .blue
+    static var diselectedPointColor: UIColor = .blue
     
     var startNode: SCNNode!
     var endNode: SCNNode!

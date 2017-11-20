@@ -22,6 +22,13 @@ enum RulerType {
     case СurveRuler
 }
 
+class CurveLine {
+    var startNode: SCNNode?
+    var endNode: SCNNode?
+    var curveLine = [SCNNode]()
+    var curveLength = Float(0.0)
+}
+
 class ViewController: UIViewController {
     
     let finishTutorialKey = "finishTutorialKey"
@@ -91,8 +98,8 @@ class ViewController: UIViewController {
     }
     
     var startCurveMeasure = false
-    var currentCurveLength = Float(0.0)
-    var currentCurveLine = [SCNNode]()
+    var currentCurveLine = CurveLine()
+    var curveLines = [CurveLine]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,7 +148,6 @@ class ViewController: UIViewController {
         if WCSession.isSupported() {
             appleWatchSession = WCSession.default
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -184,6 +190,10 @@ class ViewController: UIViewController {
             
             if currentRulerType == RulerType.СurveRuler {
                 startCurveMeasure = false
+                currentCurveLine.endNode = rulerARHelper.getPointNode(position: endValue)
+                curveLines.append(currentCurveLine)
+                currentCurveLine = CurveLine()
+                startValue = vectorZero
             }
             
         } else if sender.state == .began {
@@ -548,7 +558,7 @@ extension ViewController {
     }
     
     func showMessageLabelForСurveRuler() {
-        let measureText = String(format: "%.2f %@", currentCurveLength, unit.unit)
+        let measureText = String(format: "%.2f %@", currentCurveLine.curveLength, unit.unit)
         messageLabel.text = measureText
     }
 }

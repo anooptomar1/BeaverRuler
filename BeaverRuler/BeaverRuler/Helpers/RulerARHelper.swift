@@ -117,7 +117,7 @@ class RulerARHelper {
         rulerScreen.tutorialHelper.setUpTutorialStep2()
         rulerScreen.targetImageView.isHidden = false
         
-        if rulerScreen.currentCurveLine.isEmpty {
+        if rulerScreen.currentCurveLine.curveLine.isEmpty && rulerScreen.curveLines.isEmpty {
             rulerScreen.messageLabel.text = NSLocalizedString("longTouchYourPhoneScreen", comment: "")
         }
         
@@ -129,19 +129,39 @@ class RulerARHelper {
         let currentPosition = pointOfView.position + (dir * 0.1)
         
         if rulerScreen.startCurveMeasure {
-            let line = lineFrom(vector: rulerScreen.startValue, toVector: currentPosition)
-            let lineNode = SCNNode(geometry: line)
-            lineNode.geometry?.firstMaterial?.diffuse.contents = RulerLine.color
-            rulerScreen.sceneView.scene.rootNode.addChildNode(lineNode)
-            rulerScreen.currentCurveLine.append(lineNode)
             
-            let length = (rulerScreen.startValue.distance(from: currentPosition) * rulerScreen.unit.fator)
-            rulerScreen.currentCurveLength += length
-            rulerScreen.setUpMessageLabel()
+            if rulerScreen.startValue == rulerScreen.vectorZero {
+                rulerScreen.startValue = currentPosition
+                rulerScreen.endValue = currentPosition
+                rulerScreen.currentCurveLine.startNode = getPointNode(position: rulerScreen.startValue)
+                rulerScreen.currentCurveLine = CurveLine()
+            } else {
+                let line = lineFrom(vector: rulerScreen.endValue, toVector: currentPosition)
+                let lineNode = SCNNode(geometry: line)
+                lineNode.geometry?.firstMaterial?.diffuse.contents = RulerLine.color
+                rulerScreen.sceneView.scene.rootNode.addChildNode(lineNode)
+                rulerScreen.currentCurveLine.curveLine.append(lineNode)
+                
+                let length = (rulerScreen.endValue.distance(from: currentPosition) * rulerScreen.unit.fator)
+                
+                rulerScreen.currentCurveLine.curveLength += length
+                rulerScreen.setUpMessageLabel()
+                rulerScreen.endValue = currentPosition
+                glLineWidth(20)
+            }
         }
-        
-        rulerScreen.startValue = currentPosition
-        glLineWidth(20)
+    }
+    
+    func getPointNode(position: SCNVector3) -> SCNNode {
+        let startPointDot = SCNSphere(radius: 0.5)
+        startPointDot.firstMaterial?.diffuse.contents = RulerLine.diselectedPointColor
+        startPointDot.firstMaterial?.lightingModel = .constant
+        startPointDot.firstMaterial?.isDoubleSided = true
+        let node = SCNNode(geometry: startPointDot)
+        node.scale = SCNVector3(1/500.0, 1/500.0, 1/500.0)
+        node.position = position
+        rulerScreen.sceneView.scene.rootNode.addChildNode(node)
+        return node
     }
     
     func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3) -> SCNGeometry {
