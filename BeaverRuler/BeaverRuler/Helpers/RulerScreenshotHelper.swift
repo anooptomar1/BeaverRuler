@@ -19,16 +19,6 @@ class RulerScreenshotHelper {
     
     func makeScreenshot() {
         
-        if rulerScreen.currentRulerType == RulerType.UsualRuler {
-            makeScreenshotForUsualRuler()
-        }
-        
-        if rulerScreen.currentRulerType == RulerType.СurveRuler {
-            
-        }
-    }
-    
-    func makeScreenshotForUsualRuler() {
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Take_screenshot_pressed")
         rulerScreen.tutorialHelper.setUpTutorialStep6()
         
@@ -52,11 +42,7 @@ class RulerScreenshotHelper {
                 userObjectRm.name = self.getObjectName(id: uuid)
             }
             
-            var polygonLength: Float = 0.0
-            for line in self.rulerScreen.lines {
-                polygonLength = polygonLength + line.lineLength()
-            }
-            userObjectRm.size = polygonLength
+            userObjectRm.size = self.getObjectSize()
             
             if let data = UIImagePNGRepresentation(image) {
                 let filename = self.getDocumentsDirectory().appendingPathComponent(uuid + ".png")
@@ -101,6 +87,26 @@ class RulerScreenshotHelper {
                 }
             })
         }
+        
+    }
+    
+    func getObjectSize() -> Float {
+        var polygonLength: Float = 0.0
+        
+        if rulerScreen.currentRulerType == RulerType.UsualRuler {
+            for line in self.rulerScreen.lines {
+                polygonLength = polygonLength + line.lineLength()
+            }
+        }
+        
+        if rulerScreen.currentRulerType == RulerType.СurveRuler {
+            
+            if let lastCurveLine = rulerScreen.curveLines.last {
+                polygonLength = lastCurveLine.curveLength
+            }
+        }
+        
+        return polygonLength
     }
     
     func getObjectName(id: String) -> String {

@@ -133,8 +133,8 @@ class RulerARHelper {
             if rulerScreen.startValue == rulerScreen.vectorZero {
                 rulerScreen.startValue = currentPosition
                 rulerScreen.endValue = currentPosition
-                rulerScreen.currentCurveLine.startNode = getPointNode(position: rulerScreen.startValue)
                 rulerScreen.currentCurveLine = CurveLine()
+                rulerScreen.currentCurveLine.startNode = getPointNode(position: rulerScreen.startValue)
             } else {
                 let line = lineFrom(vector: rulerScreen.endValue, toVector: currentPosition)
                 let lineNode = SCNNode(geometry: line)

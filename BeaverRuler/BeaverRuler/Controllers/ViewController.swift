@@ -358,6 +358,18 @@ class ViewController: UIViewController {
         
         if currentRulerType == RulerType.СurveRuler {
             
+            if startCurveMeasure == false {
+                if let lastCurveLine = curveLines.last {
+                    lastCurveLine.endNode?.removeFromParentNode()
+                    lastCurveLine.startNode?.removeFromParentNode()
+                    
+                    for lineNode in lastCurveLine.curveLine {
+                        lineNode.removeFromParentNode()
+                    }
+                    
+                    curveLines.removeLast()
+                }
+            }
         }
         
     }
