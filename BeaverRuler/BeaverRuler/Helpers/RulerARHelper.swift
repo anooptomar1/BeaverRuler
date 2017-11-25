@@ -61,6 +61,7 @@ class RulerARHelper {
         } else {
             if rulerScreen.userDraggingPoint == false {
                 selectNearestPoint()
+                selectNearestCurvePoint()
             } else {
                 rulerScreen.tutorialHelper.finishDraggingTutorial()
                 rulerScreen.updateSelectedLines()
@@ -149,6 +150,8 @@ class RulerARHelper {
                 rulerScreen.endValue = currentPosition
                 glLineWidth(20)
             }
+        } else {
+            selectNearestCurvePoint()
         }
     }
     
@@ -162,6 +165,32 @@ class RulerARHelper {
         node.position = position
         rulerScreen.sceneView.scene.rootNode.addChildNode(node)
         return node
+    }
+    
+    func selectNearestCurvePoint() {
+        
+        guard let worldPosition = rulerScreen.sceneView.realWorldVector(screenPosition: rulerScreen.view.center) else { return }
+        
+        RulerLine.diselectNode(node: rulerScreen.startSelectedNode)
+        rulerScreen.startSelectedNode = nil
+        
+        for (index, line) in rulerScreen.curveLines.enumerated() {
+            
+//            if let startVector = line.startVector {
+//                let distanceToStartPoint = rulerScreen.rulerMeasurementsHelper.distanceBetweenPoints(firtsPoint: rulerScreen.sceneView.projectPoint(worldPosition), secondPoint: rulerScreen.sceneView.projectPoint(startVector))
+//                
+//                if distanceToStartPoint < 20  {
+//                    print("selectStartPointForLine: \(index)")
+//                    RulerLine.selectNode(node: line.startNode)
+//                    rulerScreen.startSelectedNode = line.startNode
+//                }
+//            }
+            
+            if rulerScreen.startNodeLine != nil || rulerScreen.endNodeLine != nil {
+                rulerScreen.tutorialHelper.showDraggingTutorial()
+            }
+        }
+        
     }
     
     func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3) -> SCNGeometry {

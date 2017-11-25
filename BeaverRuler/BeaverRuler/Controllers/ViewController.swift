@@ -171,7 +171,11 @@ class ViewController: UIViewController {
         }
         
         if currentRulerType == RulerType.СurveRuler {
-            
+            if startCurveMeasure {
+                finishCurveMeasure()
+            } else {
+                startCurveMeasure = true
+            }
         }
     }
     
@@ -189,11 +193,7 @@ class ViewController: UIViewController {
             }
             
             if currentRulerType == RulerType.СurveRuler {
-                startCurveMeasure = false
-                currentCurveLine.endNode = rulerARHelper.getPointNode(position: endValue)
-                curveLines.append(currentCurveLine)
-                currentCurveLine = CurveLine()
-                startValue = vectorZero
+                finishCurveMeasure()
             }
             
         } else if sender.state == .began {
@@ -208,6 +208,14 @@ class ViewController: UIViewController {
                 startCurveMeasure = true
             }
         }
+    }
+    
+    func finishCurveMeasure() {
+        startCurveMeasure = false
+        currentCurveLine.endNode = rulerARHelper.getPointNode(position: endValue)
+        curveLines.append(currentCurveLine)
+        currentCurveLine = CurveLine()
+        startValue = vectorZero
     }
     
     func nextPointTap() {
@@ -416,6 +424,24 @@ class ViewController: UIViewController {
         
         if currentRulerType == RulerType.СurveRuler {
             
+            for  curveLine in curveLines {
+                curveLine.endNode?.removeFromParentNode()
+                curveLine.startNode?.removeFromParentNode()
+                
+                for lineNode in curveLine.curveLine {
+                    lineNode.removeFromParentNode()
+                }
+                
+            }
+            
+            curveLines.removeAll()
+            
+            currentCurveLine.endNode?.removeFromParentNode()
+            currentCurveLine.startNode?.removeFromParentNode()
+            
+            for lineNode in currentCurveLine.curveLine {
+                lineNode.removeFromParentNode()
+            }
         }
     }
 
