@@ -599,4 +599,9 @@ extension ViewController {
         let measureText = String(format: "%.2f %@", currentCurveLine.curveLength, unit.unit)
         messageLabel.text = measureText
     }
+    
+    func showMessageLabelForСurveLine(line: CurveLine) {
+        let measureText = String(format: "%.2f %@", line.curveLength, unit.unit)
+        messageLabel.text = measureText
+    }
 }

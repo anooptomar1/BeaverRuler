@@ -174,21 +174,28 @@ class RulerARHelper {
         RulerLine.diselectNode(node: rulerScreen.startSelectedNode)
         rulerScreen.startSelectedNode = nil
         
-        for (index, line) in rulerScreen.curveLines.enumerated() {
+        for (_, line) in rulerScreen.curveLines.enumerated() {
             
-//            if let startVector = line.startVector {
-//                let distanceToStartPoint = rulerScreen.rulerMeasurementsHelper.distanceBetweenPoints(firtsPoint: rulerScreen.sceneView.projectPoint(worldPosition), secondPoint: rulerScreen.sceneView.projectPoint(startVector))
-//                
-//                if distanceToStartPoint < 20  {
-//                    print("selectStartPointForLine: \(index)")
-//                    RulerLine.selectNode(node: line.startNode)
-//                    rulerScreen.startSelectedNode = line.startNode
-//                }
-//            }
-            
-            if rulerScreen.startNodeLine != nil || rulerScreen.endNodeLine != nil {
-                rulerScreen.tutorialHelper.showDraggingTutorial()
+            if let startNode = line.startNode {
+                let distanceToStartPoint = rulerScreen.rulerMeasurementsHelper.distanceBetweenPoints(firtsPoint: rulerScreen.sceneView.projectPoint(worldPosition), secondPoint: rulerScreen.sceneView.projectPoint(startNode.position))
+                
+                if distanceToStartPoint < 20  {
+                    RulerLine.selectNode(node: startNode)
+                    rulerScreen.startSelectedNode = line.startNode
+                    rulerScreen.showMessageLabelForСurveLine(line: line)
+                }
             }
+            
+            if let endNode = line.endNode {
+                let distanceToStartPoint = rulerScreen.rulerMeasurementsHelper.distanceBetweenPoints(firtsPoint: rulerScreen.sceneView.projectPoint(worldPosition), secondPoint: rulerScreen.sceneView.projectPoint(endNode.position))
+                
+                if distanceToStartPoint < 20  {
+                    RulerLine.selectNode(node: endNode)
+                    rulerScreen.startSelectedNode = endNode
+                    rulerScreen.showMessageLabelForСurveLine(line: line)
+                }
+            }
+            
         }
         
     }
