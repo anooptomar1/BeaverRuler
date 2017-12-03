@@ -61,7 +61,6 @@ class RulerARHelper {
         } else {
             if rulerScreen.userDraggingPoint == false {
                 selectNearestPoint()
-                selectNearestCurvePoint()
             } else {
                 rulerScreen.tutorialHelper.finishDraggingTutorial()
                 rulerScreen.updateSelectedLines()
@@ -132,6 +131,7 @@ class RulerARHelper {
         if rulerScreen.startCurveMeasure {
             
             if rulerScreen.startValue == rulerScreen.vectorZero {
+                AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_start_curve_point")
                 rulerScreen.startValue = currentPosition
                 rulerScreen.endValue = currentPosition
                 rulerScreen.currentCurveLine = CurveLine()

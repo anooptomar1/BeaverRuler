@@ -20,6 +20,7 @@ import WatchConnectivity
 enum RulerType {
     case UsualRuler
     case СurveRuler
+    case PointRuler
 }
 
 class CurveLine {
@@ -86,7 +87,7 @@ class ViewController: UIViewController {
     var userDraggingPoint = false
     
     var showUserInterstitial = false
-    var currentRulerType = RulerType.СurveRuler
+    var currentRulerType = RulerType.UsualRuler
     
     var appleWatchSession: WCSession? {
         didSet {
@@ -166,6 +167,8 @@ class ViewController: UIViewController {
     
     @objc func tapGesture(sender: UITapGestureRecognizer)
     {
+        print("tap")
+        
         if currentRulerType == RulerType.UsualRuler {
             nextPointTap()
         }
@@ -211,6 +214,7 @@ class ViewController: UIViewController {
     }
     
     func finishCurveMeasure() {
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_make_end_curve_point")
         startCurveMeasure = false
         currentCurveLine.endNode = rulerARHelper.getPointNode(position: endValue)
         curveLines.append(currentCurveLine)
@@ -224,7 +228,6 @@ class ViewController: UIViewController {
             if currentLine == nil {
                 
                 tutorialHelper.setUpTutorialStep3()
-                
                 resetValues()
                 isMeasuring = true
                 targetImageView.image = UIImage(named: "targetGreen")
@@ -284,6 +287,33 @@ class ViewController: UIViewController {
 
     // MARK: - Users Interactions
 
+    @IBAction func changeRulerModePressed(_ sender: Any) {
+        AppAnalyticsHelper.sendAppAnalyticEvent(withName: "Change_ruler_type_pressed")
+        
+        let rowHeight = 45
+        let popoverSize = CGSize(width: 100, height: rowHeight * 3)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let rulerModeViewController = storyboard.instantiateViewController(withIdentifier: "RulerModeViewController") as? RulerModeViewController else {
+            return
+        }
+        
+        rulerModeViewController.preferredContentSize = popoverSize
+        
+        rulerModeViewController.delegate = self
+        rulerModeViewController.selectedRulerType = currentRulerType
+        rulerModeViewController.modalPresentationStyle = .popover
+        rulerModeViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+        rulerModeViewController.popoverPresentationController?.delegate = self
+        self.present(rulerModeViewController, animated: true, completion: nil)
+        
+        if let button = sender as? UIButton {
+            rulerModeViewController.popoverPresentationController?.sourceView = button
+            rulerModeViewController.popoverPresentationController?.sourceRect = button.bounds
+        }
+    }
+    
+    
     @IBAction func finishPolygonPressed(_ sender: Any) {
         
         if currentRulerType == RulerType.UsualRuler {
@@ -523,6 +553,28 @@ extension ViewController: AppodealInterstitialDelegate {
     }
     func interstitialDidClick(){
         AppAnalyticsHelper.sendAppAnalyticEvent(withName: "User_click_interstitial")
+    }
+}
+
+// MARK: - RulerModeVCDelegate
+
+extension ViewController: RulerModeVCDelegate {
+    func selectMode(type: RulerType) {
+        
+        if isMeasuring || startCurveMeasure {
+            tapGesture(sender: UITapGestureRecognizer())
+            
+            if isMeasuring {
+                finishPolygonPressed("")
+            }
+        }
+        
+        startValue = vectorZero
+        endValue = vectorZero
+        angleLabel.text = ""
+        
+        currentRulerType = type
+        setupRulerType()
     }
 }
 
